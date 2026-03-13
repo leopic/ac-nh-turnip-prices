@@ -32,6 +32,9 @@ i18next
 .init({
   fallbackLng: defaultLanguage,
   debug: true,
+  initAsync: false,
+  nonExplicitSupportedLngs: true,
+  supportedLngs: [...Object.keys(LANGUAGES), 'dev'],
   backend: {
     loadPath: 'locales/{{lng}}.json',
   },
