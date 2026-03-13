@@ -52,7 +52,11 @@ function setupTheming() {
 }
 
 $(document).ready(function() {
-  i18next.init((err, t) => {
+  if (i18next.isInitialized) {
     setupTheming();
-  });
+  } else {
+    i18next.on('initialized', function() {
+      setupTheming();
+    });
+  }
 });

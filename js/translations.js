@@ -32,13 +32,12 @@ i18next
 .init({
   fallbackLng: defaultLanguage,
   debug: true,
-  initAsync: false,
-  nonExplicitSupportedLngs: true,
-  supportedLngs: [...Object.keys(LANGUAGES), 'dev'],
+  supportedLngs: Object.keys(LANGUAGES),
+  load: 'currentOnly',
   backend: {
     loadPath: 'locales/{{lng}}.json',
   },
-}, (err, t) => {
+}).then(function(t) {
   languageSelector = $('#language');
   for (let [code, name] of Object.entries(LANGUAGES)) {
     languageSelector.append(`<option value="${code}">${name}</option>`);
