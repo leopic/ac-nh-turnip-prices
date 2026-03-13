@@ -2,10 +2,24 @@
 const CACHE = "pwa-precache-v2";
 const precacheFiles = [
   "/index.html",
+  "/css/styles.css",
   "/js/predictions.js",
   "/js/scripts.js",
-  "/css/styles.css",
+  "/js/chart.js",
+  "/js/translations.js",
+  "/js/themes.js",
+  "/js/contributors.js",
+  "/manifest.json",
+  "/favicon.ico",
+  "/locales/en.json",
+  "/img/favicon-192.png",
+  "/img/favicon-512.png",
   "https://code.jquery.com/jquery-3.4.1.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/i18next/19.4.2/i18next.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/4.0.2/i18nextBrowserLanguageDetector.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js",
 ];
 
 self.addEventListener("install", function (event) {
