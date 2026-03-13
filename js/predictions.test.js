@@ -395,13 +395,15 @@ describe('PDF', () => {
       expect(pdf.prob.length).toBe(origLen + (15 - 5));
     });
 
-    it('produces NaN with zero-width decay range (potential bug)', () => {
-      // rate_decay_min == rate_decay_max means max_Y = 0, division by zero
+    it('handles zero-width decay range by shifting without convolution', () => {
       const pdf = new PDF(100, 110);
+      const origProb = [...pdf.prob];
       pdf.decay(5, 5);
-      // BUG: This produces NaN values instead of throwing or handling gracefully
-      const hasNaN = pdf.prob.some(p => isNaN(p));
-      expect(hasNaN).toBe(true);
+      // Should shift range by exactly 5, keeping probabilities intact
+      expect(pdf.value_start).toBe(95);
+      expect(pdf.value_end).toBe(105);
+      expect(pdf.prob).toEqual(origProb);
+      expect(float_sum(pdf.prob)).toBeCloseTo(1.0, 10);
     });
 
     it('multiple decays accumulate', () => {

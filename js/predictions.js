@@ -223,6 +223,12 @@ class PDF {
     // In case the arguments aren't integers, round them to the nearest integer.
     rate_decay_min = Math.round(rate_decay_min);
     rate_decay_max = Math.round(rate_decay_max);
+    if (rate_decay_min === rate_decay_max) {
+      // Zero-width decay: just shift the distribution without convolution.
+      this.value_start -= rate_decay_min;
+      this.value_end -= rate_decay_min;
+      return;
+    }
     // The sum of this distribution with a uniform distribution.
     // Let's assume that both distributions start at 0 and X = this dist,
     // Y = uniform dist, and Z = X + Y.
