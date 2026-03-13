@@ -313,7 +313,7 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
   let buy_price = parseInt(buy_input.val());
   previous_pattern_number = "";
 
-  let expected_values = new Array(analyzed_possibilities[0].prices.length - 2).fill(0);
+  let expected_values = compute_expected_values(analyzed_possibilities);
   for (let poss of analyzed_possibilities) {
     var out_line = "<tr><td class='table-pattern'>" + i18next.t("patterns." + pat_desc[poss.pattern_number])  + "</td>";
     const style_price = buy_price || poss.prices[0].min;
@@ -325,11 +325,8 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
       out_line += `<td rowspan=${pattern_count}>${displayPercentage(poss.category_total_probability)}</td>`;
     }
     out_line += `<td>${displayPercentage(poss.probability)}</td>`;
-    for (let [i, day] of poss.prices.slice(2).entries()) {
+    for (let day of poss.prices.slice(2)) {
       let price_class = getPriceClass(style_price, day.max);
-      if (poss.pattern_number != 4) {
-        expected_values[i] += (poss.probability * (day.max + day.min)) / 2;
-      }
       if (day.min !== day.max) {
         out_line += `<td class='${price_class}'>${day.min} ${i18next.t("output.to")} ${day.max}</td>`;
       } else {
@@ -345,14 +342,7 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
 
   let curr_time = new Date().getDay() * 2 - 2 + (new Date().getHours() >= 12 ? 1 : 0);
   let curr_price = data[curr_time + 2];
-  let expected_maximum = 0.0;
-  let expected_argmax = 0;
-  for (let i = Math.max(curr_time + 1, 0); i < expected_values.length; i++) {
-    if (expected_values[i] > expected_maximum) {
-      expected_maximum = expected_values[i];
-      expected_argmax = i;
-    }
-  }
+  const { expected_maximum, expected_argmax } = find_expected_maximum(expected_values, curr_time + 1);
 
   $("#output").html(output_possibilities);
 
@@ -373,16 +363,17 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
 
   update_chart(data, analyzed_possibilities, expected_values, labels);
 
-  if (curr_price && curr_time >= 0 && curr_time < data.length - 3) {
+  const decision = get_sell_buy_decision(curr_price, curr_time, expected_maximum, data.length);
+  if (decision && decision.type === "sell") {
     $("#decision").html(
       `<h2>${i18next.t("output.sell-now-title")}</h2>
-      <p>${i18next.t(expected_maximum > curr_price ? "output.sell-later" : "output.sell-now")}
+      <p>${i18next.t("output." + decision.action)}
       ${i18next.t("output.sell-advice", [expected_maximum.toFixed(0), labels[expected_argmax + 1]])}</p>`
     );
-  } else if (curr_price && curr_time < 0) {
+  } else if (decision && decision.type === "buy") {
     $("#decision").html(
       `<h2>${i18next.t("output.should-buy-title")}</h2>
-      <p>${i18next.t(expected_maximum > curr_price ? "output.should-buy" : "output.should-not-buy")}
+      <p>${i18next.t("output." + decision.action)}
       ${i18next.t("output.buy-advice", [expected_maximum.toFixed(0)])}</p>`
     );
   }

@@ -998,6 +998,69 @@ class Predictor {
   }
 }
 
+/**
+ * Compute expected price per time slot from analyzed possibilities.
+ * @param {Array} analyzed_possibilities - Output of Predictor.analyze_possibilities()
+ * @returns {number[]} Expected price for each of the 12 half-day slots.
+ */
+function compute_expected_values(analyzed_possibilities) {
+  const num_slots = analyzed_possibilities[0].prices.length - 2;
+  const expected_values = new Array(num_slots).fill(0);
+  for (const poss of analyzed_possibilities) {
+    if (poss.pattern_number === 4) continue; // skip global summary
+    for (let i = 0; i < num_slots; i++) {
+      const day = poss.prices[i + 2];
+      expected_values[i] += (poss.probability * (day.max + day.min)) / 2;
+    }
+  }
+  return expected_values;
+}
+
+/**
+ * Find the expected maximum price and its time slot index from a given starting slot.
+ * @param {number[]} expected_values - Array of expected prices per slot.
+ * @param {number} from_slot - The slot index to start searching from (inclusive).
+ * @returns {{ expected_maximum: number, expected_argmax: number }}
+ */
+function find_expected_maximum(expected_values, from_slot) {
+  let expected_maximum = 0.0;
+  let expected_argmax = 0;
+  for (let i = Math.max(from_slot, 0); i < expected_values.length; i++) {
+    if (expected_values[i] > expected_maximum) {
+      expected_maximum = expected_values[i];
+      expected_argmax = i;
+    }
+  }
+  return { expected_maximum, expected_argmax };
+}
+
+/**
+ * Determine sell/buy decision.
+ * @param {number} curr_price - The current turnip price.
+ * @param {number} curr_time - Current half-day slot index (0-11 for Mon AM to Sat PM, <0 for Sunday).
+ * @param {number} expected_maximum - The expected maximum future price.
+ * @param {number} data_length - Length of the full data array (typically 14).
+ * @returns {{ action: string, type: string } | null}
+ *   action: "sell-now"|"sell-later"|"should-buy"|"should-not-buy"
+ *   type: "sell"|"buy"
+ *   Returns null if no decision can be made.
+ */
+function get_sell_buy_decision(curr_price, curr_time, expected_maximum, data_length) {
+  if (!curr_price) return null;
+  if (curr_time >= 0 && curr_time < data_length - 3) {
+    return {
+      type: "sell",
+      action: expected_maximum > curr_price ? "sell-later" : "sell-now",
+    };
+  } else if (curr_time < 0) {
+    return {
+      type: "buy",
+      action: expected_maximum > curr_price ? "should-buy" : "should-not-buy",
+    };
+  }
+  return null;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PATTERN, PROBABILITY_MATRIX, RATE_MULTIPLIER, range_length, clamp, range_intersect, range_intersect_length, float_sum, prefix_float_sum, PDF, Predictor };
+  module.exports = { PATTERN, PROBABILITY_MATRIX, RATE_MULTIPLIER, range_length, clamp, range_intersect, range_intersect_length, float_sum, prefix_float_sum, PDF, Predictor, compute_expected_values, find_expected_maximum, get_sell_buy_decision };
 }
