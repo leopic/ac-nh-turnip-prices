@@ -290,12 +290,13 @@ const displayPercentage = function(fraction) {
 
 const hideChart = function() {
   $("#output").html("");
-  $(".chart-wrapper").hide()
-}
+  $(".chart-wrapper").hide();
+};
 
 const calculateOutput = function (data, first_buy, previous_pattern) {
+  $("#decision").empty();
   if (isEmpty(data)) {
-    hideChart()
+    hideChart();
     return;
   }
   let pat_desc = {0:"fluctuating", 1:"large-spike", 2:"decreasing", 3:"small-spike", 4:"all"};
@@ -303,14 +304,16 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
   let predictor = new Predictor(data, first_buy, previous_pattern);
   let analyzed_possibilities = predictor.analyze_possibilities();
   if (analyzed_possibilities[0].weekGuaranteedMinimum === Number.POSITIVE_INFINITY) {
-    hideChart()
-    $(".error:hidden").show()
+    hideChart();
+    $(".error:hidden").show();
     return;
   }
-  $(".error:visible").hide()
-  $(".chart-wrapper:hidden").show()
+  $(".error:visible").hide();
+  $(".chart-wrapper:hidden").show();
   let buy_price = parseInt(buy_input.val());
   previous_pattern_number = "";
+
+  let expected_values = new Array(analyzed_possibilities[0].prices.length - 2).fill(0);
   for (let poss of analyzed_possibilities) {
     var out_line = "<tr><td class='table-pattern'>" + i18next.t("patterns." + pat_desc[poss.pattern_number])  + "</td>";
     const style_price = buy_price || poss.prices[0].min;
@@ -322,8 +325,11 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
       out_line += `<td rowspan=${pattern_count}>${displayPercentage(poss.category_total_probability)}</td>`;
     }
     out_line += `<td>${displayPercentage(poss.probability)}</td>`;
-    for (let day of poss.prices.slice(2)) {
+    for (let [i, day] of poss.prices.slice(2).entries()) {
       let price_class = getPriceClass(style_price, day.max);
+      if (poss.pattern_number != 4) {
+        expected_values[i] += (poss.probability * (day.max + day.min)) / 2;
+      }
       if (day.min !== day.max) {
         out_line += `<td class='${price_class}'>${day.min} ${i18next.t("output.to")} ${day.max}</td>`;
       } else {
@@ -337,9 +343,49 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
     output_possibilities += out_line;
   }
 
+  let curr_time = new Date().getDay() * 2 - 2 + (new Date().getHours() >= 12 ? 1 : 0);
+  let curr_price = data[curr_time + 2];
+  let expected_maximum = 0.0;
+  let expected_argmax = 0;
+  for (let i = Math.max(curr_time + 1, 0); i < expected_values.length; i++) {
+    if (expected_values[i] > expected_maximum) {
+      expected_maximum = expected_values[i];
+      expected_argmax = i;
+    }
+  }
+
   $("#output").html(output_possibilities);
 
-  update_chart(data, analyzed_possibilities);
+  const labels = [i18next.t("weekdays.sunday")].concat(
+    ...[
+      i18next.t("weekdays.abr.monday"),
+      i18next.t("weekdays.abr.tuesday"),
+      i18next.t("weekdays.abr.wednesday"),
+      i18next.t("weekdays.abr.thursday"),
+      i18next.t("weekdays.abr.friday"),
+      i18next.t("weekdays.abr.saturday"),
+    ].map(day =>
+      [i18next.t("times.morning"), i18next.t("times.afternoon")].map(
+        time => `${day} ${time}`
+      )
+    )
+  );
+
+  update_chart(data, analyzed_possibilities, expected_values, labels);
+
+  if (curr_price && curr_time >= 0 && curr_time < data.length - 3) {
+    $("#decision").html(
+      `<h2>${i18next.t("output.sell-now-title")}</h2>
+      <p>${i18next.t(expected_maximum > curr_price ? "output.sell-later" : "output.sell-now")}
+      ${i18next.t("output.sell-advice", [expected_maximum.toFixed(0), labels[expected_argmax + 1]])}</p>`
+    );
+  } else if (curr_price && curr_time < 0) {
+    $("#decision").html(
+      `<h2>${i18next.t("output.should-buy-title")}</h2>
+      <p>${i18next.t(expected_maximum > curr_price ? "output.should-buy" : "output.should-not-buy")}
+      ${i18next.t("output.buy-advice", [expected_maximum.toFixed(0)])}</p>`
+    );
+  }
 };
 
 const generatePermalink = function (buy_price, sell_prices, first_buy, previous_pattern) {
