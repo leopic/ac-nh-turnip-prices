@@ -21,7 +21,7 @@ const chart_options = {
   },
 };
 
-function update_chart(input_data, possibilities) {
+function update_chart(input_data, possibilities, expected_values, labels) {
   let ctx = $("#chart"),
   datasets = [{
       label: i18next.t("output.chart.input"),
@@ -29,6 +29,13 @@ function update_chart(input_data, possibilities) {
         return getComputedStyle(document.documentElement).getPropertyValue('--chart-point-color');
       },
       data: input_data.slice(1),
+      fill: false,
+    }, {
+      label: i18next.t("output.chart.expected"),
+      get pointBorderColor() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--chart-point-color');
+      },
+      data: [input_data[0], ...expected_values].map(price => price.toFixed(2)),
       fill: false,
     }, {
       label: i18next.t("output.chart.minimum"),
@@ -45,11 +52,7 @@ function update_chart(input_data, possibilities) {
       data: possibilities[0].prices.slice(1).map(day => day.max),
       fill: "-1",
     },
-  ],
-  labels = [i18next.t("weekdays.sunday")].concat(...[i18next.t("weekdays.abr.monday"), i18next.t("weekdays.abr.tuesday"), i18next.t("weekdays.abr.wednesday"), i18next.t("weekdays.abr.thursday"), i18next.t("weekdays.abr.friday"), i18next.t("weekdays.abr.saturday")].map(
-      day => [i18next.t("times.morning"),
-        i18next.t("times.afternoon")].map(
-        time => `${day} ${time}`)));
+  ];
 
   if (chart_instance) {
     chart_instance.data.datasets = datasets;
@@ -60,7 +63,7 @@ function update_chart(input_data, possibilities) {
     chart_instance = new Chart(ctx, {
       data: {
         datasets: datasets,
-        labels: labels
+        labels: labels,
       },
       options: chart_options,
       type: "line",
