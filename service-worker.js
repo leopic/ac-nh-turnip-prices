@@ -1,5 +1,5 @@
 // PWA Code adapted from https://github.com/pwa-builder/PWABuilder
-const CACHE = "pwa-precache-v1";
+const CACHE = "pwa-precache-v2";
 const precacheFiles = [
   "/index.html",
   "/js/predictions.js",
@@ -22,10 +22,25 @@ self.addEventListener("install", function (event) {
   );
 });
 
-// Allow sw to control of current page
+// Allow sw to control of current page and clean up old caches
 self.addEventListener("activate", function (event) {
   console.log("[PWA] Claiming clients for current page");
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then(function (cacheNames) {
+      return Promise.all(
+        cacheNames
+          .filter(function (cacheName) {
+            return cacheName !== CACHE;
+          })
+          .map(function (cacheName) {
+            console.log("[PWA] Deleting old cache: " + cacheName);
+            return caches.delete(cacheName);
+          })
+      );
+    }).then(function () {
+      return self.clients.claim();
+    })
+  );
 });
 
 // If any fetch fails, it will look for the request in the cache and serve it from there first
