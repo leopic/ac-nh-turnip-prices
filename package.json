@@ -22,6 +22,7 @@
   "homepage": "https://github.com/mikebryant/ac-nh-turnip-prices#readme",
   "devDependencies": {
     "@vitest/coverage-v8": "^3.2.4",
+    "jsdom": "^27.0.1",
     "vitest": "^3.2.4"
   }
 }
