@@ -14,7 +14,7 @@ const precacheFiles = [
   "/locales/en.json",
   "/img/favicon-192.png",
   "/img/favicon-512.png",
-  "https://code.jquery.com/jquery-3.4.1.min.js",
+  "https://code.jquery.com/jquery-3.7.1.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/i18next/19.4.2/i18next.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.2/i18nextXHRBackend.min.js",
