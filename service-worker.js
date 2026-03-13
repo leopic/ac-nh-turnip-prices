@@ -15,10 +15,10 @@ const precacheFiles = [
   "/img/favicon-192.png",
   "/img/favicon-512.png",
   "https://code.jquery.com/jquery-3.7.1.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/i18next/19.4.2/i18next.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/i18next/25.5.2/i18next.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/3.0.2/i18nextHttpBackend.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/4.0.2/i18nextBrowserLanguageDetector.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.2.0/i18nextBrowserLanguageDetector.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js",
 ];
 
