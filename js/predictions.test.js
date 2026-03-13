@@ -15,6 +15,9 @@ const {
   prefix_float_sum,
   PDF,
   Predictor,
+  compute_expected_values,
+  find_expected_maximum,
+  get_sell_buy_decision,
 } = require('./predictions.js');
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -1178,5 +1181,385 @@ describe('Edge cases', () => {
       const results = p.analyze_possibilities();
       expect(results.length).toBeGreaterThan(0);
     }
+  });
+});
+
+// ─── compute_expected_values ─────────────────────────────────────────────────
+
+describe('compute_expected_values', () => {
+  function getAnalyzed(buyPrice, prices, firstBuy, prevPattern) {
+    const p = new Predictor(prices || [buyPrice, buyPrice, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], firstBuy || false, prevPattern === undefined ? null : prevPattern);
+    return p.analyze_possibilities();
+  }
+
+  it('returns an array of 12 values (one per half-day slot)', () => {
+    const analyzed = getAnalyzed(100);
+    const ev = compute_expected_values(analyzed);
+    expect(ev).toHaveLength(12);
+  });
+
+  it('all expected values are positive for a normal buy price', () => {
+    const analyzed = getAnalyzed(100);
+    const ev = compute_expected_values(analyzed);
+    for (const val of ev) {
+      expect(val).toBeGreaterThan(0);
+    }
+  });
+
+  it('expected values are finite numbers', () => {
+    const analyzed = getAnalyzed(100);
+    const ev = compute_expected_values(analyzed);
+    for (const val of ev) {
+      expect(Number.isFinite(val)).toBe(true);
+    }
+  });
+
+  it('skips the global summary entry (pattern_number 4)', () => {
+    const analyzed = getAnalyzed(100);
+    // Manually verify: if we include pattern 4, values would be different
+    const evCorrect = compute_expected_values(analyzed);
+    // The global summary min/max are wider than weighted averages
+    // So expected values should be within global min/max range
+    const globalSummary = analyzed.find(a => a.pattern_number === 4);
+    for (let i = 0; i < 12; i++) {
+      expect(evCorrect[i]).toBeGreaterThanOrEqual(globalSummary.prices[i + 2].min);
+      expect(evCorrect[i]).toBeLessThanOrEqual(globalSummary.prices[i + 2].max);
+    }
+  });
+
+  it('expected values change with different buy prices', () => {
+    const ev90 = compute_expected_values(getAnalyzed(90));
+    const ev110 = compute_expected_values(getAnalyzed(110));
+    // Higher buy price should lead to higher expected sell prices
+    for (let i = 0; i < 12; i++) {
+      expect(ev110[i]).toBeGreaterThan(ev90[i]);
+    }
+  });
+
+  it('expected values change with different previous patterns', () => {
+    const evAfterDecreasing = compute_expected_values(getAnalyzed(100, undefined, false, PATTERN.DECREASING));
+    const evAfterLargeSpike = compute_expected_values(getAnalyzed(100, undefined, false, PATTERN.LARGE_SPIKE));
+    // After decreasing, large spike is more likely (0.45), so expected values should be higher
+    const avgDecreasing = evAfterDecreasing.reduce((a, b) => a + b, 0) / 12;
+    const avgLargeSpike = evAfterLargeSpike.reduce((a, b) => a + b, 0) / 12;
+    expect(avgDecreasing).not.toBeCloseTo(avgLargeSpike, 1);
+  });
+
+  it('expected values with given prices constrain the result', () => {
+    const pricesWithData = [100, 100, 90, 85, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
+    const pricesWithout = [100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
+    const evWith = compute_expected_values(getAnalyzed(100, pricesWithData));
+    const evWithout = compute_expected_values(getAnalyzed(100, pricesWithout));
+    // First two slots should differ since we provided actual prices
+    expect(evWith[0]).not.toBeCloseTo(evWithout[0], 0);
+  });
+
+  it('first_buy produces different expected values than normal', { timeout: 30000 }, () => {
+    const p1 = new Predictor([NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], true, null);
+    const p2 = new Predictor([NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const ev1 = compute_expected_values(p1.analyze_possibilities());
+    const ev2 = compute_expected_values(p2.analyze_possibilities());
+    // first_buy only generates pattern 3, so values should differ
+    const sum1 = ev1.reduce((a, b) => a + b, 0);
+    const sum2 = ev2.reduce((a, b) => a + b, 0);
+    expect(sum1).not.toBeCloseTo(sum2, 0);
+  });
+
+  it('handles single possibility result', () => {
+    // Fully specified decreasing pattern
+    const prices = [100, 100, 86, 83, 79, 76, 73, 69, 66, 63, 59, 56, 53, 49];
+    const analyzed = getAnalyzed(100, prices, false, PATTERN.FLUCTUATING);
+    const ev = compute_expected_values(analyzed);
+    expect(ev).toHaveLength(12);
+    // With all prices given, expected values should be close to the given prices
+    for (let i = 0; i < 12; i++) {
+      if (!isNaN(prices[i + 2])) {
+        expect(ev[i]).toBeCloseTo(prices[i + 2], 0);
+      }
+    }
+  });
+});
+
+// ─── find_expected_maximum ───────────────────────────────────────────────────
+
+describe('find_expected_maximum', () => {
+  it('finds the maximum value and its index', () => {
+    const values = [50, 80, 120, 90, 60, 40, 30, 20, 15, 10, 8, 5];
+    const result = find_expected_maximum(values, 0);
+    expect(result.expected_maximum).toBe(120);
+    expect(result.expected_argmax).toBe(2);
+  });
+
+  it('searches only from the given slot onwards', () => {
+    const values = [200, 50, 80, 120, 90, 60, 40, 30, 20, 15, 10, 5];
+    const result = find_expected_maximum(values, 1);
+    expect(result.expected_maximum).toBe(120);
+    expect(result.expected_argmax).toBe(3);
+  });
+
+  it('handles from_slot of 0', () => {
+    const values = [100, 50, 30];
+    const result = find_expected_maximum(values, 0);
+    expect(result.expected_maximum).toBe(100);
+    expect(result.expected_argmax).toBe(0);
+  });
+
+  it('handles negative from_slot (treats as 0)', () => {
+    const values = [100, 200, 50];
+    const result = find_expected_maximum(values, -5);
+    expect(result.expected_maximum).toBe(200);
+    expect(result.expected_argmax).toBe(1);
+  });
+
+  it('returns 0 when searching past the end', () => {
+    const values = [100, 200, 50];
+    const result = find_expected_maximum(values, 10);
+    expect(result.expected_maximum).toBe(0);
+    expect(result.expected_argmax).toBe(0);
+  });
+
+  it('returns the first maximum when there are ties', () => {
+    const values = [50, 100, 100, 50];
+    const result = find_expected_maximum(values, 0);
+    expect(result.expected_maximum).toBe(100);
+    expect(result.expected_argmax).toBe(1);
+  });
+
+  it('handles single-element array', () => {
+    const result = find_expected_maximum([42], 0);
+    expect(result.expected_maximum).toBe(42);
+    expect(result.expected_argmax).toBe(0);
+  });
+
+  it('handles empty array', () => {
+    const result = find_expected_maximum([], 0);
+    expect(result.expected_maximum).toBe(0);
+  });
+
+  it('works with real expected values from predictor', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const analyzed = p.analyze_possibilities();
+    const ev = compute_expected_values(analyzed);
+    const result = find_expected_maximum(ev, 0);
+    expect(result.expected_maximum).toBeGreaterThan(0);
+    expect(result.expected_argmax).toBeGreaterThanOrEqual(0);
+    expect(result.expected_argmax).toBeLessThan(12);
+    expect(result.expected_maximum).toBe(ev[result.expected_argmax]);
+  });
+
+  it('from_slot restricts search correctly with real data', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const ev = compute_expected_values(p.analyze_possibilities());
+    const fullResult = find_expected_maximum(ev, 0);
+    const laterResult = find_expected_maximum(ev, 6); // from Wednesday PM onwards
+    expect(laterResult.expected_maximum).toBeLessThanOrEqual(fullResult.expected_maximum);
+  });
+});
+
+// ─── get_sell_buy_decision ───────────────────────────────────────────────────
+
+describe('get_sell_buy_decision', () => {
+  const DATA_LENGTH = 14;
+
+  describe('sell decisions (curr_time >= 0)', () => {
+    it('returns sell-later when expected max > current price', () => {
+      const result = get_sell_buy_decision(80, 3, 150, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-later");
+    });
+
+    it('returns sell-now when expected max <= current price', () => {
+      const result = get_sell_buy_decision(200, 3, 150, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-now");
+    });
+
+    it('returns sell-now when expected max equals current price', () => {
+      const result = get_sell_buy_decision(150, 3, 150, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-now");
+    });
+
+    it('works at slot 0 (Monday AM)', () => {
+      const result = get_sell_buy_decision(90, 0, 120, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-later");
+    });
+
+    it('works at slot 10 (Saturday AM, last valid sell slot)', () => {
+      const result = get_sell_buy_decision(90, 10, 120, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-later");
+    });
+
+    it('returns null at slot 11 (Saturday PM, last slot, data.length-3)', () => {
+      // curr_time=11, data_length-3=11, so curr_time < data_length-3 is false
+      const result = get_sell_buy_decision(90, 11, 120, DATA_LENGTH);
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('buy decisions (curr_time < 0, i.e. Sunday)', () => {
+    it('returns should-buy when expected max > current price', () => {
+      const result = get_sell_buy_decision(95, -2, 150, DATA_LENGTH);
+      expect(result.type).toBe("buy");
+      expect(result.action).toBe("should-buy");
+    });
+
+    it('returns should-not-buy when expected max <= current price', () => {
+      const result = get_sell_buy_decision(200, -2, 150, DATA_LENGTH);
+      expect(result.type).toBe("buy");
+      expect(result.action).toBe("should-not-buy");
+    });
+
+    it('returns should-not-buy when expected max equals current price', () => {
+      const result = get_sell_buy_decision(150, -1, 150, DATA_LENGTH);
+      expect(result.type).toBe("buy");
+      expect(result.action).toBe("should-not-buy");
+    });
+
+    it('works with Sunday AM (curr_time = -2)', () => {
+      const result = get_sell_buy_decision(100, -2, 200, DATA_LENGTH);
+      expect(result.type).toBe("buy");
+    });
+
+    it('works with Sunday PM (curr_time = -1)', () => {
+      const result = get_sell_buy_decision(100, -1, 200, DATA_LENGTH);
+      expect(result.type).toBe("buy");
+    });
+  });
+
+  describe('null/no-decision cases', () => {
+    it('returns null when curr_price is 0', () => {
+      expect(get_sell_buy_decision(0, 3, 150, DATA_LENGTH)).toBeNull();
+    });
+
+    it('returns null when curr_price is NaN', () => {
+      expect(get_sell_buy_decision(NaN, 3, 150, DATA_LENGTH)).toBeNull();
+    });
+
+    it('returns null when curr_price is undefined', () => {
+      expect(get_sell_buy_decision(undefined, 3, 150, DATA_LENGTH)).toBeNull();
+    });
+
+    it('returns null when curr_price is null', () => {
+      expect(get_sell_buy_decision(null, 3, 150, DATA_LENGTH)).toBeNull();
+    });
+
+    it('returns null at the very last time slot', () => {
+      expect(get_sell_buy_decision(100, 11, 150, DATA_LENGTH)).toBeNull();
+    });
+
+    it('returns null for curr_time beyond data range', () => {
+      expect(get_sell_buy_decision(100, 20, 150, DATA_LENGTH)).toBeNull();
+    });
+  });
+
+  describe('boundary conditions', () => {
+    it('handles very high expected maximum', () => {
+      const result = get_sell_buy_decision(100, 3, 660, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-later");
+    });
+
+    it('handles very low expected maximum', () => {
+      const result = get_sell_buy_decision(100, 3, 1, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-now");
+    });
+
+    it('handles expected_maximum of 0', () => {
+      const result = get_sell_buy_decision(100, 3, 0, DATA_LENGTH);
+      expect(result.type).toBe("sell");
+      expect(result.action).toBe("sell-now");
+    });
+  });
+});
+
+// ─── Expected Value Integration Tests ────────────────────────────────────────
+
+describe('Expected value integration', () => {
+  it('full pipeline: analyze -> expected values -> find max -> decision', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const analyzed = p.analyze_possibilities();
+    const ev = compute_expected_values(analyzed);
+    const { expected_maximum, expected_argmax } = find_expected_maximum(ev, 0);
+
+    expect(ev).toHaveLength(12);
+    expect(expected_maximum).toBeGreaterThan(0);
+
+    // Simulate Monday AM with price 90
+    const decision = get_sell_buy_decision(90, 0, expected_maximum, 14);
+    expect(decision).not.toBeNull();
+    expect(decision.type).toBe("sell");
+    // Expected max should be > 90 for buy price 100 (large spike possible)
+    expect(decision.action).toBe("sell-later");
+  });
+
+  it('full pipeline with Sunday (buy decision)', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const analyzed = p.analyze_possibilities();
+    const ev = compute_expected_values(analyzed);
+    const { expected_maximum } = find_expected_maximum(ev, 0);
+
+    // Sunday AM, Daisy Mae price is 95
+    const decision = get_sell_buy_decision(95, -2, expected_maximum, 14);
+    expect(decision).not.toBeNull();
+    expect(decision.type).toBe("buy");
+    // Expected max should be > 95 (large spike possible)
+    expect(decision.action).toBe("should-buy");
+  });
+
+  it('expected values with partial data still produce valid decisions', () => {
+    const p = new Predictor([100, 100, 92, 88, 84, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, PATTERN.FLUCTUATING);
+    const analyzed = p.analyze_possibilities();
+    const ev = compute_expected_values(analyzed);
+    const { expected_maximum } = find_expected_maximum(ev, 3); // from Tuesday PM onwards
+
+    expect(expected_maximum).toBeGreaterThan(0);
+    const decision = get_sell_buy_decision(84, 3, expected_maximum, 14);
+    expect(decision).not.toBeNull();
+    expect(decision.type).toBe("sell");
+  });
+
+  it('expected values sum correctly represents weighted average', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+    const analyzed = p.analyze_possibilities();
+    const ev = compute_expected_values(analyzed);
+
+    // Each expected value should be the probability-weighted midpoint
+    for (let slot = 0; slot < 12; slot++) {
+      let manual_ev = 0;
+      for (const poss of analyzed) {
+        if (poss.pattern_number === 4) continue;
+        const day = poss.prices[slot + 2];
+        manual_ev += (poss.probability * (day.max + day.min)) / 2;
+      }
+      expect(ev[slot]).toBeCloseTo(manual_ev, 10);
+    }
+  });
+
+  it('expected maximum is always within global min/max bounds', () => {
+    for (const buyPrice of [90, 100, 110]) {
+      const p = new Predictor([buyPrice, buyPrice, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, null);
+      const analyzed = p.analyze_possibilities();
+      const ev = compute_expected_values(analyzed);
+      const globalSummary = analyzed.find(a => a.pattern_number === 4);
+      const { expected_maximum, expected_argmax } = find_expected_maximum(ev, 0);
+
+      expect(expected_maximum).toBeLessThanOrEqual(globalSummary.prices[expected_argmax + 2].max);
+      expect(expected_maximum).toBeGreaterThanOrEqual(globalSummary.prices[expected_argmax + 2].min);
+    }
+  });
+
+  it('after decreasing pattern, expected values are higher (large spike more likely)', () => {
+    const p1 = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, PATTERN.DECREASING);
+    const p2 = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, PATTERN.LARGE_SPIKE);
+    const ev1 = compute_expected_values(p1.analyze_possibilities());
+    const ev2 = compute_expected_values(p2.analyze_possibilities());
+    const max1 = find_expected_maximum(ev1, 0).expected_maximum;
+    const max2 = find_expected_maximum(ev2, 0).expected_maximum;
+    // After decreasing, large spike has 45% chance vs 5% after large spike
+    expect(max1).toBeGreaterThan(max2);
   });
 });
