@@ -997,3 +997,7 @@ class Predictor {
     return generated_possibilities;
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { PATTERN, PROBABILITY_MATRIX, RATE_MULTIPLIER, range_length, clamp, range_intersect, range_intersect_length, float_sum, prefix_float_sum, PDF, Predictor };
+}
