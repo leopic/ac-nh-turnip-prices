@@ -27,7 +27,7 @@ const LANGUAGES = {
   'zh-TW': '繁體中文'
 };
 i18next
-.use(i18nextXHRBackend)
+.use(i18nextHttpBackend)
 .use(i18nextBrowserLanguageDetector)
 .init({
   fallbackLng: defaultLanguage,
