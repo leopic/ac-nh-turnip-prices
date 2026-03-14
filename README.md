@@ -1,66 +1,38 @@
-# Animal Crossing New Horizons: Turnip Prophet
-[![discord](https://img.shields.io/badge/discord-join-7289DA.svg?logo=discord&longCache=true&style=for-the-badge)](https://discord.gg/bRh74X8)
-[![issues](https://img.shields.io/github/issues/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/issues)
-[![pull requests](https://img.shields.io/github/issues-pr/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/pulls)
-[![contributors](https://img.shields.io/github/contributors/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/graphs/contributors)
+# Turnip Prophet
 
-Turnip Prophet is a price calculator/price predictor for Animal Crossing: New Horizons turnip prices.
+A turnip price predictor for Animal Crossing: New Horizons.
 
-## Support
+This is a fork of [mikebryant/ac-nh-turnip-prices](https://github.com/mikebryant/ac-nh-turnip-prices) — huge thanks to Mike Bryant and all the [original contributors](https://github.com/mikebryant/ac-nh-turnip-prices/graphs/contributors) for building the foundation of this project. The prediction logic is based on [Ninji's reverse engineering](https://twitter.com/_Ninji/status/1244818665851289602) of the game's turnip pricing algorithm.
 
-If you have any questions, feel free to join our [Discord server](https://discord.gg/bRh74X8) to ask or [open a new issue](https://github.com/mikebryant/ac-nh-turnip-prices/issues).
+## What's changed in this fork
 
-If you have a prediction issue, please open an issue describing your problem and give the permalink to your prediction. Otherwise, please search the issues before opening a new one to make sure you are not opening a duplicate issue.
+- **Expected value calculations** — shows the probability-weighted expected price for each time slot, so you can see what a "typical" outcome looks like rather than just the min/max range
+- **Sell/buy decision advice** — compares your current price against the expected future maximum and tells you whether to sell now or wait
+- **Pattern likelihood indicator** — as you enter prices throughout the week, shows which pattern you're most likely on and how confident the prediction is
+- **Dismissable welcome message** — the intro dialog can be closed and won't reappear until you reset
+- **Hamburger menu** — language, theme, and credits moved to a slide-out drawer to reduce clutter
+- **Bug fix: Pattern 3 middle peak** — the minimum prediction for Small Spike's middle peak slot was off by 1 bell vs the game code
+- **Bug fix: PDF.decay() division by zero** — equal min/max decay rates no longer produce NaN
+- **Updated dependencies** — jQuery 3.7.1, Chart.js 4.5.0, i18next 25, replaced deprecated i18next-xhr-backend with i18next-http-backend
+- **Removed Google Analytics** — the UA tracking tag was deprecated
+- **Improved PWA setup** — complete precache file list, proper cache versioning, manifest fields
+- **Comprehensive test suite** — 300 tests covering prediction logic, expected values, pattern detection, and UI functions
+- **CI pipeline** — GitHub Actions runs tests on PRs and pushes; pre-push hook runs tests locally
 
-Please create issues in English language only.
+## Running locally
 
-## What about feature X?
+```
+npx serve
+```
 
-At first please have a look at our current project scope:
+## Running tests
 
-| Turnip Prophet is | Turnip Prophet is not |
-|----|----|
-| A predictor for future prices that week | A calculator for how much money you'll make |
-| Able to calculate probabilities for different futures | A way to count your turnips |
-| Able to show data from a query string | A way to store multiple people's islands |
-| A single page web-based app | Something with a backend |
+```
+npm install
+npm test
+npm run test:coverage
+```
 
-If your idea, suggestion or improvement is anything out of the above named, feel free to [open a new issue](https://github.com/mikebryant/ac-nh-turnip-prices/issues) or contribute by a [new pull request](https://github.com/mikebryant/ac-nh-turnip-prices/pulls).
+## Contributing
 
-## How to run the project locally?
-
-To run the project locally you will have to clone it and then, from the folder you just cloned, you will have to execute a command. There are multiple options, listed below:
-
-### Using Python
-
-For Python 2.7: 
-
-```python -m SimpleHTTPServer```
-
-For Python 3:
-
-```python3 -m http.server```
-
-### Using Node.js
-
-```npx serve```
-
-### Using Chrome
-
-```google-chrome --allow-file-access-from-files```
-
-
-## Adding a new language
-
-Turnip Prophet is already available in some languages. If your local language is not listed you may go on to create a JSON file corresponding to your language in the folder [locales](https://github.com/mikebryant/ac-nh-turnip-prices/tree/master/locales). You may copy the [English localisation](https://github.com/mikebryant/ac-nh-turnip-prices/blob/master/locales/en.json) and translate it. 
-
-Please make sure **not to translate** "Turnip Prophet" and include the new language in the selector inside [js/translations.js](https://github.com/mikebryant/ac-nh-turnip-prices/blob/master/js/translations.js).
-
-If you have any remaining questions, feel free to stop by the Discord server and ask. 
-
-
-## Final statement
-
-A special thanks to all who [contribute](https://github.com/mikebryant/ac-nh-turnip-prices/graphs/contributors) to this project, helping to improve it and spend their time.
-
-Stay awesome guys.
+See the [contributors](https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors) to this fork.
