@@ -30,9 +30,19 @@
     function detectTheme() {
       let systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       let preferredTheme = localStorage.getItem("theme");
-      
-      if (preferredTheme == "dark" || (systemTheme == "dark" && preferredTheme != "light")) {
-        document.documentElement.setAttribute("data-theme", "dark");
+      let highContrast = localStorage.getItem("highColorContrast");
+      let theme = preferredTheme || (systemTheme == "dark" ? "dark" : "light");
+
+      if (theme == "auto") {
+        theme = systemTheme;
+      }
+
+      if (highContrast) {
+        theme = theme + "-high-color-contrast";
+      }
+
+      if (theme != "light") {
+        document.documentElement.setAttribute("data-theme", theme);
       }
     }
     detectTheme();
@@ -51,6 +61,10 @@
 
       <h2 class="menu-drawer__title" data-i18n="textbox.theme.title"></h2>
       <select id="theme"></select>
+      <label class="menu-drawer__text" style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+        <input type="checkbox" id="high-color-contrast" />
+        <span data-i18n="textbox.theme.high-color-contrast"></span>
+      </label>
 
       <h2 class="menu-drawer__title" data-i18n="textbox.contributors"></h2>
       <p class="menu-drawer__text" data-i18n="[html]textbox.credits"></p>

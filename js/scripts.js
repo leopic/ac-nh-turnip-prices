@@ -468,6 +468,10 @@ const update = function () {
   }
   permalink_input.val(permalink);
 
+  if (permalink && window.history.replaceState) {
+    window.history.replaceState({}, null, permalink);
+  }
+
   const prices = [buy_price, buy_price, ...sell_prices];
 
   if (!window.populated_from_query) {

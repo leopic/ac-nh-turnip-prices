@@ -1,5 +1,5 @@
 // PWA Code adapted from https://github.com/pwa-builder/PWABuilder
-const CACHE = "pwa-precache-v2";
+const CACHE = "pwa-precache-v3";
 const precacheFiles = [
   "/index.html",
   "/css/styles.css",

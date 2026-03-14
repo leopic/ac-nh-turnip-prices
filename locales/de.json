@@ -22,8 +22,8 @@
     "decreasing": "Absteigend",
     "fluctuating": "Schwankend",
     "unknown": "Ich weiß nicht",
-    "large-spike": "Stark Ansteigend",
-    "small-spike": "Leicht Ansteigend"
+    "large-spike": "Große Spitze",
+    "small-spike": "Kleine Spitze"
   },
   "prices": {
     "description": "Wie hoch war der Preis für Rüben diese Woche auf deiner Insel?",
@@ -94,7 +94,8 @@
       "title": "Theme",
       "auto": "Automatic",
       "light": "Light",
-      "dark": "Dark"
+      "dark": "Dark",
+      "high-color-contrast": "High Color Contrast"
     }
   },
   "errors": {

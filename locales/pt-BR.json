@@ -92,7 +92,8 @@
       "title": "Tema",
       "auto": "Automático",
       "light": "Claro",
-      "dark": "Escuro"
+      "dark": "Escuro",
+      "high-color-contrast": "High Color Contrast"
     },
     "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
     "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"

@@ -65,9 +65,29 @@
   --table-range2: hsl(60, 80%, 85%);
   --table-range3: hsl(30, 80%, 85%);
   --table-range4: hsl(0, 80%, 85%);
+
+  --table-range0-text: inherit;
+  --table-range1-text: inherit;
+  --table-range2-text: inherit;
+  --table-range3-text: inherit;
+  --table-range4-text: inherit;
 }
 
-[data-theme="dark"] {
+[data-theme="light-high-color-contrast"] {
+  --table-range0: hsl(140, 90%, 75%);
+  --table-range1: hsl(90, 90%, 75%);
+  --table-range2: hsl(60, 90%, 75%);
+  --table-range3: hsl(30, 90%, 75%);
+  --table-range4: hsl(0, 90%, 75%);
+  --table-range0-text: #000;
+  --table-range1-text: #000;
+  --table-range2-text: inherit;
+  --table-range3-text: inherit;
+  --table-range4-text: inherit;
+}
+
+[data-theme="dark"],
+[data-theme="dark-high-color-contrast"] {
   --bg-color: #1A1A1A;
   --bg-dot-color: #222;
 
@@ -117,6 +137,19 @@
   --table-range2: hsl(60, 80%, 20%);
   --table-range3: hsl(30, 80%, 20%);
   --table-range4: hsl(0, 80%, 22%);
+}
+
+[data-theme="dark-high-color-contrast"] {
+  --table-range0: hsl(140, 90%, 30%);
+  --table-range1: hsl(90, 90%, 25%);
+  --table-range2: hsl(60, 90%, 25%);
+  --table-range3: hsl(30, 90%, 25%);
+  --table-range4: hsl(0, 90%, 27%);
+  --table-range0-text: #000;
+  --table-range1-text: #000;
+  --table-range2-text: inherit;
+  --table-range3-text: inherit;
+  --table-range4-text: inherit;
 }
 
 /* - Global Styles - */
@@ -392,7 +425,8 @@ input[type=number] {
 }
 
 .input__radio-buttons input[type=radio] {
-  display: none;
+  position: fixed;
+  top: -100px;
 }
 
 .input__radio-buttons input[type="radio"]+label {
@@ -408,6 +442,7 @@ input[type=number] {
   margin: 8px;
 }
 
+.input__radio-buttons input[type="radio"]:focus+label,
 .input__radio-buttons input[type="radio"]:not(:checked)+label:hover {
   cursor: pointer;
   background: var(--radio-hover-bg-color);
@@ -457,16 +492,16 @@ input[class=now]:placeholder-shown::placeholder {
 .table-wrapper {
   display: inline-block;
   max-width: 98%;
-  padding: 16px;
-  margin: 0px auto;
+  margin: 16px auto;
   box-sizing: border-box;
   overflow-x: auto;
+  max-height: calc(75vh - 40px);
   scrollbar-width: thin;
 }
 
-@media only screen and (max-width: 1440px) and (pointer: fine) {
+@media only screen and (min-width: 1440px) {
   .table-wrapper {
-    max-height: calc(75vh - 40px);
+    overflow-x: hidden;
   }
 }
 
@@ -498,6 +533,14 @@ input[class=now]:placeholder-shown::placeholder {
 
 #turnipTable {
   border-collapse: collapse;
+}
+
+#turnipTable th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
+  z-index: 1;
+  background-color: var(--center-bg-color);
 }
 
 #turnipTable th div:nth-of-type(1) {
@@ -534,22 +577,27 @@ input[class=now]:placeholder-shown::placeholder {
 
 #turnipTable td.range4 {
   background-color: var(--table-range4);
+  color: var(--table-range4-text);
 }
 
 #turnipTable td.range3{
   background-color: var(--table-range3);
+  color: var(--table-range3-text);
 }
 
 #turnipTable td.range2 {
   background-color: var(--table-range2);
+  color: var(--table-range2-text);
 }
 
 #turnipTable td.range1 {
   background-color: var(--table-range1);
+  color: var(--table-range1-text);
 }
 
 #turnipTable td.range0 {
   background-color: var(--table-range0);
+  color: var(--table-range0-text);
 }
 
 .chart-wrapper {
