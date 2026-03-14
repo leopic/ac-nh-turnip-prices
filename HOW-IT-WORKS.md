@@ -25,9 +25,9 @@ Prices alternate between "okay" and "not great" phases. You'll see some slots ar
 
 | Mon AM | Mon PM | Tue AM | Tue PM | Wed AM | Wed PM | Thu AM | Thu PM | Fri AM | Fri PM | Sat AM | Sat PM |
 |--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
-| 96     | 121    | 82     | 73     | 105    | 88     | 112    | 127    | 68     | 62     | 98     | 108    |
+| 105    | 118    | 73     | 64     | 55     | 96     | 127    | 83     | 68     | 58     | 110    | 100    |
 
-Notice how prices bounce around — some above what you paid, some below, but nothing dramatic. The best price here (127) is only about 1.4x the buy price. You might make a small profit, or you might break even.
+Notice how prices bounce around — some above what you paid, some below, but nothing dramatic. The best price here (127) is only about 1.4x the buy price. You can see the pattern's structure: a good start (Mon), a dip (Tue-Wed AM), another good run (Wed PM-Thu), another dip (Fri), and a decent finish (Sat).
 
 ### Pattern 1: Large Spike
 
@@ -39,9 +39,9 @@ This is the jackpot pattern. Prices start by slowly decreasing, then suddenly sp
 |--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
 | 82     | 78     | 75     | 71     | 96     | 163    | **468**| 155    | 98     | 62     | 55     | 49     |
 
-The prices drop Mon-Tue as the game starts with a decreasing phase. Then Wednesday AM starts climbing, and Wednesday PM explodes to 468 bells — over 5x what you paid! After the peak, prices crash and stay low for the rest of the week.
+The prices drop Mon-Tue as the game starts with a decreasing phase. Then the spike begins on Wednesday AM at 96, climbs to 163 on Wednesday PM, and Thursday AM explodes to 468 bells — over 5x what you paid! After the peak, prices crash and stay low for the rest of the week.
 
-The spike can start as early as Wednesday AM or as late as Saturday AM. If you see prices steadily dropping early in the week, don't panic — it might be building up to a massive spike.
+The spike can start as early as Monday PM or as late as Thursday PM. If you see prices steadily dropping early in the week, don't panic — it might be building up to a massive spike.
 
 ### Pattern 2: Decreasing
 
