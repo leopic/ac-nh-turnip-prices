@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Hello, and welcome to the <b>Turnip Prophet</b> app on your Nook Phone.",
     "description": "This app lets you track your island's turnip prices daily, but you'll have to put the prices in yourself!",
-    "conclusion": "After that, the Turnip Prophet app will <b>magically</b> predict the turnip prices you'll have for the rest of the week."
+    "conclusion": "After that, the Turnip Prophet app will <b>magically</b> predict the turnip prices you'll have for the rest of the week.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "First-Time Buyer",

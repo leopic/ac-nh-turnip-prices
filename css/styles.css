@@ -807,6 +807,11 @@ input[class=now]:placeholder-shown::placeholder {
   padding: 8px 0;
 }
 
+#dismiss-welcome {
+  display: block;
+  margin: 16px auto 0;
+}
+
 #decision {
   padding: 0px 16px;
 }

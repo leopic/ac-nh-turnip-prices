@@ -94,12 +94,24 @@ const initialize = function () {
 
   $(document).trigger("input");
 
+  var welcomeBox = document.getElementById("welcome-box");
+  if (welcomeBox && localStorage.getItem("welcome_dismissed")) {
+    welcomeBox.style.display = "none";
+  }
+
+  $("#dismiss-welcome").on("click", function () {
+    localStorage.setItem("welcome_dismissed", "1");
+    if (welcomeBox) welcomeBox.style.display = "none";
+  });
+
   $("#permalink-btn").on("click", copyPermalink);
 
   $("#reset").on("click", function () {
     if (window.confirm(i18next.t("prices.reset-warning"))) {
       sell_inputs.forEach(input => input.value = '');
       fillFields([], false, -1);
+      localStorage.removeItem("welcome_dismissed");
+      if (welcomeBox) welcomeBox.style.display = "";
       update();
     }
   });
