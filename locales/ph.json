@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Kumusta, at maligayang pagdating sa <b>Turnip Prophet</b> app sa iyong Nook Phone.",
     "description": "Sa pamamagitan ng app na ito, puwede mo na subaybayan ang mga presyo ng turnip ng iyong isla araw-araw, ngunit kailangan mong ilagay ang mga presyo sa iyong sarili!",
-    "conclusion": "Pagkatapos nito, ang Turnip Prophet app ay huhulaan ang magiging presyo ng singil sa iyo para sa natitirang linggo, sa pamamagitan ng <b>mahika</b>!"
+    "conclusion": "Pagkatapos nito, ang Turnip Prophet app ay huhulaan ang magiging presyo ng singil sa iyo para sa natitirang linggo, sa pamamagitan ng <b>mahika</b>!",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Unang beses na Mamimili",
@@ -41,7 +42,7 @@
     "wednesday": "Miyerkules",
     "thursday": "Huwebes",
     "friday": "Biyernes",
-    "saturday" : "Sabado",
+    "saturday": "Sabado",
     "sunday": "Linggo",
     "abr": {
       "monday": "Lunes",
@@ -49,7 +50,7 @@
       "wednesday": "Miyerkules",
       "thursday": "Huwebes",
       "friday": "Biyernes",
-      "saturday" : "Sabado"
+      "saturday": "Sabado"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Na-input na Presyo",
       "minimum": "Garantisadong Minimum",
-      "maximum": "Potensyal na Maximum"
-    }
+      "maximum": "Potensyal na Maximum",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Pagkatapos mong mailista ang ilang mga presyo ng turnip, kakalkulahin ng Turnip Prophet ang mga numero at lilitaw ang iba't ibang mga posibleng pattern na maaaring maranasan ng iyong isla.",
@@ -82,6 +93,12 @@
       "auto": "Automatic",
       "light": "Light",
       "dark": "Dark"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }

@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Üdvözöllek a Nookfonod <b>Turnip Prophet</b> alkalmazásában!",
     "description": "Ezzel az alkalmazással követheted a szigeted naponta változó retekárait, viszont az árakat Neked kell megadnod!",
-    "conclusion": "Az árak megadása után a Turnip Prophet <b>varázslatosan</b> megjósolja a hét elkövetkezendő árait."
+    "conclusion": "Az árak megadása után a Turnip Prophet <b>varázslatosan</b> megjósolja a hét elkövetkezendő árait.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Első vásárlás",
@@ -41,7 +42,7 @@
     "wednesday": "Szerda",
     "thursday": "Csütörtök",
     "friday": "Péntek",
-    "saturday" : "Szombat",
+    "saturday": "Szombat",
     "sunday": "Vasárnap",
     "abr": {
       "monday": "H",
@@ -49,7 +50,7 @@
       "wednesday": "Sze",
       "thursday": "Cs",
       "friday": "P",
-      "saturday" : "Szo"
+      "saturday": "Szo"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Megadott ár",
       "minimum": "Garantált minimum",
-      "maximum": "Lehetséges maximum"
-    }
+      "maximum": "Lehetséges maximum",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Miután megadtál néhány árat, a Turnip Prophet kiszámolja és megjeleníti az összes lehetséges mintát ami a héten megjelenhet.",
@@ -82,7 +93,9 @@
       "auto": "Automatikus",
       "light": "Világos",
       "dark": "Sötét"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
   },
   "errors": {
     "impossible-values": "Hoppá! Valami nem stimmel a jóslatokkal. Ellenőrizd a bevitt adatokat.",

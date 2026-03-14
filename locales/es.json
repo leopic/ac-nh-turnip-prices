@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "¡Hola! Te damos la bienvenida a la aplicación <b>Turnip Prophet</b> para tu Nookófono.",
     "description": "Esta aplicación te permite monitorizar la fluctuación del precio de los nabos en tu isla, ¡pero tendrás que introducir tú manualmente los precios diarios!",
-    "conclusion": "Una vez hecho, la aplicación Turnip Prophet predecirá <b>mágicamente</b> el precio que tendrán los nabos el resto de la semana."
+    "conclusion": "Una vez hecho, la aplicación Turnip Prophet predecirá <b>mágicamente</b> el precio que tendrán los nabos el resto de la semana.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Comprador(a) primerizo(a)",
@@ -41,7 +42,7 @@
     "wednesday": "Miércoles",
     "thursday": "Jueves",
     "friday": "Viernes",
-    "saturday" : "Sábado",
+    "saturday": "Sábado",
     "sunday": "Domingo",
     "abr": {
       "monday": "LU",
@@ -49,7 +50,7 @@
       "wednesday": "MI",
       "thursday": "JU",
       "friday": "VI",
-      "saturday" : "SA"
+      "saturday": "SA"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Precio de entrada",
       "minimum": "Mínimo garantizado",
-      "maximum": "Máximo potencial"
-    }
+      "maximum": "Máximo potencial",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Cuando introduzcas algunos precios, Turnip Prophet empezará a hacer sus cálculos y te mostrará algunos posibles patrones para el precio de los nabos en tu isla.",
@@ -82,7 +93,9 @@
       "auto": "Automático",
       "light": "Claro",
       "dark": "Oscuro"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
   },
   "errors": {
     "impossible-values": "¡Ups! Parece que hay un error con tus predicciones. Por favor, revisa tus valores introducidos.",

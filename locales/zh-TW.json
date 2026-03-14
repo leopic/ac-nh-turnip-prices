@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "你好，歡迎使用 Nook 手機上的 <b>Turnip Prophet</b>。",
     "description": "這個工具可以讓你每天追蹤自己島上的大頭菜價格，但你必須自己輸入價格！",
-    "conclusion": "接下來，Turnip Prophet 將 <b>神奇地</b> 預測本週剩餘時間的大頭菜價格。"
+    "conclusion": "接下來，Turnip Prophet 將 <b>神奇地</b> 預測本週剩餘時間的大頭菜價格。",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "首次購買",
@@ -41,7 +42,7 @@
     "wednesday": "星期三",
     "thursday": "星期四",
     "friday": "星期五",
-    "saturday" : "星期六",
+    "saturday": "星期六",
     "sunday": "星期日",
     "abr": {
       "monday": "週一",
@@ -49,7 +50,7 @@
       "wednesday": "週三",
       "thursday": "週四",
       "friday": "週五",
-      "saturday" : "週六"
+      "saturday": "週六"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "輸入價格",
       "minimum": "保底價格",
-      "maximum": "最高價格"
-    }
+      "maximum": "最高價格",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "在你記錄了一些大頭菜價格後，Turnip Prophet 會預測，並顯示自己島上可能出現的不同模型。",
@@ -82,6 +93,12 @@
       "auto": "自動",
       "light": "亮色",
       "dark": "暗色"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }

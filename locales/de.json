@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Hallo und Willkommen bei der <b>Turnip Prophet</b> App auf deinem Nook Phone.",
     "description": "Mit dieser App kannst du die Rübenpreise deiner Insel täglich verfolgen, aber du musst die Preise selbst eingeben!",
-    "conclusion": "Danach wird die Turnip Prophet App <b>magisch</b> deine Rübenpreise vorhersagen, welche du den Rest der Woche haben wirst."
+    "conclusion": "Danach wird die Turnip Prophet App <b>magisch</b> deine Rübenpreise vorhersagen, welche du den Rest der Woche haben wirst.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Erstmaliger Einkäufer",
@@ -41,7 +42,7 @@
     "wednesday": "Mittwoch",
     "thursday": "Donnerstag",
     "friday": "Freitag",
-    "saturday" : "Samstag",
+    "saturday": "Samstag",
     "sunday": "Sonntag",
     "abr": {
       "monday": "Mo",
@@ -49,7 +50,7 @@
       "wednesday": "Mi",
       "thursday": "Do",
       "friday": "Fr",
-      "saturday" : "Sa"
+      "saturday": "Sa"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Eingegebener Preis",
       "minimum": "Garantiertes Minimum",
-      "maximum": "Potentielles Maximum"
-    }
+      "maximum": "Potentielles Maximum",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Nachdem du einige Rübenpreise eingegeben hast, benutzt der Turnip Prophet etwas Magie und zeigt dir die verschiedenen möglichen Verkaufsmuster an, die auf deiner Insel auftreten können.",
@@ -76,6 +87,18 @@
     "sponsor": "Möchtest du die Entwickler hinter diesem Projekt unterstützen? Gehe zu <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub.com</a> und klicke auf den '❤ Sponsor' Button für mehr Informationen.",
     "contributors-text": "Oh! Und vergessen wir nicht, denen zu danken, die bis jetzt dazu beigetragen haben!",
     "contributors": "Mitwirkende",
-    "language": "Sprache"
+    "language": "Sprache",
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
+    "theme": {
+      "title": "Theme",
+      "auto": "Automatic",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }

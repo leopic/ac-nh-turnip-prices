@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Halo, dan selamat datang di aplikasi <b>Turnip Prophet</b> pada Nook Phone kalian.",
     "description": "Aplikasi ini dapat digunakan untuk mencatat harga turnip harian di pulau kalian, tapi kalian harus memasukkan harganya sendiri!",
-    "conclusion": "Setelah itu, aplikasi Turnip Prophet akan <b>secara ajaib</b> memprediksi harga turnip kalian selama satu minggu ke depan."
+    "conclusion": "Setelah itu, aplikasi Turnip Prophet akan <b>secara ajaib</b> memprediksi harga turnip kalian selama satu minggu ke depan.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Pertama Kali Beli",
@@ -41,7 +42,7 @@
     "wednesday": "Rabu",
     "thursday": "Kamis",
     "friday": "Jumat",
-    "saturday" : "Sabtu",
+    "saturday": "Sabtu",
     "sunday": "Minggu",
     "abr": {
       "monday": "Sen",
@@ -49,7 +50,7 @@
       "wednesday": "Rab",
       "thursday": "Kam",
       "friday": "Jum",
-      "saturday" : "Sab"
+      "saturday": "Sab"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Input Harga",
       "minimum": "Jaminan Minimal",
-      "maximum": "Potensi Maksimal"
-    }
+      "maximum": "Potensi Maksimal",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Setelah kalian mendaftarkan harga turnip-nya, Turnip Prophet akan melakukan perhitungan dan menampilkan beberapa kemungkinan dengan pola yang berbeda yang mungkin terjadi di pulau kalian.",
@@ -76,6 +87,18 @@
     "sponsor": "Ingin mensponsori pengembang di balik proyek ini? Silakan menuju halaman <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> dan klik '❤ Sponsor'",
     "contributors-text": "Oh! Jangan lupa juga untuk berterima kasih pada semuanya yang telah berkontribusi sejauh ini!",
     "contributors": "Kontributor",
-    "language": "Bahasa"
+    "language": "Bahasa",
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
+    "theme": {
+      "title": "Theme",
+      "auto": "Automatic",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }

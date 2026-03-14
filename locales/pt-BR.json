@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "Olá, e bem-vindo ao aplicativo <b>Turnip Prophet</b> em seu Nook Phone.",
     "description": "Este aplicativo lhe permite acompanhar os preços diários de nabo em sua ilha, porém você terá que colocar os preços você mesmo!",
-    "conclusion": "Depois disso, o aplicativo Turnip Prophet irá <b>magicamente</b> prever os preços dos nabos que você terá pelo resto da semana."
+    "conclusion": "Depois disso, o aplicativo Turnip Prophet irá <b>magicamente</b> prever os preços dos nabos que você terá pelo resto da semana.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "Comprador de primeira viagem",
@@ -41,7 +42,7 @@
     "wednesday": "Quarta-feira",
     "thursday": "Quinta-feira",
     "friday": "Sexta-feira",
-    "saturday" : "Sábado",
+    "saturday": "Sábado",
     "sunday": "Domingo",
     "abr": {
       "monday": "Seg",
@@ -49,7 +50,7 @@
       "wednesday": "Qua",
       "thursday": "Qui",
       "friday": "Sex",
-      "saturday" : "Sab"
+      "saturday": "Sab"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "Preço de entrada",
       "minimum": "Mínimo Garantido",
-      "maximum": "Potencial Máximo"
-    }
+      "maximum": "Potencial Máximo",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "Depois de listar alguns preços de nabo, o Turnip Prophet irá calcular alguns números e exibirá os diferentes padrões possíveis que sua ilha pode experienciar.",
@@ -82,7 +93,9 @@
       "auto": "Automático",
       "light": "Claro",
       "dark": "Escuro"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
   },
   "errors": {
     "impossible-values": "Opa! Parece haver um erro com suas previsões. Por favor, verifique os valores introduzidos.",

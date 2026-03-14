@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "大家好，欢迎使用Nook手机上的<b>大头菜预测工具</b>。",
     "description": "这个APP可以让你每天跟踪自己岛上大头菜的价格，但你得自己把价格填写进去！",
-    "conclusion": "之后，大头菜预测工具会<b>神奇地</b>预测出本周剩余时间的大头菜价格。"
+    "conclusion": "之后，大头菜预测工具会<b>神奇地</b>预测出本周剩余时间的大头菜价格。",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "首次购买",
@@ -41,7 +42,7 @@
     "wednesday": "周三",
     "thursday": "周四",
     "friday": "周五",
-    "saturday" : "周六",
+    "saturday": "周六",
     "sunday": "周日",
     "abr": {
       "monday": "周一",
@@ -49,7 +50,7 @@
       "wednesday": "周三",
       "thursday": "周四",
       "friday": "周五",
-      "saturday" : "周六"
+      "saturday": "周六"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "输入价格",
       "minimum": "保底价格",
-      "maximum": "最高价格"
-    }
+      "maximum": "最高价格",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "在填写一些大头菜价格后，大头菜预测工具将预测大头菜的价格并显示本周可能的趋势。",
@@ -82,6 +93,12 @@
       "auto": "自动",
       "light": "亮色",
       "dark": "暗色"
-    }
+    },
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }

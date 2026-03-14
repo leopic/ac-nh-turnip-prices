@@ -5,7 +5,8 @@
   "welcome": {
     "salutation": "안녕하세요, Nook Inc. 스마트폰의 <b>Turnip Prophet</b>앱을 사용해주셔서 감사합니다.",
     "description": "이 앱은 당신의 섬의 매일의 무 가격을 추적 할 수 있게 도와줍니다. 하지만 가격은 직접 입력해야 합니다!",
-    "conclusion": "가격을 입력하고 나면, 이번 주 동안의 무 가격을 <b>마법처럼</b> 예측해줍니다."
+    "conclusion": "가격을 입력하고 나면, 이번 주 동안의 무 가격을 <b>마법처럼</b> 예측해줍니다.",
+    "dismiss": "Got it!"
   },
   "first-time": {
     "title": "첫 구매",
@@ -41,7 +42,7 @@
     "wednesday": "수요일",
     "thursday": "목요일",
     "friday": "금요일",
-    "saturday" : "토요일",
+    "saturday": "토요일",
     "sunday": "일요일",
     "abr": {
       "monday": "월",
@@ -49,7 +50,7 @@
       "wednesday": "수",
       "thursday": "목",
       "friday": "금",
-      "saturday" : "토"
+      "saturday": "토"
     }
   },
   "times": {
@@ -65,8 +66,18 @@
     "chart": {
       "input": "입력된 가격",
       "minimum": "최저 보장 가격",
-      "maximum": "가능한 최고 가격"
-    }
+      "maximum": "가능한 최고 가격",
+      "expected": "Expected Price"
+    },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
+    "sell-now-title": "Should you sell now?",
+    "sell-now": "You should sell now.",
+    "sell-later": "You should sell later.",
+    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
+    "should-buy-title": "Should you buy?",
+    "should-buy": "You should buy.",
+    "should-not-buy": "You should not buy.",
+    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
   },
   "textbox": {
     "description": "지금까지의 무 가격을 입력하고 나면, Turnip Prophet이 당신의 섬에서 일어날 수 있는 가격 패턴을 보여줍니다.",
@@ -75,6 +86,19 @@
     "support": "<a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">GitHub</a>을 통해서 문의, 의견 제시, 기여가 가능합니다",
     "contributors-text": "그리고 기여를 해주신 분들에게 감사를 표합니다!",
     "contributors": "기여해 주신 분들",
-    "language": "언어"
+    "language": "언어",
+    "sponsor": "Want to sponsor the developers behind this project? Go to the <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> page and click '❤ Sponsor'",
+    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
+    "theme": {
+      "title": "Theme",
+      "auto": "Automatic",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "errors": {
+    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
+    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
   }
 }
