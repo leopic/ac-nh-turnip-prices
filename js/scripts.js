@@ -376,13 +376,13 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
 
   const decision = get_sell_buy_decision(curr_price, curr_time, expected_maximum, data.length);
   if (decision && decision.type === "sell") {
-    $("#decision").html(
+    $("#decision").append(
       `<h2>${i18next.t("output.sell-now-title")}</h2>
       <p>${i18next.t("output." + decision.action)}
       ${i18next.t("output.sell-advice", [expected_maximum.toFixed(0), labels[expected_argmax + 1]])}</p>`
     );
   } else if (decision && decision.type === "buy") {
-    $("#decision").html(
+    $("#decision").append(
       `<h2>${i18next.t("output.should-buy-title")}</h2>
       <p>${i18next.t("output." + decision.action)}
       ${i18next.t("output.buy-advice", [expected_maximum.toFixed(0)])}</p>`
