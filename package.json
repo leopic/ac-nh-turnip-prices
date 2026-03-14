@@ -1,7 +1,7 @@
 {
   "name": "ac-nh-turnip-prices",
   "version": "1.0.0",
-  "description": "[![discord](https://img.shields.io/badge/discord-join-7289DA.svg?logo=discord&longCache=true&style=for-the-badge)](https://discord.gg/bRh74X8) [![issues](https://img.shields.io/github/issues/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/issues) [![pull requests](https://img.shields.io/github/issues-pr/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/pulls) [![contributors](https://img.shields.io/github/contributors/mikebryant/ac-nh-turnip-prices?style=for-the-badge)](https://github.com/mikebryant/ac-nh-turnip-prices/graphs/contributors)",
+  "description": "Turnip price predictor for Animal Crossing: New Horizons",
   "main": "service-worker.js",
   "scripts": {
     "test": "vitest run",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikebryant/ac-nh-turnip-prices.git"
+    "url": "git+https://github.com/leopic/ac-nh-turnip-prices.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["animal-crossing", "turnip-prices", "predictor"],
+  "author": "Mike Bryant, leopic",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/mikebryant/ac-nh-turnip-prices/issues"
+    "url": "https://github.com/leopic/ac-nh-turnip-prices/issues"
   },
-  "homepage": "https://github.com/mikebryant/ac-nh-turnip-prices#readme",
+  "homepage": "https://github.com/leopic/ac-nh-turnip-prices#readme",
   "devDependencies": {
     "@vitest/coverage-v8": "^3.2.4",
     "jsdom": "^27.0.1",
