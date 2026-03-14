@@ -55,7 +55,7 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
   <input type="checkbox" id="menu-toggle" class="menu-toggle" />
   <div class="menu-overlay" onclick="document.getElementById('menu-toggle').checked = false;"></div>
-  <nav class="menu-drawer">
+  <nav class="menu-drawer" aria-label="Settings">
     <div class="menu-drawer__content">
       <h2 class="menu-drawer__title" data-i18n="textbox.language"></h2>
       <select id="language"></select>
@@ -83,14 +83,14 @@
   </div>
 
   <div class="nook-phone">
-    <div class="nook-phone__header">
+    <header class="nook-phone__header">
       <label for="menu-toggle" class="hamburger" aria-label="Menu">
         <span></span>
         <span></span>
         <span></span>
       </label>
       <h1>Turnip Prophet</h1>
-    </div>
+    </header>
 
     <div>
       <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -107,7 +107,7 @@
       </svg>
     </div>
 
-    <div class="nook-phone-center">
+    <main class="nook-phone-center">
 
 
 
@@ -308,7 +308,7 @@
       </div>
 
       <div id="decision"></div>
-    </div>
+    </main>
 
     <div style="transform:rotate(180deg)">
       <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

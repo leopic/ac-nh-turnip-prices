@@ -27,3 +27,22 @@ describe('Accessibility: Skip navigation', () => {
     expect(target).not.toBeNull();
   });
 });
+
+describe('Accessibility: Landmark elements', () => {
+  it('has a <main> element', () => {
+    const doc = getDOM();
+    expect(doc.querySelector('main')).not.toBeNull();
+  });
+
+  it('has a <header> element', () => {
+    const doc = getDOM();
+    expect(doc.querySelector('header')).not.toBeNull();
+  });
+
+  it('nav element has an aria-label', () => {
+    const doc = getDOM();
+    const nav = doc.querySelector('nav');
+    expect(nav).not.toBeNull();
+    expect(nav.getAttribute('aria-label')).toBeTruthy();
+  });
+});
