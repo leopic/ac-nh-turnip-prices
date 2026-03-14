@@ -57,3 +57,17 @@ describe('Accessibility: Focus indicators', () => {
     expect(matches.length).toBe(0);
   });
 });
+
+describe('Accessibility: Chart alternative', () => {
+  it('canvas has role="img"', () => {
+    const doc = getDOM();
+    const canvas = doc.getElementById('chart');
+    expect(canvas.getAttribute('role')).toBe('img');
+  });
+
+  it('canvas has an aria-label', () => {
+    const doc = getDOM();
+    const canvas = doc.getElementById('chart');
+    expect(canvas.getAttribute('aria-label')).toBeTruthy();
+  });
+});
