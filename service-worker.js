@@ -5,6 +5,7 @@ const precacheFiles = [
   "/css/styles.css",
   "/js/predictions.js",
   "/js/scripts.js",
+  "/js/menu.js",
   "/js/chart.js",
   "/js/translations.js",
   "/js/themes.js",

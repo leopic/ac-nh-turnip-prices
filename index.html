@@ -53,9 +53,8 @@
 <body>
 
   <a href="#main-content" class="skip-link">Skip to content</a>
-  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-  <div class="menu-overlay" onclick="document.getElementById('menu-toggle').checked = false;"></div>
-  <nav class="menu-drawer" aria-label="Settings">
+  <div class="menu-overlay" aria-hidden="true"></div>
+  <nav id="menu-drawer" class="menu-drawer" aria-label="Settings" aria-hidden="true">
     <div class="menu-drawer__content">
       <h2 class="menu-drawer__title" data-i18n="textbox.language"></h2>
       <select id="language"></select>
@@ -84,11 +83,11 @@
 
   <div class="nook-phone">
     <header class="nook-phone__header">
-      <label for="menu-toggle" class="hamburger" aria-label="Menu">
+      <button type="button" id="menu-trigger" class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="menu-drawer">
         <span></span>
         <span></span>
         <span></span>
-      </label>
+      </button>
       <h1>Turnip Prophet</h1>
     </header>
 
@@ -337,6 +336,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/3.0.2/i18nextHttpBackend.min.js" integrity="sha512-RYgVA7vVuFPjAksuk9TPraxVuJvdB5sF3KkbHdPkh47Bw2/q4wfiO67yU/btAG6k8t6qg7bY0VRHddW0/JcEsw==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.2.0/i18nextBrowserLanguageDetector.min.js" integrity="sha512-v3t6AdRiPcnJJZQk9BQom46BwPDJ/lfbhaEyqAzr8xkTnSsJGluw2mHrmZR5SNqVGIBQW70kmFr9Www8dvDYtg==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js" integrity="sha384-fLTSt6zHOb152KeFkj7kSiXdkyjKf6fjk5bdzWYLDPDo9evwd9PVs3TKoYYaaxdl" crossorigin="anonymous"></script>
+  <script src="js/menu.js"></script>
   <script src="js/chart.js"></script>
   <script src="js/predictions.js"></script>
   <script src="js/scripts.js"></script>

@@ -739,10 +739,6 @@ input[class=now]:placeholder-shown::placeholder {
 
 /* - Hamburger Menu - */
 
-.menu-toggle {
-  display: none;
-}
-
 .hamburger {
   position: absolute;
   left: 24px;
@@ -755,6 +751,15 @@ input[class=now]:placeholder-shown::placeholder {
   height: 20px;
   cursor: pointer;
   z-index: 100;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.hamburger:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .hamburger span {
@@ -764,17 +769,18 @@ input[class=now]:placeholder-shown::placeholder {
   border-radius: 3px;
   background: var(--nook-phone-text-color);
   transition: 0.3s all;
+  pointer-events: none;
 }
 
-.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(1) {
+.hamburger[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(8.5px) rotate(45deg);
 }
 
-.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(2) {
+.hamburger[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
 
-.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(3) {
+.hamburger[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
@@ -789,7 +795,7 @@ input[class=now]:placeholder-shown::placeholder {
   z-index: 200;
 }
 
-.menu-toggle:checked ~ .menu-overlay {
+.menu-overlay.open {
   display: block;
 }
 
@@ -806,7 +812,7 @@ input[class=now]:placeholder-shown::placeholder {
   overflow-y: auto;
 }
 
-.menu-toggle:checked ~ .menu-drawer {
+.menu-drawer.open {
   right: 0;
 }
 

@@ -58,6 +58,28 @@ describe('Accessibility: Focus indicators', () => {
   });
 });
 
+describe('Accessibility: Menu drawer keyboard support', () => {
+  it('hamburger trigger is a button with aria-expanded', () => {
+    const doc = getDOM();
+    const trigger = doc.getElementById('menu-trigger');
+    expect(trigger).not.toBeNull();
+    expect(trigger.tagName.toLowerCase()).toBe('button');
+    expect(trigger.hasAttribute('aria-expanded')).toBe(true);
+  });
+
+  it('menu drawer has aria-hidden attribute', () => {
+    const doc = getDOM();
+    const drawer = doc.querySelector('.menu-drawer');
+    expect(drawer.hasAttribute('aria-hidden')).toBe(true);
+  });
+
+  it('no hidden checkbox hack for menu toggle', () => {
+    const doc = getDOM();
+    const checkbox = doc.getElementById('menu-toggle');
+    expect(checkbox).toBeNull();
+  });
+});
+
 describe('Accessibility: Chart alternative', () => {
   it('canvas has role="img"', () => {
     const doc = getDOM();
