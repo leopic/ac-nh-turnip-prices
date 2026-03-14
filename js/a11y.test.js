@@ -80,6 +80,23 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Label associations', () => {
+  it('no label elements have empty for attributes', () => {
+    const doc = getDOM();
+    const labels = doc.querySelectorAll('label[for=""]');
+    expect(labels.length).toBe(0);
+  });
+
+  it('descriptive text for radio groups uses p or span, not label', () => {
+    const doc = getDOM();
+    // The first-time and patterns description should not be <label> without valid for
+    const firstTimeDesc = doc.querySelector('[data-i18n="[html]first-time.description"]');
+    const patternsDesc = doc.querySelector('[data-i18n="[html]patterns.description"]');
+    if (firstTimeDesc) expect(firstTimeDesc.tagName.toLowerCase()).not.toBe('label');
+    if (patternsDesc) expect(patternsDesc.tagName.toLowerCase()).not.toBe('label');
+  });
+});
+
 describe('Accessibility: Radio button hiding', () => {
   it('radio buttons are not hidden with display:none or position:fixed', () => {
     // CSS should use clip-based hiding, not display:none or position:fixed
