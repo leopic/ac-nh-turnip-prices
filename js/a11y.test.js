@@ -80,6 +80,17 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Decorative SVGs', () => {
+  it('all wave SVGs have aria-hidden="true"', () => {
+    const doc = getDOM();
+    const waves = doc.querySelectorAll('svg.waves');
+    expect(waves.length).toBeGreaterThan(0);
+    waves.forEach(svg => {
+      expect(svg.getAttribute('aria-hidden')).toBe('true');
+    });
+  });
+});
+
 describe('Accessibility: Permalink button', () => {
   it('permalink trigger is a button element', () => {
     const doc = getDOM();
