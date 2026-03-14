@@ -56,11 +56,11 @@
   <div class="menu-overlay" aria-hidden="true"></div>
   <nav id="menu-drawer" class="menu-drawer" aria-label="Settings" aria-hidden="true">
     <div class="menu-drawer__content">
-      <h2 class="menu-drawer__title" data-i18n="textbox.language"></h2>
-      <select id="language"></select>
+      <h2 class="menu-drawer__title" id="label-language" data-i18n="textbox.language"></h2>
+      <select id="language" aria-labelledby="label-language"></select>
 
-      <h2 class="menu-drawer__title" data-i18n="textbox.theme.title"></h2>
-      <select id="theme"></select>
+      <h2 class="menu-drawer__title" id="label-theme" data-i18n="textbox.theme.title"></h2>
+      <select id="theme" aria-labelledby="label-theme"></select>
       <label class="menu-drawer__text" style="display:flex;align-items:center;gap:8px;margin-top:12px;">
         <input type="checkbox" id="high-color-contrast" />
         <span data-i18n="textbox.theme.high-color-contrast"></span>

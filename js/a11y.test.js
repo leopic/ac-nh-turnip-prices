@@ -80,6 +80,24 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Select labels in drawer', () => {
+  it('language select has an accessible label', () => {
+    const doc = getDOM();
+    const sel = doc.getElementById('language');
+    const hasLabel = doc.querySelector('label[for="language"]') !== null;
+    const hasAriaLabel = sel.hasAttribute('aria-labelledby') || sel.hasAttribute('aria-label');
+    expect(hasLabel || hasAriaLabel).toBe(true);
+  });
+
+  it('theme select has an accessible label', () => {
+    const doc = getDOM();
+    const sel = doc.getElementById('theme');
+    const hasLabel = doc.querySelector('label[for="theme"]') !== null;
+    const hasAriaLabel = sel.hasAttribute('aria-labelledby') || sel.hasAttribute('aria-label');
+    expect(hasLabel || hasAriaLabel).toBe(true);
+  });
+});
+
 describe('Accessibility: Radio group semantics', () => {
   it('first-time radio group is wrapped in fieldset with legend', () => {
     const doc = getDOM();
