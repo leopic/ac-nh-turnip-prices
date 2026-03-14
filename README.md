@@ -11,12 +11,27 @@ This is a fork of [mikebryant/ac-nh-turnip-prices](https://github.com/mikebryant
 - **Pattern likelihood indicator** — as you enter prices throughout the week, shows which pattern you're most likely on and how confident the prediction is
 - **Dismissable welcome message** — the intro dialog can be closed and won't reappear until you reset
 - **Hamburger menu** — language, theme, and credits moved to a slide-out drawer to reduce clutter
+- **High color contrast mode** — toggle for colorblind-friendly table colors, works with light and dark themes
+- **Auto-updating URL** — the browser URL updates as you enter prices, making sharing easier
+- **Sticky table header** — column headers stay visible when scrolling through pattern results
+- **Accessibility overhaul:**
+  - Skip-to-content link for keyboard navigation
+  - Proper landmark elements (`<main>`, `<header>`, labeled `<nav>`)
+  - Visible focus indicators on all interactive elements
+  - Keyboard-accessible menu drawer with focus trapping and Escape key support
+  - Screen reader announcements for dynamic results, errors, and notifications (`aria-live`, `role="alert"`)
+  - Accessible chart canvas (`role="img"` with `aria-label`)
+  - Radio groups wrapped in `<fieldset>`/`<legend>` for screen reader context
+  - Properly associated labels on all form controls
+  - Decorative SVGs hidden from screen readers
+  - Keyboard-focusable permalink button
 - **Bug fix: Pattern 3 middle peak** — the minimum prediction for Small Spike's middle peak slot was off by 1 bell vs the game code
 - **Bug fix: PDF.decay() division by zero** — equal min/max decay rates no longer produce NaN
+- **German translation fix** — corrected "large spike" and "small spike" pattern names
 - **Updated dependencies** — jQuery 3.7.1, Chart.js 4.5.0, i18next 25, replaced deprecated i18next-xhr-backend with i18next-http-backend
 - **Removed Google Analytics** — the UA tracking tag was deprecated
 - **Improved PWA setup** — complete precache file list, proper cache versioning, manifest fields
-- **Comprehensive test suite** — 300 tests covering prediction logic, expected values, pattern detection, and UI functions
+- **Comprehensive test suite** — 324 tests covering prediction logic, expected values, pattern detection, UI functions, and accessibility
 - **CI pipeline** — GitHub Actions runs tests on PRs and pushes; pre-push hook runs tests locally
 
 ## Running locally
