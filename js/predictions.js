@@ -539,8 +539,8 @@ class Predictor {
       max: max_pred,
     });
 
-    // Main spike 2
-    min_pred = predicted_prices[start].min;
+    // Main spike 2 (no -1 unlike the side peaks)
+    min_pred = predicted_prices[start].min + 1;
     max_pred = this.get_price(rate_max, buy_price);
     if (!isNaN(given_prices[start + 1])) {
       min_pred = given_prices[start + 1];
