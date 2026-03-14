@@ -80,6 +80,13 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: html lang attribute', () => {
+  it('html element has a lang attribute', () => {
+    const doc = getDOM();
+    expect(doc.documentElement.getAttribute('lang')).toBeTruthy();
+  });
+});
+
 describe('Accessibility: Decorative SVGs', () => {
   it('all wave SVGs have aria-hidden="true"', () => {
     const doc = getDOM();
