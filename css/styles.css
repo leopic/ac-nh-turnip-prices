@@ -259,7 +259,8 @@ h2 {
 }
 
 .dialog-box-option select:focus {
-  outline: none;
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
 }
 
 .dialog-box p,
@@ -399,7 +400,8 @@ input[type=number]:placeholder-shown:hover {
 }
 
 input[type=number]:focus {
-  outline: none;
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
   transform: scale(1.1);
   color: var(--input-focus-text-color);
   background: var(--input-focus-bg-color);
@@ -843,8 +845,8 @@ input[class=now]:placeholder-shown::placeholder {
 }
 
 .menu-drawer__content select:focus {
-  outline: none;
-  border-color: var(--color-blue);
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
 }
 
 .menu-drawer__text {

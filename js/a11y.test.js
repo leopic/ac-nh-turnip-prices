@@ -46,3 +46,14 @@ describe('Accessibility: Landmark elements', () => {
     expect(nav.getAttribute('aria-label')).toBeTruthy();
   });
 });
+
+describe('Accessibility: Focus indicators', () => {
+  it('does not use outline:none without a replacement focus style', () => {
+    // Check that every "outline: none" in CSS has a sibling visual indicator
+    // (box-shadow, border, or outline with offset)
+    const outlineNonePattern = /outline:\s*none/g;
+    const matches = [...stylesCSS.matchAll(outlineNonePattern)];
+    // After fix, there should be no bare outline:none remaining
+    expect(matches.length).toBe(0);
+  });
+});
