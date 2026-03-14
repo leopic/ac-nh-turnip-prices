@@ -1,18 +1,23 @@
 {
   "name": "ac-nh-turnip-prices",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Turnip price predictor for Animal Crossing: New Horizons",
   "main": "service-worker.js",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leopic/ac-nh-turnip-prices.git"
   },
-  "keywords": ["animal-crossing", "turnip-prices", "predictor"],
+  "keywords": [
+    "animal-crossing",
+    "turnip-prices",
+    "predictor"
+  ],
   "author": "Mike Bryant, leopic",
   "license": "ISC",
   "type": "commonjs",
@@ -21,6 +26,8 @@
   },
   "homepage": "https://github.com/leopic/ac-nh-turnip-prices#readme",
   "devDependencies": {
+    "@commitlint/cli": "^20.4.4",
+    "@commitlint/config-conventional": "^20.4.4",
     "@vitest/coverage-v8": "^3.2.4",
     "jsdom": "^27.0.1",
     "vitest": "^3.2.4"
