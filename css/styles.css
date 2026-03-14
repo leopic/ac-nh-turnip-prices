@@ -669,6 +669,144 @@ input[class=now]:placeholder-shown::placeholder {
   }
 }
 
+/* - Hamburger Menu - */
+
+.menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  border-radius: 3px;
+  background: var(--nook-phone-text-color);
+  transition: 0.3s all;
+}
+
+.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked ~ .nook-phone .hamburger span:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+}
+
+.menu-toggle:checked ~ .menu-overlay {
+  display: block;
+}
+
+.menu-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: var(--dialog-bg-color);
+  box-shadow: -2px 0 8px var(--shadow-20);
+  z-index: 300;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.menu-toggle:checked ~ .menu-drawer {
+  right: 0;
+}
+
+.menu-drawer__content {
+  padding: 32px 24px;
+}
+
+.menu-drawer__title {
+  font-size: 1.1rem;
+  color: var(--dialog-name-text-color);
+  margin: 24px 0 8px;
+  text-align: left;
+}
+
+.menu-drawer__title:first-child {
+  margin-top: 0;
+}
+
+.menu-drawer__content select {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid var(--select-border-color);
+  color: var(--select-text-color);
+  background: var(--center-bg-color);
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+.menu-drawer__content select:hover {
+  border-color: var(--color-light-blue);
+  box-shadow: 0 2px 4px var(--shadow-16);
+}
+
+.menu-drawer__content select:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.menu-drawer__text {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--dialog-text-color);
+  line-height: 1.6rem;
+  margin: 8px 0;
+}
+
+.menu-drawer__text a {
+  color: var(--color-blue);
+  transition: 0.2s all;
+}
+
+.menu-drawer__text a:hover {
+  color: var(--color-light-blue);
+}
+
+.nook-phone__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
 #decision {
   padding: 0px 16px;
 }

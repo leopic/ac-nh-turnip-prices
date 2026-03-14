@@ -8,7 +8,6 @@ const precacheFiles = [
   "/js/chart.js",
   "/js/translations.js",
   "/js/themes.js",
-  "/js/contributors.js",
   "/manifest.json",
   "/favicon.ico",
   "/locales/en.json",
