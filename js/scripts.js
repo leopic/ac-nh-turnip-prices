@@ -305,10 +305,18 @@ const hideChart = function() {
   $(".chart-wrapper").hide();
 };
 
+const announceResults = function (count) {
+  var liveRegion = document.getElementById("results-live");
+  if (liveRegion) {
+    liveRegion.textContent = count + " pattern" + (count !== 1 ? "s" : "") + " found";
+  }
+};
+
 const calculateOutput = function (data, first_buy, previous_pattern) {
   $("#decision").empty();
   if (isEmpty(data)) {
     hideChart();
+    announceResults(0);
     return;
   }
   let pat_desc = {0:"fluctuating", 1:"large-spike", 2:"decreasing", 3:"small-spike", 4:"all"};
@@ -357,6 +365,7 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
   const { expected_maximum, expected_argmax } = find_expected_maximum(expected_values, curr_time + 1);
 
   $("#output").html(output_possibilities);
+  announceResults(analyzed_possibilities.length);
 
   const labels = [i18next.t("weekdays.sunday")].concat(
     ...[

@@ -240,7 +240,7 @@
 
       <h2 data-i18n="output.title"></h2>
 
-      <div class="dialog-box error">
+      <div class="dialog-box error" role="alert">
         <h2 class="dialog-box__name" data-i18n="general.daisy-mae"></h2>
         <p data-i18n="errors.impossible-values"></p>
         <p data-i18n="[html]errors.github"></p>
@@ -306,6 +306,7 @@
         </table>
       </div>
 
+      <div id="results-live" class="sr-only" aria-live="polite"></div>
       <div id="decision"></div>
     </main>
 
@@ -328,7 +329,7 @@
   </div>
 
 
-  <div id="snackbar"></div>
+  <div id="snackbar" role="status" aria-live="polite"></div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/25.5.2/i18next.min.js" integrity="sha512-41q9Nizfj3hnJoKqqMdlUlqK4K6WUyERaAWE50zuXMDvJT/91KdN9eiulSqOFw703IKsflcvrCJSb8Q+EjtyIQ==" crossorigin="anonymous"></script>

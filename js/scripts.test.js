@@ -53,6 +53,7 @@ const HTML_TEMPLATE = `<!doctype html>
       <tbody id="output"></tbody>
     </table>
   </div>
+  <div id="results-live" aria-live="polite"></div>
   <div id="decision"></div>
   <div id="snackbar"></div>
 </body>

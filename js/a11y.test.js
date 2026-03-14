@@ -80,6 +80,27 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Live regions', () => {
+  it('has an aria-live region for result announcements', () => {
+    const doc = getDOM();
+    const liveRegion = doc.querySelector('[aria-live="polite"]');
+    expect(liveRegion).not.toBeNull();
+  });
+
+  it('error dialog has role="alert"', () => {
+    const doc = getDOM();
+    const error = doc.querySelector('.dialog-box.error');
+    expect(error.getAttribute('role')).toBe('alert');
+  });
+
+  it('snackbar has role="status"', () => {
+    const doc = getDOM();
+    const snackbar = doc.getElementById('snackbar');
+    expect(snackbar.getAttribute('role')).toBe('status');
+    expect(snackbar.getAttribute('aria-live')).toBe('polite');
+  });
+});
+
 describe('Accessibility: Chart alternative', () => {
   it('canvas has role="img"', () => {
     const doc = getDOM();
