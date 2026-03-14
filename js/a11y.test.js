@@ -80,6 +80,22 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Radio group semantics', () => {
+  it('first-time radio group is wrapped in fieldset with legend', () => {
+    const doc = getDOM();
+    const fieldset = doc.querySelector('fieldset:has(#first-time-radio-no)');
+    expect(fieldset).not.toBeNull();
+    expect(fieldset.querySelector('legend')).not.toBeNull();
+  });
+
+  it('pattern radio group is wrapped in fieldset with legend', () => {
+    const doc = getDOM();
+    const fieldset = doc.querySelector('fieldset:has(#pattern-radio-unknown)');
+    expect(fieldset).not.toBeNull();
+    expect(fieldset.querySelector('legend')).not.toBeNull();
+  });
+});
+
 describe('Accessibility: Label associations', () => {
   it('no label elements have empty for attributes', () => {
     const doc = getDOM();

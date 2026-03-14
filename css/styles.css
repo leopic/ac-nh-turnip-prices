@@ -334,7 +334,14 @@ h2 {
   align-items: center;
 }
 
-.form__row h6 {
+fieldset.form__row {
+  border: none;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.form__row h6,
+.form__row legend {
   width: 100%;
   display: block;
   font-weight: 800;
