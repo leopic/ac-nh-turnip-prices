@@ -18,6 +18,7 @@ const {
   compute_expected_values,
   find_expected_maximum,
   get_sell_buy_decision,
+  get_pattern_probabilities,
 } = require('./predictions.js');
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -1475,6 +1476,81 @@ describe('get_sell_buy_decision', () => {
       expect(result.type).toBe("sell");
       expect(result.action).toBe("sell-now");
     });
+  });
+});
+
+// ─── get_pattern_probabilities ────────────────────────────────────────────────
+
+describe('get_pattern_probabilities', () => {
+  it('returns all four patterns sorted by probability descending', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const analyzed = p.analyze_possibilities();
+    const probs = get_pattern_probabilities(analyzed);
+
+    expect(probs.length).toBe(4);
+    // sorted descending
+    for (let i = 1; i < probs.length; i++) {
+      expect(probs[i - 1].probability).toBeGreaterThanOrEqual(probs[i].probability);
+    }
+    // each has pattern_number and probability
+    for (const p of probs) {
+      expect(typeof p.pattern_number).toBe('number');
+      expect(p.pattern_number).toBeGreaterThanOrEqual(0);
+      expect(p.pattern_number).toBeLessThanOrEqual(3);
+      expect(typeof p.probability).toBe('number');
+    }
+  });
+
+  it('probabilities sum to approximately 1', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const analyzed = p.analyze_possibilities();
+    const probs = get_pattern_probabilities(analyzed);
+    const total = probs.reduce((sum, p) => sum + p.probability, 0);
+    expect(total).toBeCloseTo(1.0, 2);
+  });
+
+  it('excludes pattern 4 (global summary)', () => {
+    const p = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const analyzed = p.analyze_possibilities();
+    const probs = get_pattern_probabilities(analyzed);
+    expect(probs.every(p => p.pattern_number !== 4)).toBe(true);
+  });
+
+  it('narrows probabilities when prices match a specific pattern', () => {
+    // Decreasing prices strongly suggest decreasing pattern
+    const p = new Predictor([100, 100, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35], false, -1);
+    const analyzed = p.analyze_possibilities();
+    const probs = get_pattern_probabilities(analyzed);
+    const decreasing = probs.find(p => p.pattern_number === 2);
+    expect(decreasing).toBeDefined();
+    expect(decreasing.probability).toBeGreaterThan(0.5);
+  });
+
+  it('eliminates impossible patterns as more prices are entered', () => {
+    // With few prices, all patterns are possible
+    const p1 = new Predictor([100, 100, 90, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const probs1 = get_pattern_probabilities(p1.analyze_possibilities());
+
+    // With a spike price, decreasing should be eliminated or very low
+    const p2 = new Predictor([100, 100, 90, 85, 80, 75, 200, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const probs2 = get_pattern_probabilities(p2.analyze_possibilities());
+    const decreasing2 = probs2.find(p => p.pattern_number === 2);
+    if (decreasing2) {
+      expect(decreasing2.probability).toBeLessThan(0.01);
+    }
+  });
+
+  it('with known previous pattern, shifts probabilities accordingly', () => {
+    const pUnknown = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, -1);
+    const probsUnknown = get_pattern_probabilities(pUnknown.analyze_possibilities());
+
+    const pAfterDecreasing = new Predictor([100, 100, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], false, 2);
+    const probsAfterDecreasing = get_pattern_probabilities(pAfterDecreasing.analyze_possibilities());
+
+    // After a decreasing week, large spike is most likely (50% transition prob)
+    const largeSpikeAfter = probsAfterDecreasing.find(p => p.pattern_number === 1);
+    const largeSpikeUnknown = probsUnknown.find(p => p.pattern_number === 1);
+    expect(largeSpikeAfter.probability).toBeGreaterThan(largeSpikeUnknown.probability);
   });
 });
 

@@ -363,6 +363,17 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
 
   update_chart(data, analyzed_possibilities, expected_values, labels);
 
+  const pattern_probs = get_pattern_probabilities(analyzed_possibilities);
+  if (pattern_probs.length > 0 && pattern_probs[0].probability < 1) {
+    const top = pattern_probs[0];
+    $("#decision").append(
+      `<p>${i18next.t("output.likely-pattern", [
+        i18next.t("patterns." + pat_desc[top.pattern_number]),
+        displayPercentage(top.probability)
+      ])}</p>`
+    );
+  }
+
   const decision = get_sell_buy_decision(curr_price, curr_time, expected_maximum, data.length);
   if (decision && decision.type === "sell") {
     $("#decision").html(

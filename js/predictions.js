@@ -1067,6 +1067,26 @@ function get_sell_buy_decision(curr_price, curr_time, expected_maximum, data_len
   return null;
 }
 
+/**
+ * Extract per-pattern probability summary from analyzed possibilities.
+ * @param {Array} analyzed_possibilities - Output of Predictor.analyze_possibilities()
+ * @returns {Array<{ pattern_number: number, probability: number }>}
+ *   Sorted by probability descending. Pattern 4 (global summary) is excluded.
+ */
+function get_pattern_probabilities(analyzed_possibilities) {
+  const totals = {};
+  for (const poss of analyzed_possibilities) {
+    if (poss.pattern_number === 4) continue;
+    if (!(poss.pattern_number in totals)) {
+      totals[poss.pattern_number] = 0;
+    }
+    totals[poss.pattern_number] = poss.category_total_probability;
+  }
+  return Object.entries(totals)
+    .map(([pattern_number, probability]) => ({ pattern_number: parseInt(pattern_number), probability }))
+    .sort((a, b) => b.probability - a.probability);
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PATTERN, PROBABILITY_MATRIX, RATE_MULTIPLIER, range_length, clamp, range_intersect, range_intersect_length, float_sum, prefix_float_sum, PDF, Predictor, compute_expected_values, find_expected_maximum, get_sell_buy_decision };
+  module.exports = { PATTERN, PROBABILITY_MATRIX, RATE_MULTIPLIER, range_length, clamp, range_intersect, range_intersect_length, float_sum, prefix_float_sum, PDF, Predictor, compute_expected_values, find_expected_maximum, get_sell_buy_decision, get_pattern_probabilities };
 }

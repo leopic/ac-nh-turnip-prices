@@ -68,6 +68,7 @@
       "maximum": "Potential Maximum",
       "expected": "Expected Price"
     },
+    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
     "sell-now-title": "Should you sell now?",
     "sell-now": "You should sell now.",
     "sell-later": "You should sell later.",
