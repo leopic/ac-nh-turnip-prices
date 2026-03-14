@@ -80,6 +80,18 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Radio button hiding', () => {
+  it('radio buttons are not hidden with display:none or position:fixed', () => {
+    // CSS should use clip-based hiding, not display:none or position:fixed
+    const radioRule = stylesCSS.match(/\.input__radio-buttons input\[type=radio\]\s*\{[^}]+\}/);
+    expect(radioRule).not.toBeNull();
+    const rule = radioRule[0];
+    expect(rule).not.toMatch(/display:\s*none/);
+    expect(rule).not.toMatch(/position:\s*fixed/);
+    expect(rule).toMatch(/clip/);
+  });
+});
+
 describe('Accessibility: Live regions', () => {
   it('has an aria-live region for result announcements', () => {
     const doc = getDOM();
