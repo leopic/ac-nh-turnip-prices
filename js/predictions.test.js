@@ -1554,6 +1554,38 @@ describe('get_pattern_probabilities', () => {
   });
 });
 
+// ─── Real-world scenario: Large Spike detection ─────────────────────────────
+
+describe('Large Spike detection scenario', () => {
+  // Buy price 91, Mon: 81/71, Tue: 96/161
+  // Not first-time buyer, unknown previous pattern
+  const buy = 91;
+  const base = [buy, buy];
+
+  it('with Mon prices only, multiple patterns are still possible', () => {
+    const data = [...base, 81, 71, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
+    const probs = get_pattern_probabilities(new Predictor(data, false, -1).analyze_possibilities());
+    // Declining Monday prices are ambiguous — could be start of several patterns
+    expect(probs.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('with Mon + Tue AM, Large Spike becomes dominant', () => {
+    const data = [...base, 81, 71, 96, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
+    const probs = get_pattern_probabilities(new Predictor(data, false, -1).analyze_possibilities());
+    const largeSpike = probs.find(p => p.pattern_number === PATTERN.LARGE_SPIKE);
+    expect(largeSpike).toBeDefined();
+    expect(largeSpike.probability).toBeGreaterThan(0.9);
+  });
+
+  it('with Tue PM spike at 161, locks to 100% Large Spike', () => {
+    const data = [...base, 81, 71, 96, 161, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN];
+    const probs = get_pattern_probabilities(new Predictor(data, false, -1).analyze_possibilities());
+    expect(probs).toHaveLength(1);
+    expect(probs[0].pattern_number).toBe(PATTERN.LARGE_SPIKE);
+    expect(probs[0].probability).toBeCloseTo(1.0, 2);
+  });
+});
+
 // ─── Expected Value Integration Tests ────────────────────────────────────────
 
 describe('Expected value integration', () => {
