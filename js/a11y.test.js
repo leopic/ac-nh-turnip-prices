@@ -80,6 +80,14 @@ describe('Accessibility: Menu drawer keyboard support', () => {
   });
 });
 
+describe('Accessibility: Permalink button', () => {
+  it('permalink trigger is a button element', () => {
+    const doc = getDOM();
+    const btn = doc.getElementById('permalink-btn');
+    expect(btn.tagName.toLowerCase()).toBe('button');
+  });
+});
+
 describe('Accessibility: Select labels in drawer', () => {
   it('language select has an accessible label', () => {
     const doc = getDOM();

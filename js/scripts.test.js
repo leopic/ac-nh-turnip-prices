@@ -40,7 +40,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <input type="number" id="sell_13" placeholder="..." />
 
     <input id="permalink-input" type="text" readOnly />
-    <div id="permalink-btn" class="button permalink"></div>
+    <button type="button" id="permalink-btn" class="button permalink"></button>
     <button type="button" id="reset" class="button button--reset"></button>
   </form>
 
