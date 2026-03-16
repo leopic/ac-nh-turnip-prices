@@ -1,6 +1,6 @@
 {
   "name": "ac-nh-turnip-prices",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Turnip price predictor for Animal Crossing: New Horizons",
   "main": "service-worker.js",
   "scripts": {
