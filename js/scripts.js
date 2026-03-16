@@ -303,6 +303,7 @@ const displayPercentage = function(fraction) {
 const hideChart = function() {
   $("#output").html("");
   $(".chart-wrapper").hide();
+  $(".table-wrapper").hide();
 };
 
 const announceResults = function (count) {
@@ -330,6 +331,7 @@ const calculateOutput = function (data, first_buy, previous_pattern) {
   }
   $(".error:visible").hide();
   $(".chart-wrapper:hidden").show();
+  $(".table-wrapper:hidden").show();
   let buy_price = parseInt(buy_input.val());
   previous_pattern_number = "";
 
