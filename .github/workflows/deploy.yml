@@ -42,4 +42,4 @@ jobs:
           rsync -avz --delete \
             --exclude-from='rsync-exclude.txt' \
             -e "ssh -i ~/.ssh/deploy_key" \
-            ./ ${{ secrets.DREAMHOST_USER }}@${{ secrets.DREAMHOST_HOST }}:~/${{ secrets.DREAMHOST_DEPLOY_PATH }}/
+            ./ ${{ secrets.DREAMHOST_USER }}@${{ secrets.DREAMHOST_HOST }}:/${{ secrets.DREAMHOST_DEPLOY_PATH }}/
