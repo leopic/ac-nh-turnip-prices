@@ -8,7 +8,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "start": "npx serve .",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "git config core.hooksPath .githooks",
+    "deploy": "rsync -avz --delete --exclude-from='rsync-exclude.txt' -e 'ssh -i ~/.ssh/dreamhost_turnip_deploy' ./ dh_turnip_prophet@turnip-prophet.leonardopicado.com:/home/dh_turnip_prophet/turnip-prophet.leonardopicado.com/"
   },
   "repository": {
     "type": "git",
