@@ -1,61 +1,17 @@
-name: Create Release
+name: Release
 
 on:
-  workflow_run:
-    workflows: ["Deploy"]
-    types:
-      - completed
+  push:
     branches: [main]
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  create-release:
+  release:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: googleapis/release-please-action@v4.4.0
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
-          body: |
-            ## Deployment Complete
-
-            **Build Number:** ${{ github.run_number }}
-            **Commit:** ${{ github.event.workflow_run.head_sha }}
-            **Branch:** main
-            **Deployed at:** ${{ github.event.workflow_run.created_at }}
-
-            ### Deployed to
-            - turnip-prophet.leonardopicado.com
-
-            ### Workflow Details
-            - Workflow Run: [#${{ github.event.workflow_run.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }})
-          draft: false
-          prerelease: false
-
-      - name: Create Release Archive
-        run: |
-          zip -r website-build-${{ github.run_number }}.zip . \
-            -x "node_modules/*" ".git/*" ".github/*" ".githooks/*" ".claude/*" \
-               "coverage/*" "*.test.js" "test-setup.js" "package.json" \
-               "package-lock.json" "vitest.config.js" "commitlint.config.js" \
-               ".nvmrc" ".gitignore" "rsync-exclude.txt"
-
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./website-build-${{ github.run_number }}.zip
-          asset_name: website-build-${{ github.run_number }}.zip
-          asset_content_type: application/zip
+          release-type: node
