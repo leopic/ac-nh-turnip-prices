@@ -1,5 +1,5 @@
 // PWA Code adapted from https://github.com/pwa-builder/PWABuilder
-const CACHE = "pwa-precache-v4";
+const CACHE = "pwa-precache-v5";
 const CDN_ORIGINS = [
   "https://code.jquery.com",
   "https://cdnjs.cloudflare.com",
@@ -40,6 +40,8 @@ const precacheFiles = [
   "/img/favicon-192.png",
   "/img/favicon-512.png",
   "/img/favicon-512-maskable.png",
+  "/img/screenshots/desktop.png",
+  "/img/screenshots/mobile.png",
 ];
 
 self.addEventListener("install", function (event) {
