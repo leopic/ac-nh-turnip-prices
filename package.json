@@ -9,7 +9,8 @@
     "test:coverage": "vitest run --coverage",
     "start": "npx serve .",
     "prepare": "git config core.hooksPath .githooks",
-    "deploy": "rsync -avz --delete --exclude-from='rsync-exclude.txt' -e 'ssh -i ~/.ssh/dreamhost_turnip_deploy' ./ dh_turnip_prophet@turnip-prophet.leonardopicado.com:/home/dh_turnip_prophet/turnip-prophet.leonardopicado.com/"
+    "deploy": "rsync -avz --delete --exclude-from='rsync-exclude.txt' -e 'ssh -i ~/.ssh/dreamhost_turnip_deploy' ./ dh_turnip_prophet@turnip-prophet.leonardopicado.com:/home/dh_turnip_prophet/turnip-prophet.leonardopicado.com/",
+    "generate-icons": "node scripts/generate-maskable-icon.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@vitest/coverage-v8": "^4.1.5",
     "fast-uri": "^3.1.2",
     "jsdom": "^29.1.1",
+    "sharp": "^0.34.5",
     "vitest": "^4.1.5"
   }
 }
