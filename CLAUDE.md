@@ -13,7 +13,6 @@ npm test              # run full Vitest suite (jsdom environment)
 npm run test:watch    # watch mode
 npm run test:coverage # coverage report
 npm start             # serve locally via `npx serve`
-npm run deploy        # rsync to DreamHost (requires SSH access)
 npm run generate-icons # regenerate img/favicon-512-maskable.png (requires sharp)
 ```
 
@@ -69,8 +68,9 @@ Tests live alongside their source files (`predictions.test.js`, `scripts.test.js
 
 ## CI/CD
 
+Deployments are handled automatically by **Cloudflare Pages** on every push to `main`. No manual deploy step needed.
+
 GitHub Actions runs on PRs and pushes to `main`:
 - `ci.yml` — `npm test` on Node 18 (pinned via `.nvmrc`)
 - `commitlint.yml` — conventional commit format check
-- `deploy.yml` — production rsync deploy to DreamHost
-- `release.yml` — auto-incrementing releases after successful deploys
+- `release.yml` — auto-incrementing releases after CI passes

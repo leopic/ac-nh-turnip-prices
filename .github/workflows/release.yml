@@ -2,7 +2,7 @@ name: Create Release
 
 on:
   workflow_run:
-    workflows: ["Deploy"]
+    workflows: ["CI"]
     types:
       - completed
     branches: [main]
@@ -27,18 +27,11 @@ jobs:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
           body: |
-            ## Deployment Complete
-
             **Build Number:** ${{ github.run_number }}
             **Commit:** ${{ github.event.workflow_run.head_sha }}
             **Branch:** main
-            **Deployed at:** ${{ github.event.workflow_run.created_at }}
 
-            ### Deployed to
-            - turnip-prophet.leonardopicado.com
-
-            ### Workflow Details
-            - Workflow Run: [#${{ github.event.workflow_run.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }})
+            Deployed to [turnip-prophet.leonardopicado.com](https://turnip-prophet.leonardopicado.com) via Cloudflare Pages.
           draft: false
           prerelease: false
 
