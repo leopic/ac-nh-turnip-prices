@@ -14,6 +14,7 @@ npm run test:watch    # watch mode
 npm run test:coverage # coverage report
 npm start             # serve locally via `npx serve`
 npm run deploy        # rsync to DreamHost (requires SSH access)
+npm run generate-icons # regenerate img/favicon-512-maskable.png (requires sharp)
 ```
 
 Run a single test file:
@@ -36,15 +37,29 @@ Commitlint enforces conventional commits and runs on CI. A pre-push hook runs th
 | `js/chart.js` | Chart.js wrapper for price range visualization |
 | `js/translations.js` | i18next setup (23+ locales, loaded at runtime from `locales/`) |
 | `js/themes.js` | Light/dark/high-contrast theme switching |
-| `js/menu.js` | Settings drawer (theme, language) |
-| `service-worker.js` | PWA precache — version string must be bumped when assets change |
+| `js/menu.js` | Settings drawer (theme, language, install prompt) |
+| `service-worker.js` | PWA precache (v5) and fetch strategies — bump `CACHE` version string when adding/removing precached assets |
+| `offline.html` | Offline fallback page served by the SW when navigation fails with no cache |
+| `manifest.json` | Web app manifest — icons, shortcuts, screenshots, display settings |
+| `scripts/generate-maskable-icon.js` | Generates `img/favicon-512-maskable.png` from `favicon-512.png` using sharp |
 
 ### Data flow
 
-1. User fills form → `scripts.js` reads DOM values and encodes them into the URL hash
+1. User fills form → `scripts.js` reads DOM values and encodes them into the URL query string
 2. URL change triggers `calculate()` → calls `predictions.js` functions
 3. `predictions.js` returns probability-weighted min/max/avg price arrays per pattern
 4. `scripts.js` renders the results table and buy/sell decision; `chart.js` draws the graph
+
+### PWA / Service Worker
+
+The SW uses three caching strategies:
+- **CDN resources** (jQuery, Chart.js, i18next): cache-first — version-pinned URLs, serve from cache when available
+- **Navigation requests**: network-first with offline fallback to `offline.html`
+- **Everything else** (local assets, locale files): network-first, cache fallback
+
+All 23 locale files and both icon sizes are precached on install. The `CACHE` constant in `service-worker.js` must be bumped whenever the precache list changes — the SW update notification (`controllerchange` → snackbar) depends on this.
+
+When editing `manifest.json` icons or adding new precached assets, also run `npm run generate-icons` if the maskable icon source has changed.
 
 ### Testing
 
