@@ -517,3 +517,29 @@ const update = function () {
     requestAnimationFrame(scrollToCurrentField);
   }
 };
+
+// Install prompt
+let deferredInstallPrompt = null;
+const installSection = document.getElementById("install-section");
+const installBtn = document.getElementById("install-btn");
+
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (installSection) installSection.style.display = "block";
+});
+
+window.addEventListener("appinstalled", function () {
+  deferredInstallPrompt = null;
+  if (installSection) installSection.style.display = "none";
+});
+
+if (installBtn) {
+  installBtn.addEventListener("click", async function () {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const { outcome } = await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    if (installSection) installSection.style.display = "none";
+  });
+}
