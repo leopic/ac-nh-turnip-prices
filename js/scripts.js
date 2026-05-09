@@ -133,6 +133,7 @@ const initialize = function () {
       localStorage.removeItem("welcome_dismissed");
       if (welcomeBox) welcomeBox.style.display = "";
       update();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
 
