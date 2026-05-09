@@ -2,7 +2,8 @@
 	"name": "Turnip Prophet - ACNH Turnip Tracker",
 	"short_name": "Turnip Prophet",
 	"description": "An app to track your Animal Crossing: New Horizons turnip prices daily!",
-	"start_url": "index.html",
+	"start_url": "/",
+	"id": "/",
 	"display": "standalone",
 	"background_color": "#def2d9",
 	"theme_color": "#def2d9",
@@ -21,7 +22,7 @@
 			"type": "image/png"
 		},
 		{
-			"src": "/img/favicon-512.png",
+			"src": "/img/favicon-512-maskable.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "maskable"
