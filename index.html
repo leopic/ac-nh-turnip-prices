@@ -354,25 +354,23 @@
   <script src="js/translations.js"></script>
   <script src="js/themes.js"></script>
   <script>
-    // Check compatibility for the browser we're running this in
     if ("serviceWorker" in navigator) {
-      if (navigator.serviceWorker.controller) {
-        console.log(
-          "[PWA] Service Worker already found, skipping register"
-        );
-      } else {
-        // Register the service worker
-        navigator.serviceWorker
-          .register("/service-worker.js", {
-            scope: "./",
-          })
-          .then(function (reg) {
-            console.log(
-              "[PWA] Service worker has been registered for scope: " +
-                reg.scope
-            );
-          });
-      }
+      // Capture whether a SW was already controlling the page before we register.
+      // Used below to distinguish a first install from an update.
+      const hadController = !!navigator.serviceWorker.controller;
+
+      // When a new SW takes over (via skipWaiting + clients.claim), notify the user.
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (hadController) {
+          flashMessage("Turnip Prophet updated! Refresh for the latest version.");
+        }
+      });
+
+      navigator.serviceWorker
+        .register("/service-worker.js", { scope: "/" })
+        .then(function (reg) {
+          console.log("[PWA] Service worker registered for scope: " + reg.scope);
+        });
     }
   </script>
 </body>
