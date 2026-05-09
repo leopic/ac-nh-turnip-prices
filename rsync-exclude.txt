@@ -13,3 +13,4 @@ commitlint.config.js
 .nvmrc
 .gitignore
 rsync-exclude.txt
+scripts/
