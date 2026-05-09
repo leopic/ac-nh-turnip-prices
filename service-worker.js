@@ -39,6 +39,7 @@ const precacheFiles = [
   "/locales/zh-TW.json",
   "/img/favicon-192.png",
   "/img/favicon-512.png",
+  "/img/favicon-512-maskable.png",
 ];
 
 self.addEventListener("install", function (event) {

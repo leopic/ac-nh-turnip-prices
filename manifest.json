@@ -10,6 +10,16 @@
 	"scope": "/",
 	"orientation": "any",
 	"categories": ["games", "utilities"],
+	"prefer_related_applications": false,
+	"shortcuts": [
+		{
+			"name": "New Week",
+			"short_name": "New Week",
+			"description": "Start fresh for a new week of turnip prices",
+			"url": "/",
+			"icons": [{ "src": "/img/favicon-192.png", "sizes": "192x192", "type": "image/png" }]
+		}
+	],
 	"icons": [
 		{
 			"src": "/img/favicon-192.png",
