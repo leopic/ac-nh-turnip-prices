@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offline — Turnip Prophet</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #def2d9;
+      color: #333;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1rem;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #6abf69;
+      color: #fff;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #57a858;
+    }
+  </style>
+</head>
+<body>
+  <h1>Turnip Prophet</h1>
+  <p>Oops! Looks like you're offline, islander. Check your connection and try again.</p>
+  <button onclick="window.location.reload()">Try again</button>
+</body>
+</html>

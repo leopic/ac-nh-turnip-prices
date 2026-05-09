@@ -1,7 +1,12 @@
 // PWA Code adapted from https://github.com/pwa-builder/PWABuilder
-const CACHE = "pwa-precache-v3";
+const CACHE = "pwa-precache-v4";
+const CDN_ORIGINS = [
+  "https://code.jquery.com",
+  "https://cdnjs.cloudflare.com",
+];
 const precacheFiles = [
   "/index.html",
+  "/offline.html",
   "/css/styles.css",
   "/js/predictions.js",
   "/js/scripts.js",
@@ -12,14 +17,28 @@ const precacheFiles = [
   "/manifest.json",
   "/favicon.ico",
   "/locales/en.json",
+  "/locales/ca.json",
+  "/locales/cs.json",
+  "/locales/de.json",
+  "/locales/es.json",
+  "/locales/fr.json",
+  "/locales/gl.json",
+  "/locales/hu.json",
+  "/locales/id.json",
+  "/locales/it.json",
+  "/locales/ja.json",
+  "/locales/ko.json",
+  "/locales/nl.json",
+  "/locales/ph.json",
+  "/locales/pl.json",
+  "/locales/pt-BR.json",
+  "/locales/ru.json",
+  "/locales/th.json",
+  "/locales/ua.json",
+  "/locales/zh-CN.json",
+  "/locales/zh-TW.json",
   "/img/favicon-192.png",
   "/img/favicon-512.png",
-  "https://code.jquery.com/jquery-3.7.1.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/i18next/25.5.2/i18next.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/3.0.2/i18nextHttpBackend.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.2.0/i18nextBrowserLanguageDetector.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js",
 ];
 
 self.addEventListener("install", function (event) {
@@ -57,20 +76,46 @@ self.addEventListener("activate", function (event) {
   );
 });
 
-// If any fetch fails, it will look for the request in the cache and serve it from there first
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
 
+  const url = event.request.url;
+
+  // CDN resources: cache-first (URLs are version-pinned, serve from cache when available)
+  if (CDN_ORIGINS.some(function (origin) { return url.startsWith(origin); })) {
+    event.respondWith(
+      caches.match(event.request).then(function (cached) {
+        if (cached) return cached;
+        return fetch(event.request).then(function (response) {
+          event.waitUntil(updateCache(event.request, response.clone()));
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Navigation requests: network-first, fall back to cache, then offline page
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).catch(function () {
+        return caches.match(event.request).then(function (cached) {
+          return cached || caches.match("/offline.html");
+        });
+      })
+    );
+    return;
+  }
+
+  // All other requests: network-first, cache fallback
   event.respondWith(
     (async () => {
       let response;
       try {
-        // Fetch from network first.
         response = await fetch(event.request);
         event.waitUntil(updateCache(event.request, response.clone()));
       } catch (error) {
         try {
-          // Try if there's locally cached version.
           response = await fromCache(event.request);
         } catch (error) {
           console.log("[PWA] Network request failed and no cache." + error);
@@ -98,6 +143,7 @@ function fromCache(request) {
 }
 
 function updateCache(request, response) {
+  if (!response || !response.ok) return Promise.resolve();
   return caches.open(CACHE).then(function (cache) {
     return cache.put(request, response);
   });
