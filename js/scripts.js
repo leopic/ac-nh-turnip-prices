@@ -64,6 +64,7 @@ const scrollToCurrentField = function () {
 
 const state = {
   initialized: false,
+  scrolled: false,
 };
 
 const buy_input = $("#buy");
@@ -134,8 +135,6 @@ const initialize = function () {
       update();
     }
   });
-
-  scrollToCurrentField();
 
   console.log('finished initializing');
   state.initialized = true;
@@ -511,4 +510,9 @@ const update = function () {
   }
 
   calculateOutput(prices, first_buy, previous_pattern);
+
+  if (!state.scrolled) {
+    state.scrolled = true;
+    requestAnimationFrame(scrollToCurrentField);
+  }
 };

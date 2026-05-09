@@ -56,6 +56,7 @@ i18next
     $('html').attr('lang', this.value);
   });
   jqueryI18next.init(i18next, $);
+  $('body').localize();
   i18next.on('languageChanged', lng => {
     updateContent();
   });
