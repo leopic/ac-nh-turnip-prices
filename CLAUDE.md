@@ -71,6 +71,6 @@ Tests live alongside their source files (`predictions.test.js`, `scripts.test.js
 Deployments are handled automatically by **Cloudflare Pages** on every push to `main`. No manual deploy step needed.
 
 GitHub Actions runs on PRs and pushes to `main`:
-- `ci.yml` — `npm test` on Node 18 (pinned via `.nvmrc`)
+- `ci.yml` — `npm test` on the Node version pinned in `.nvmrc` (currently 24)
 - `commitlint.yml` — conventional commit format check
 - `release.yml` — auto-incrementing releases after CI passes
