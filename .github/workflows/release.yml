@@ -40,7 +40,7 @@ jobs:
           zip -r website-build-${{ github.run_number }}.zip . \
             -x "node_modules/*" ".git/*" ".github/*" ".githooks/*" ".claude/*" \
                "coverage/*" "*.test.js" "test-setup.js" "package.json" \
-               "package-lock.json" "vitest.config.js" "commitlint.config.js" \
+               "package-lock.json" "vitest.config.mjs" "commitlint.config.js" \
                ".nvmrc" ".gitignore" "rsync-exclude.txt"
 
       - name: Upload Release Assets
