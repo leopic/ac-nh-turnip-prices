@@ -13,6 +13,38 @@ function getDOM() {
   return dom.window.document;
 }
 
+describe('Accessibility: Profit calculator', () => {
+  it('associates the native selling-price dropdown with its label and instructions', () => {
+    const doc = getDOM();
+    const select = doc.getElementById('profit-sell-price');
+    expect(select.tagName).toBe('SELECT');
+    expect(select.labels).toHaveLength(1);
+    expect(doc.getElementById(select.getAttribute('aria-describedby'))).not.toBeNull();
+  });
+
+  it('labels the optional input and associates its help and validation message', () => {
+    const doc = getDOM();
+    const input = doc.getElementById('turnip-quantity');
+    expect(doc.querySelector('label[for="turnip-quantity"]')).not.toBeNull();
+    expect(input.required).toBe(false);
+    expect(input.getAttribute('inputmode')).toBe('numeric');
+    for (const id of input.getAttribute('aria-describedby').split(' ')) {
+      expect(doc.getElementById(id)).not.toBeNull();
+    }
+  });
+
+  it('has a named section and polite results that do not move focus', () => {
+    const doc = getDOM();
+    const section = doc.querySelector('.profit-calculator');
+    expect(doc.getElementById(section.getAttribute('aria-labelledby'))).not.toBeNull();
+    const results = doc.getElementById('profit-results');
+    expect(results.getAttribute('role')).toBe('status');
+    expect(results.getAttribute('aria-live')).toBe('polite');
+    expect(results.getAttribute('aria-atomic')).toBe('true');
+    expect(results.hasAttribute('tabindex')).toBe(false);
+  });
+});
+
 describe('Accessibility: Skip navigation', () => {
   it('has a skip-to-content link as the first focusable element in body', () => {
     const doc = getDOM();

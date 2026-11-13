@@ -71,6 +71,8 @@
   --table-range2-text: inherit;
   --table-range3-text: inherit;
   --table-range4-text: inherit;
+  --profit-gain-text: #333;
+  --profit-loss-text: #333;
 }
 
 [data-theme="light-high-color-contrast"] {
@@ -88,6 +90,8 @@
 
 [data-theme="dark"],
 [data-theme="dark-high-color-contrast"] {
+  --profit-gain-text: #FFF;
+  --profit-loss-text: #FFF;
   --bg-color: #1A1A1A;
   --bg-dot-color: #222;
 
@@ -140,6 +144,7 @@
 }
 
 [data-theme="dark-high-color-contrast"] {
+  --profit-gain-text: #000;
   --table-range0: hsl(140, 90%, 30%);
   --table-range1: hsl(90, 90%, 25%);
   --table-range2: hsl(60, 90%, 25%);
@@ -762,6 +767,97 @@ input[class=now]:placeholder-shown::placeholder {
     height: 40px;
     min-height: 40px;
   }
+}
+
+/* - Optional profit calculator - */
+
+.profit-calculator {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  min-width: 0;
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid currentColor;
+  border-radius: 24px;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.profit-calculator h2 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  color: var(--form-h6-text-color);
+}
+
+.profit-calculator p {
+  margin: 8px 0;
+}
+
+.profit-calculator label {
+  opacity: 1;
+}
+
+#turnip-quantity,
+#profit-sell-price {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 240px;
+  min-height: 44px;
+  color: inherit;
+  transition: none;
+}
+
+#profit-sell-price {
+  padding: 8px;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  font: inherit;
+  background: var(--input-bg-color);
+}
+
+#profit-sell-price:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+#turnip-quantity:focus {
+  outline-color: currentColor;
+  background: var(--input-bg-color);
+  transform: none;
+}
+
+#quantity-error {
+  font-weight: bold;
+}
+
+#profit-values {
+  margin-bottom: 0;
+}
+
+#profit-values > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+#profit-values dd {
+  margin: 0;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.profit-gain {
+  background: var(--table-range0);
+  color: var(--profit-gain-text);
+}
+
+.profit-loss {
+  background: var(--table-range4);
+  color: var(--profit-loss-text);
 }
 
 /* - Hamburger Menu - */

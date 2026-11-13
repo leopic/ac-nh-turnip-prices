@@ -237,6 +237,30 @@
             </div>
           </div>
         </div>
+        <section class="profit-calculator" aria-labelledby="profit-title">
+          <h2 id="profit-title" data-i18n="profit.title"></h2>
+          <p id="profit-help" data-i18n="profit.description"></p>
+          <div class="input__group">
+            <label for="turnip-quantity" data-i18n="profit.quantity"></label>
+            <input type="number" inputmode="numeric" min="1" step="1" id="turnip-quantity"
+              placeholder="..." aria-describedby="profit-help quantity-error" />
+            <p id="quantity-error" hidden data-i18n="profit.invalid-quantity"></p>
+          </div>
+          <div class="input__group">
+            <label for="profit-sell-price" data-i18n="profit.selling-price"></label>
+            <select id="profit-sell-price" aria-describedby="profit-help" disabled></select>
+          </div>
+          <div id="profit-results" role="status" aria-live="polite" aria-atomic="true">
+            <p id="profit-message"></p>
+            <dl id="profit-values" hidden>
+              <div><dt data-i18n="profit.investment"></dt><dd id="profit-investment"></dd></div>
+              <div><dt data-i18n="profit.break-even"></dt><dd id="profit-break-even"></dd></div>
+              <div><dt data-i18n="profit.revenue"></dt><dd id="profit-revenue"></dd></div>
+              <div id="profit-net-row"><dt id="profit-net-label"></dt><dd id="profit-net"></dd></div>
+              <div><dt data-i18n="profit.roi"></dt><dd id="profit-roi"></dd></div>
+            </dl>
+          </div>
+        </section>
         <input id="permalink-input" type="text" readOnly />
         <button type="button" id="permalink-btn" class="button permalink">
           <span data-i18n="prices.copy-permalink"></span>
@@ -351,6 +375,7 @@
   <script src="js/menu.js"></script>
   <script src="js/chart.js"></script>
   <script src="js/predictions.js"></script>
+  <script src="js/profit.js"></script>
   <script src="js/scripts.js"></script>
   <script src="js/translations.js"></script>
   <script src="js/themes.js"></script>

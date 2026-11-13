@@ -1,5 +1,5 @@
 // PWA Code adapted from https://github.com/pwa-builder/PWABuilder
-const CACHE = "pwa-precache-v5";
+const CACHE = "pwa-precache-v7";
 const CDN_ORIGINS = [
   "https://code.jquery.com",
   "https://cdnjs.cloudflare.com",
@@ -9,6 +9,7 @@ const precacheFiles = [
   "/offline.html",
   "/css/styles.css",
   "/js/predictions.js",
+  "/js/profit.js",
   "/js/scripts.js",
   "/js/menu.js",
   "/js/chart.js",
