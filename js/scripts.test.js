@@ -10,6 +10,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Read the source files
 const predictionsSource = fs.readFileSync(path.join(__dirname, 'predictions.js'), 'utf-8');
 const scriptsSource = fs.readFileSync(path.join(__dirname, 'scripts.js'), 'utf-8');
+const profitSource = fs.readFileSync(path.join(__dirname, 'profit.js'), 'utf-8');
+const calculatorHTML = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf-8')
+  .match(/<section class="profit-calculator"[\s\S]*?<\/section>/)[0];
+const english = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'locales', 'en.json'), 'utf-8'));
 
 // Minimal HTML structure matching index.html
 const HTML_TEMPLATE = `<!doctype html>
@@ -39,6 +43,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <input type="number" id="sell_12" placeholder="..." />
     <input type="number" id="sell_13" placeholder="..." />
 
+    ${calculatorHTML}
     <input id="permalink-input" type="text" readOnly />
     <button type="button" id="permalink-btn" class="button permalink"></button>
     <button type="button" id="reset" class="button button--reset"></button>
@@ -164,6 +169,9 @@ function createJQueryMock(document) {
 function createI18nextMock() {
   return {
     t(key, params) {
+      if (key.startsWith('profit.')) {
+        return english.profit[key.slice(7)].replace(/{{(\w+)}}/g, (_, name) => params[name]);
+      }
       if (params && Array.isArray(params)) {
         let result = key;
         params.forEach((p, i) => { result += ` ${p}`; });
@@ -213,6 +221,12 @@ function setupEnvironment(options = {}) {
   window.chart_instance = null;
   window.update_chart = vi.fn();
   window.confirm = vi.fn(() => true);
+  window.scrollTo = vi.fn();
+  if (options.now) {
+    window.Date = class extends Date {
+      constructor(...args) { super(...(args.length ? args : [options.now])); }
+    };
+  }
 
   // Execute scripts in the JSDOM window context.
   // const/let are block-scoped in vm and won't be visible on window,
@@ -220,10 +234,246 @@ function setupEnvironment(options = {}) {
   const toVar = (src) => src.replace(/\b(const|let)\s/g, 'var ');
   const vmContext = dom.getInternalVMContext();
   vm.runInContext(toVar(predictionsSource), vmContext, { filename: 'predictions.js' });
+  vm.runInContext(toVar(profitSource), vmContext, { filename: 'profit.js' });
   vm.runInContext(toVar(scriptsSource), vmContext, { filename: 'scripts.js' });
 
   return { window, document, dom, store };
 }
+
+describe('Profit calculator integration', () => {
+  let env;
+  const field = id => env.document.getElementById(id);
+  const selectPrice = id => {
+    const select = field('profit-sell-price');
+    select.value = id;
+    select.dispatchEvent(new env.window.Event('change', { bubbles: true }));
+  };
+  const enterQuantity = value => {
+    field('turnip-quantity').value = value;
+    field('turnip-quantity').dispatchEvent(new env.window.Event('input', { bubbles: true }));
+  };
+  beforeEach(() => {
+    env = setupEnvironment({ now: new Date(2026, 10, 15, 23).getTime() });
+    env.window.initialize();
+  });
+  afterEach(() => env.dom.window.close());
+
+  it('defaults to the latest valid slot and formats the example regardless of the clock', () => {
+    field('buy').value = '108';
+    field('sell_2').value = '80';
+    field('sell_12').value = '169';
+    field('sell_13').value = '2.5';
+    field('sell_9').value = '0';
+    field('sell_10').value = '-1';
+    enterQuantity('920');
+    const select = field('profit-sell-price');
+    expect([...select.options].map(option => option.value)).toEqual(['sell_2', 'sell_12']);
+    expect(select.value).toBe('sell_12');
+    expect(select.selectedOptions[0].text).toContain('weekdays.saturday times.morning · 169 Bells');
+    expect(field('profit-message').textContent).toContain('Hypothetical results');
+    expect(field('profit-investment').textContent).toBe('99,360 Bells');
+    expect(field('profit-revenue').textContent).toBe('155,480 Bells');
+    expect(field('profit-net').textContent).toBe('+56,120 Bells');
+    expect(field('profit-roi').textContent).toBe('+56.48%');
+    expect(field('profit-break-even').textContent).toBe('108 Bells');
+    expect(field('profit-net-label').textContent).toBe('Net profit');
+    expect(field('profit-net-row').className).toBe('profit-gain');
+  });
+
+  it('distinguishes loss and break-even without relying on colour', () => {
+    field('buy').value = '100';
+    field('sell_2').value = '80';
+    enterQuantity('100');
+    expect(field('profit-net-label').textContent).toBe('Net loss');
+    expect(field('profit-net').textContent).toBe('-2,000 Bells');
+    expect(field('profit-roi').textContent).toBe('-20.00%');
+    field('sell_2').value = '100';
+    env.window.updateProfitCalculator();
+    expect(field('profit-net-label').textContent).toContain('break-even');
+    expect(field('profit-net').textContent).toBe('0 Bells');
+  });
+
+  it('keeps investment and break-even when no entered selling price is valid', () => {
+    field('buy').value = '108';
+    field('sell_3').value = '0';
+    enterQuantity('920');
+    env.window.update();
+    expect(field('profit-investment').textContent).toBe('99,360 Bells');
+    expect(field('profit-revenue').textContent).toBe('Not available');
+    expect(field('profit-net').textContent).toBe('Not available');
+    expect(field('profit-roi').textContent).toBe('Not available');
+    expect(field('profit-message').textContent).toContain('hypothetical sale');
+    expect(field('profit-sell-price').disabled).toBe(true);
+    expect(field('profit-sell-price').options[0].text).toBe('No selling prices entered');
+  });
+
+  it('updates from purchase-price edits through the existing update path', () => {
+    field('buy').value = '108';
+    enterQuantity('920');
+    field('buy').value = '100';
+    env.window.update();
+    expect(field('profit-investment').textContent).toBe('92,000 Bells');
+    field('buy').value = '';
+    env.window.update();
+    expect(field('profit-values').hidden).toBe(true);
+    expect(field('profit-message').textContent).toContain('purchase price');
+  });
+
+  it.each(['0', '-1', '2.5', '9007199254740992'])('marks invalid quantity %s and clears stale figures', value => {
+    field('buy').value = '108';
+    enterQuantity('920');
+    enterQuantity(value);
+    expect(field('turnip-quantity').getAttribute('aria-invalid')).toBe('true');
+    expect(field('turnip-quantity').checkValidity()).toBe(false);
+    expect(field('quantity-error').hidden).toBe(false);
+    expect(field('profit-values').hidden).toBe(true);
+    expect(env.store.turnip_quantity).toBeUndefined();
+  });
+
+  it('accepts an empty optional input and clears validation on correction', () => {
+    enterQuantity('-1');
+    enterQuantity('');
+    expect(field('turnip-quantity').checkValidity()).toBe(true);
+    expect(field('quantity-error').hidden).toBe(true);
+    expect(field('profit-message').textContent).toContain('Enter your turnip quantity');
+    enterQuantity('920');
+    expect(field('turnip-quantity').getAttribute('aria-invalid')).toBe('false');
+  });
+
+  it('persists quantity across reloads without changing saved prices or share URLs', () => {
+    field('buy').value = '108';
+    env.window.update();
+    const beforePrices = env.store.sell_prices;
+    const beforeURL = env.window.location.href;
+    enterQuantity('920');
+    expect(env.store.turnip_quantity).toBe('920');
+    expect(env.store.sell_prices).toBe(beforePrices);
+    expect(env.window.location.href).toBe(beforeURL);
+    const reload = setupEnvironment({ localStorage: env.store });
+    reload.window.initialize();
+    expect(reload.document.getElementById('turnip-quantity').value).toBe('920');
+    expect(reload.document.getElementById('buy').value).toBe('108');
+    reload.dom.window.close();
+  });
+
+  it('loads old saved prices with no quantity', () => {
+    const old = setupEnvironment({ localStorage: { sell_prices: JSON.stringify([108, 108, 90, ...Array(11).fill(null)]) } });
+    old.window.initialize();
+    expect(old.document.getElementById('turnip-quantity').value).toBe('');
+    expect(old.document.getElementById('buy').value).toBe('108');
+    old.dom.window.close();
+  });
+
+  it('ignores corrupt quantity storage and tolerates unavailable storage', () => {
+    const corrupt = setupEnvironment({ localStorage: { turnip_quantity: 'not a number' } });
+    corrupt.window.initialize();
+    expect(corrupt.document.getElementById('turnip-quantity').value).toBe('');
+    corrupt.dom.window.close();
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    env.window.localStorage.setItem = () => { throw new Error('Storage unavailable'); };
+    field('buy').value = '108';
+    enterQuantity('920');
+    expect(field('profit-investment').textContent).toBe('99,360 Bells');
+    error.mockRestore();
+  });
+
+  it('leaves quantity intact when reset is cancelled, then clears it when confirmed', () => {
+    field('buy').value = '108';
+    field('sell_2').value = '169';
+    field('sell_3').value = '80';
+    enterQuantity('920');
+    env.window.update();
+    selectPrice('sell_2');
+    env.window.confirm.mockReturnValue(false);
+    field('reset').click();
+    expect(field('turnip-quantity').value).toBe('920');
+    expect(env.store.turnip_quantity).toBe('920');
+    expect(field('profit-sell-price').value).toBe('sell_2');
+    env.window.confirm.mockReturnValue(true);
+    field('reset').click();
+    expect(field('turnip-quantity').value).toBe('');
+    expect(env.store.turnip_quantity).toBeUndefined();
+    expect(env.window.location.search).toBe('');
+    expect(field('profit-values').hidden).toBe(true);
+    expect(field('profit-sell-price').value).toBe('');
+    expect(field('profit-sell-price').disabled).toBe(true);
+    field('sell_2').value = '169';
+    field('sell_3').value = '80';
+    env.window.update();
+    expect(field('profit-sell-price').value).toBe('sell_3');
+  });
+
+  it('clears the shared scenario and quantity on reset while preserving the saved week', () => {
+    const shared = setupEnvironment({ search: '?prices=108.169', localStorage: { turnip_quantity: '920', sell_prices: JSON.stringify(Array(14).fill(100)) } });
+    shared.window.initialize();
+    shared.window.update();
+    expect(shared.document.getElementById('buy').value).toBe('108');
+    expect(shared.store.sell_prices).toBe(JSON.stringify(Array(14).fill(100)));
+    shared.document.getElementById('turnip-quantity').value = '1000';
+    shared.document.getElementById('turnip-quantity').dispatchEvent(new shared.window.Event('input'));
+    expect(shared.store.turnip_quantity).toBe('1000');
+    shared.document.getElementById('reset').click();
+    expect(shared.store.turnip_quantity).toBeUndefined();
+    expect(JSON.parse(shared.store.sell_prices)).toEqual(Array(14).fill(100));
+    expect(shared.document.getElementById('buy').value).toBe('');
+    expect(shared.document.getElementById('profit-sell-price').disabled).toBe(true);
+    expect(shared.window.location.search).toBe('');
+    // A pending input update after reset must also leave the saved week alone.
+    shared.window.update();
+    expect(JSON.parse(shared.store.sell_prices)).toEqual(Array(14).fill(100));
+    shared.dom.window.close();
+  });
+
+  it('keeps an explicit selection when the price changes or later entries are added', () => {
+    field('buy').value = '108';
+    field('sell_2').value = '169';
+    enterQuantity('920');
+    field('sell_3').value = '80';
+    env.window.updateProfitCalculator();
+    expect(field('profit-sell-price').value).toBe('sell_3');
+    expect(field('profit-net').textContent).toBe('-25,760 Bells');
+    selectPrice('sell_2');
+    expect(field('profit-net').textContent).toBe('+56,120 Bells');
+    expect(field('profit-roi').textContent).toBe('+56.48%');
+    expect(env.window.update_chart).not.toHaveBeenCalled();
+
+    field('sell_2').value = '120';
+    field('sell_13').value = '170';
+    env.window.update();
+    const select = field('profit-sell-price');
+    expect(select.value).toBe('sell_2');
+    expect(select.selectedOptions[0].text).toContain('120 Bells');
+    expect(field('profit-net').textContent).toBe('+11,040 Bells');
+  });
+
+  it('falls back to the latest price after removal and clears totals when all prices disappear', () => {
+    field('buy').value = '108';
+    field('sell_2').value = '169';
+    field('sell_3').value = '80';
+    enterQuantity('920');
+    selectPrice('sell_2');
+    field('sell_2').value = '';
+    env.window.update();
+    expect(field('profit-sell-price').value).toBe('sell_3');
+    expect(field('profit-net').textContent).toBe('-25,760 Bells');
+
+    field('sell_3').value = '';
+    env.window.update();
+    expect(field('profit-sell-price').disabled).toBe(true);
+    expect(field('profit-net').textContent).toBe('Not available');
+    expect(field('profit-investment').textContent).toBe('99,360 Bells');
+    expect(field('profit-break-even').textContent).toBe('108 Bells');
+  });
+
+  it('uses the selected locale for numbers and percentages', () => {
+    field('buy').value = '108';
+    field('sell_2').value = '169';
+    env.window.i18next.language = 'de';
+    enterQuantity('920');
+    expect(field('profit-investment').textContent).toBe('99.360 Bells');
+    expect(field('profit-roi').textContent).toBe('+56,48\u00a0%');
+  });
+});
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
 

@@ -65,8 +65,8 @@ i18next
 
   let delayTimer;
   $(document).on('input', function(event) {
-    //prevent radio input from updating content twice per input change
-    if(event.target.type === 'radio'){ return }
+    // Radio buttons and calculator controls have their own handlers.
+    if(event.target.type === 'radio' || event.target.id === 'turnip-quantity' || event.target.id === 'profit-sell-price'){ return }
     // adding short delay after input to help mitigate potential lag after keystrokes
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function() {

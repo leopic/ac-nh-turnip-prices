@@ -13,6 +13,7 @@ This is a fork of [mikebryant/ac-nh-turnip-prices](https://github.com/mikebryant
 - **Hamburger menu** — language, theme, and credits moved to a slide-out drawer to reduce clutter
 - **High color contrast mode** — toggle for colorblind-friendly table colors, works with light and dark themes
 - **Auto-updating URL** — the browser URL updates as you enter prices, making sharing easier
+- **Optional profit calculator** — enter your turnip quantity and choose an observed price to see investment, break-even price, and a hypothetical sale
 - **Sticky table header** — column headers stay visible when scrolling through pattern results
 - **Accessibility overhaul:**
   - Skip-to-content link for keyboard navigation
@@ -31,7 +32,7 @@ This is a fork of [mikebryant/ac-nh-turnip-prices](https://github.com/mikebryant
 - **Updated dependencies** — jQuery 3.7.1, Chart.js 4.5.0, i18next 25, replaced deprecated i18next-xhr-backend with i18next-http-backend
 - **Removed Google Analytics** — the UA tracking tag was deprecated
 - **Improved PWA setup** — complete precache file list, proper cache versioning, manifest fields
-- **Comprehensive test suite** — 324 tests covering prediction logic, expected values, pattern detection, UI functions, and accessibility
+- **Comprehensive test suite** — tests covering prediction logic, expected values, pattern detection, profit calculations, UI functions, and accessibility
 - **CI pipeline** — GitHub Actions runs tests on PRs and pushes; pre-push hook runs tests locally
 
 ## Running locally
@@ -47,6 +48,32 @@ npm install
 npm test
 npm run test:coverage
 ```
+
+## Profit calculator
+
+Enter the purchase price in the existing Sunday field and your optional quantity
+in **Profit & investment** below the weekly prices. Choose any valid Monday
+through Saturday AM/PM selling price you've entered. The default is the latest
+slot in the weekly schedule. Your choice stays selected while that slot has a
+valid price. With no valid selling prices, you can still see investment and
+break-even. The sale figures assume you hypothetically sell the entire quantity
+at the selected price.
+
+Quantity is saved locally under `turnip_quantity`, separately from price data,
+and is not included in shared URLs. The selling-price choice lasts until reload
+or reset. Reset clears the quantity, displayed prices, and price URL. If you
+opened a shared link, your separately saved week remains available on reload.
+New labels use i18next's English fallback
+until translated; numbers use the selected language's formatting.
+
+To check it locally, run `npm start` (`npm.cmd start` in PowerShell if script
+execution is disabled) and open the address printed by the server.
+Enter a purchase price of **108**, quantity **920**, and **169** in any
+selling slot. Select that slot. Expect **99,360 Bells** invested, **155,480 Bells** revenue,
+**+56,120 Bells** profit, **+56.48%** return, and **108 Bells** break-even.
+Then clear the selling price, try a lower price and an invalid quantity, reload,
+and use Reset. For a phone check, open the server's network address from a phone
+on the same Wi-Fi network; check both themes, high contrast, and the numeric keyboard.
 
 ## Contributing
 
