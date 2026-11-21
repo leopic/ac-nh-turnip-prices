@@ -34,10 +34,10 @@ Commitlint enforces conventional commits and runs on CI. A pre-push hook runs th
 | `js/predictions.js` | Core algorithm: pattern detection, Markov-style price transitions, probability matrix, expected value calculations |
 | `js/scripts.js` | DOM wiring: form state, URL ↔ input sync, table rendering, decision output |
 | `js/chart.js` | Chart.js wrapper for price range visualization |
-| `js/translations.js` | i18next setup (23+ locales, loaded at runtime from `locales/`) |
+| `js/translations.js` | i18next setup (locales loaded at runtime from `locales/`) |
 | `js/themes.js` | Light/dark/high-contrast theme switching |
 | `js/menu.js` | Settings drawer (theme, language, install prompt) |
-| `service-worker.js` | PWA precache (v5) and fetch strategies — bump `CACHE` version string when adding/removing precached assets |
+| `service-worker.js` | PWA precache and fetch strategies — bump the `CACHE` version string when adding/removing precached assets |
 | `offline.html` | Offline fallback page served by the SW when navigation fails with no cache |
 | `manifest.json` | Web app manifest — icons, shortcuts, screenshots, display settings |
 | `scripts/generate-maskable-icon.js` | Generates `img/favicon-512-maskable.png` from `favicon-512.png` using sharp |
@@ -56,7 +56,7 @@ The SW uses three caching strategies:
 - **Navigation requests**: network-first with offline fallback to `offline.html`
 - **Everything else** (local assets, locale files): network-first, cache fallback
 
-All 23 locale files and both icon sizes are precached on install. The `CACHE` constant in `service-worker.js` must be bumped whenever the precache list changes — the SW update notification (`controllerchange` → snackbar) depends on this.
+All locale files and both icon sizes are precached on install. The `CACHE` constant in `service-worker.js` must be bumped whenever the precache list changes — the SW update notification (`controllerchange` → snackbar) depends on this.
 
 When editing `manifest.json` icons or adding new precached assets, also run `npm run generate-icons` if the maskable icon source has changed.
 
