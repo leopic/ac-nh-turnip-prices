@@ -57,7 +57,6 @@ const SAME_AS_ENGLISH = {
   ],
   'nl': [
     'general.daisy-mae', // official Dutch name
-    'profit.bells',      // the Dutch game also says Bells
   ],
   'ph': [
     'general.daisy-mae', // no Filipino localisation of the game
