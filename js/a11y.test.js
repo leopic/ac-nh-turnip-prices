@@ -45,6 +45,76 @@ describe('Accessibility: Profit calculator', () => {
   });
 });
 
+// Reads custom properties from one top-level block of styles.css, e.g. ':root {'.
+// The header must start the block, so '[data-theme="x"] {' does not match the
+// end of a shared '[data-theme="y"],\n[data-theme="x"] {' selector list.
+function cssBlockVars(header) {
+  let start = -1;
+  for (let i = stylesCSS.indexOf(header); i !== -1; i = stylesCSS.indexOf(header, i + 1)) {
+    if (!stylesCSS.slice(0, i).trimEnd().endsWith(',')) { start = i; break; }
+  }
+  if (start === -1) throw new Error(`missing CSS block: ${header}`);
+  const body = stylesCSS.slice(start + header.length, stylesCSS.indexOf('\n}', start));
+  return Object.fromEntries([...body.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(m => [m[1], m[2].trim()]));
+}
+
+function toRGB(value) {
+  const hex = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (hex) {
+    const h = hex[1].length === 3 ? [...hex[1]].map(c => c + c).join('') : hex[1];
+    return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+  }
+  const hsl = value.match(/^hsl\(\s*([\d.]+),\s*([\d.]+)%,\s*([\d.]+)%\s*\)$/);
+  if (hsl) {
+    const [h, s, l] = [hsl[1] / 360, hsl[2] / 100, hsl[3] / 100];
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    const channel = t => {
+      t = (t + 1) % 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    };
+    return [channel(h + 1 / 3), channel(h), channel(h - 1 / 3)];
+  }
+  throw new Error(`unsupported colour: ${value}`);
+}
+
+function contrast(a, b) {
+  const luminance = rgb => {
+    const [r, g, bl] = rgb.map(v => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+  };
+  const [hi, lo] = [luminance(toRGB(a)), luminance(toRGB(b))].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+describe('Accessibility: Profit calculator colours', () => {
+  const root = cssBlockVars(':root {');
+  const dark = cssBlockVars('[data-theme="dark"],\n[data-theme="dark-high-color-contrast"] {');
+  const themes = {
+    light: { vars: root, min: 4.5 },
+    'light-high-color-contrast': { vars: { ...root, ...cssBlockVars('[data-theme="light-high-color-contrast"] {') }, min: 7 },
+    dark: { vars: { ...root, ...dark }, min: 4.5 },
+    'dark-high-color-contrast': { vars: { ...root, ...dark, ...cssBlockVars('[data-theme="dark-high-color-contrast"] {') }, min: 7 },
+  };
+
+  for (const [theme, { vars, min }] of Object.entries(themes)) {
+    it(`keeps net gain and loss text readable on the page background in the ${theme} theme`, () => {
+      for (const token of ['--profit-gain-text', '--profit-loss-text']) {
+        expect(contrast(vars[token], vars['--center-bg-color'])).toBeGreaterThanOrEqual(min);
+      }
+    });
+  }
+
+  it('uses the body text colour for the selling-price dropdown, not the low-contrast accent blue', () => {
+    // The select's own rule, not the one it shares with #turnip-quantity.
+    const rule = stylesCSS.match(/\n\n#profit-sell-price \{([^}]*)\}/)[1];
+    expect(rule).toMatch(/\bcolor:\s*inherit;/);
+  });
+});
+
 describe('Accessibility: Skip navigation', () => {
   it('has a skip-to-content link as the first focusable element in body', () => {
     const doc = getDOM();
