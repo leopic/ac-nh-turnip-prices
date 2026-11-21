@@ -28,7 +28,7 @@ This is a fork of [mikebryant/ac-nh-turnip-prices](https://github.com/mikebryant
 - **Bug fix: Pattern 3 middle peak** — the minimum prediction for Small Spike's middle peak slot was off by 1 bell vs the game code
 - **Bug fix: PDF.decay() division by zero** — equal min/max decay rates no longer produce NaN
 - **German translation fix** — corrected "large spike" and "small spike" pattern names
-- **Updated dependencies** — jQuery 3.7.1, Chart.js 4.5.0, i18next 25, replaced deprecated i18next-xhr-backend with i18next-http-backend
+- **Updated dependencies** — jQuery 3.7.1, Chart.js 4.5.0, i18next 27, replaced deprecated i18next-xhr-backend with i18next-http-backend
 - **Removed Google Analytics** — the UA tracking tag was deprecated
 - **Improved PWA setup** — complete precache file list, proper cache versioning, manifest fields
 - **Comprehensive test suite** — tests covering prediction logic, expected values, pattern detection, UI functions, and accessibility
