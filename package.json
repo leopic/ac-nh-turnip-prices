@@ -37,7 +37,7 @@
     "@commitlint/config-conventional": "^21.2.4",
     "@vitest/coverage-v8": "^5.1.0",
     "i18next": "25.5.2",
-    "jsdom": "^31.0.0",
+    "jsdom": "^31.0.1",
     "sharp": "^0.35.5",
     "vitest": "^5.1.0"
   }
