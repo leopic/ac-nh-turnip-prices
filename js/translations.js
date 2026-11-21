@@ -38,6 +38,7 @@ i18next
     loadPath: 'locales/{{lng}}.json',
   },
 }).then(function(t) {
+  useLanguageTagPlurals(i18next);
   languageSelector = $('#language');
   for (let [code, name] of Object.entries(LANGUAGES)) {
     languageSelector.append(`<option value="${code}">${name}</option>`);

@@ -6,11 +6,11 @@
     "salutation": "Добрий день! Вітаємо в додатку <b>Turnip Prophet</b> на Вашому Нукофоні.",
     "description": "Цей додаток дозволяє Вам відслідковувати ціни ріпи на Вашому острові щоденно, але Вам доведеться вписати ціни власноруч!",
     "conclusion": "Після цього, додаток Turnip Prophet <b>магічним способом</b> передбачить ціни ріпи на Вашому острові на решту тижня.",
-    "dismiss": "Got it!"
+    "dismiss": "Зрозуміло!"
   },
   "first-time": {
     "title": "Перша покупка ріпи",
-    "description": "Ви купуєте ріпу від Дейзі Мей на <b>своєму</b> острові вперше?<i>(Це має вплив на модель ціни)</i>",
+    "description": "Хтось із мешканців уперше купує ріпу в Дейзі Мей на <b>Вашому власному</b> острові?<i>(Це має вплив на модель ціни)</i>",
     "yes": "Так",
     "no": "Ні"
   },
@@ -35,6 +35,33 @@
     "permalink-copied": "Посилання скопійоване!",
     "reset": "Перезапустити Turnip Prophet",
     "reset-warning": "Ви впевнені що хочете стерти всі поля?\n\nВтрачені дані неможливо повернути!"
+  },
+  "profit": {
+    "title": "Прибуток та інвестиції",
+    "description": "Оберіть одну з введених цін продажу, щоб дізнатися, скільки Ви заробите, якщо продасте всю ріпу за цією ціною.",
+    "selling-price": "Ціна продажу для цього сценарію",
+    "price-option": "{{day}}, {{time}} · {{price}}",
+    "no-prices": "Ціни продажу не введено",
+    "quantity": "Кількість купленої ріпи (необов'язково)",
+    "invalid-quantity": "Введіть кількість ріпи — ціле додатне число в допустимому діапазоні.",
+    "empty": "Введіть кількість ріпи, щоб розрахувати інвестиції та прибуток.",
+    "missing-buy": "Введіть вище ціну покупки (ціле додатне число), щоб розрахувати інвестиції.",
+    "missing-sell": "Введіть вище ціну продажу (ціле додатне число), щоб побачити гіпотетичний продаж.",
+    "scenario": "Гіпотетичний результат продажу всієї ріпи за обраною ціною.",
+    "too-large": "Ці значення завеликі для точного розрахунку. Використайте менші значення.",
+    "unknown": "Немає даних",
+    "bells_one": "{{amount}} дзвіночок",
+    "bells_few": "{{amount}} дзвіночки",
+    "bells_many": "{{amount}} дзвіночків",
+    "bells_other": "{{amount}} дзвіночка",
+    "investment": "Початкові інвестиції",
+    "break-even": "Ціна беззбитковості за одну ріпу",
+    "revenue": "Виторг від продажу",
+    "net": "Чистий прибуток / збиток",
+    "gain": "Чистий прибуток",
+    "loss": "Чистий збиток",
+    "even": "Чистий прибуток (беззбитковість)",
+    "roi": "Рентабельність інвестицій"
   },
   "weekdays": {
     "monday": "Понеділок",
@@ -67,39 +94,43 @@
       "input": "Вхідна ціна",
       "minimum": "Гарантований мінімум",
       "maximum": "Можливий максимум",
-      "expected": "Expected Price"
+      "expected": "Очікувана ціна"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Судячи з Ваших цін, найімовірніше, у Вас модель <b>{{0}}</b> (шанс {{1}}).",
+    "sell-now-title": "Чи варто продавати зараз?",
+    "sell-now": "Варто продати зараз.",
+    "sell-later": "Варто продати пізніше.",
+    "sell-advice": "Якщо продати пізніше, очікувана максимальна ціна в дзвіночках — <b>{{0}}</b> (<b>{{1}}</b>).",
+    "should-buy-title": "Чи варто купувати?",
+    "should-buy": "Варто купити.",
+    "should-not-buy": "Не варто купувати.",
+    "buy-advice": "Очікувана максимальна ціна продажу цього тижня в дзвіночках — <b>{{0}}</b>."
   },
   "textbox": {
-    "description": "Після того, як Ви запишете делілька цін на ріпу, додаток Turnip Prophet підрахує і покаже різні можливі моделі цін на Вашому острові.",
+    "description": "Після того, як Ви запишете декілька цін на ріпу, додаток Turnip Prophet підрахує і покаже різні можливі моделі цін на Вашому острові.",
     "development": "Цей додаток ще в розробці, але напевно з часом покращиться!",
     "thanks": "Цей додаток не був би можливий без <a href=\"https://twitter.com/_Ninji/status/1244818665851289602?s=20\">праці Ninji</a>, котрий дізнався як саме Тіммі і Томмі оцінюють їх ріпу.",
     "support": "Ви можете підтримати, зробити коментар, або внесок до проекту на сторінці <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">GitHub</a>",
     "sponsor": "Хочете заспонсорувати розробників проекту? Відвідайте сторінку <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> і натисніть '❤ Sponsor'",
     "contributors-text": "До речі! Не забудьмо подякувати людям, які зробили внесок до проекту!",
     "contributors": "Зробили внесок",
+    "credits": "Форк проекту <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Створено на основі <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">дослідження Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Переглянути всіх учасників</a>",
+    "install": {
+      "title": "Встановити додаток",
+      "button": "Додати на головний екран"
+    },
     "language": "Мова",
     "theme": {
       "title": "Тема",
       "auto": "Автоматична",
       "light": "Світла",
       "dark": "Темна",
-      "high-color-contrast": "High Color Contrast"
-    },
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+      "high-color-contrast": "Висока контрастність"
+    }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Ой! Схоже, у прогнозі цін на ріпу сталася помилка. Будь ласка, перевірте введені дані.",
+    "github": "Якщо ціни на ріпу правильні і Ви не подорожували в часі, будь ласка, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">повідомте про помилку.</a>"
   }
 }

@@ -6,11 +6,11 @@
     "salutation": "¡Hola! Te damos la bienvenida a la aplicación <b>Turnip Prophet</b> para tu Nookófono.",
     "description": "Esta aplicación te permite monitorizar la fluctuación del precio de los nabos en tu isla, ¡pero tendrás que introducir tú manualmente los precios diarios!",
     "conclusion": "Una vez hecho, la aplicación Turnip Prophet predecirá <b>mágicamente</b> el precio que tendrán los nabos el resto de la semana.",
-    "dismiss": "Got it!"
+    "dismiss": "¡Entendido!"
   },
   "first-time": {
     "title": "Comprador(a) primerizo(a)",
-    "description": "¿Ha sido esta la primera vez que compras nabos?<i>(Esta información afectará a tu patrón)</i>",
+    "description": "¿Es la primera vez que un residente compra nabos a Juliana en <b>tu propia</b> isla?<i>(Esta información afectará a tu patrón)</i>",
     "yes": "Sí",
     "no": "No"
   },
@@ -35,6 +35,30 @@
     "permalink-copied": "¡Permalink copiado!",
     "reset": "Reiniciar Turnip Prophet",
     "reset-warning": "¿Seguro que quieres reiniciar todos los campos?\n\n¡Esto no se puede deshacer!"
+  },
+  "profit": {
+    "title": "Ganancias e inversión",
+    "description": "Elige uno de los precios de venta introducidos para ver cuánto ganarías si vendieras todos tus nabos a ese precio.",
+    "selling-price": "Precio de venta para esta simulación",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "No has introducido precios de venta",
+    "quantity": "Nabos comprados (opcional)",
+    "invalid-quantity": "Introduce un número entero positivo de nabos dentro del rango admitido.",
+    "empty": "Introduce la cantidad de nabos para calcular la inversión y las ganancias.",
+    "missing-buy": "Introduce arriba un precio de compra entero y positivo para calcular tu inversión.",
+    "missing-sell": "Introduce arriba un precio de venta entero y positivo para ver una venta hipotética.",
+    "scenario": "Resultados hipotéticos si vendes todos los nabos al precio seleccionado.",
+    "too-large": "Estos valores son demasiado grandes para calcularlos con precisión. Usa valores más pequeños.",
+    "unknown": "No disponible",
+    "bells": "{{amount}} bayas",
+    "investment": "Inversión inicial",
+    "break-even": "Precio de equilibrio por nabo",
+    "revenue": "Ingresos por la venta",
+    "net": "Ganancia / pérdida neta",
+    "gain": "Ganancia neta",
+    "loss": "Pérdida neta",
+    "even": "Ganancia neta (punto de equilibrio)",
+    "roi": "Retorno de la inversión"
   },
   "weekdays": {
     "monday": "Lunes",
@@ -67,17 +91,17 @@
       "input": "Precio de entrada",
       "minimum": "Mínimo garantizado",
       "maximum": "Máximo potencial",
-      "expected": "Expected Price"
+      "expected": "Precio esperado"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Según los precios que has introducido hasta ahora, lo más probable es que tengas el patrón <b>{{0}}</b> ({{1}} de probabilidad).",
+    "sell-now-title": "¿Te conviene vender ahora?",
+    "sell-now": "Te conviene vender ahora.",
+    "sell-later": "Te conviene vender más tarde.",
+    "sell-advice": "El precio máximo esperado si vendes más tarde es de <b>{{0}}</b> bayas el <b>{{1}}</b>.",
+    "should-buy-title": "¿Te conviene comprar?",
+    "should-buy": "Te conviene comprar.",
+    "should-not-buy": "No te conviene comprar.",
+    "buy-advice": "El precio de venta máximo esperado para esta semana es de <b>{{0}}</b> bayas."
   },
   "textbox": {
     "description": "Cuando introduzcas algunos precios, Turnip Prophet empezará a hacer sus cálculos y te mostrará algunos posibles patrones para el precio de los nabos en tu isla.",
@@ -87,16 +111,20 @@
     "sponsor": "¿Quieres apoyar a los desarrolladores del proyecto? Visita la página de <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> y pulsa sobre '❤ Sponsor'.",
     "contributors-text": "¡Ah! ¡Y no nos olvidemos de todos los que han puesto su granito de arena hasta ahora!",
     "contributors": "Contribuidores",
+    "credits": "Fork de <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Basado en la <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">investigación de Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Ver todos los contribuidores</a>",
+    "install": {
+      "title": "Instalar aplicación",
+      "button": "Añadir a la pantalla de inicio"
+    },
     "language": "Idioma",
     "theme": {
       "title": "Tema",
       "auto": "Automático",
       "light": "Claro",
       "dark": "Oscuro",
-      "high-color-contrast": "High Color Contrast"
-    },
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+      "high-color-contrast": "Alto contraste"
+    }
   },
   "errors": {
     "impossible-values": "¡Ups! Parece que hay un error con tus predicciones. Por favor, revisa tus valores introducidos.",

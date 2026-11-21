@@ -6,11 +6,11 @@
     "salutation": "Cześć, witaj w aplikacji <b>Turnip Prophet</b> na Twoim Nook Phone.",
     "description": "Ta aplikacja pozwoli Ci codziennie śledzić ceny rzep na twojej wyspie, jednak będziesz musiał uzupełniać je samodzielnie.",
     "conclusion": "Następnie aplikacja Turnip Prophet <b>w magiczny sposób</b> przewidzi jakie ceny rzep będziesz mieć przez resztę tygodnia",
-    "dismiss": "Got it!"
+    "dismiss": "Rozumiem!"
   },
   "first-time": {
     "title": "Kupujący po raz pierwszy",
-    "description": "Czy jest to pierwszy raz gdy kupujesz rzepy od Daisy Mae na <b>własnej</b> wyspie?<i>(Ta opcja wpłynie na Twój schemat)</i>",
+    "description": "Czy to pierwszy raz, gdy ktoś z mieszkańców kupuje rzepy od Daisy Mae na <b>Twojej własnej</b> wyspie?<i>(Ta opcja wpłynie na Twój schemat)</i>",
     "yes": "Tak",
     "no": "Nie"
   },
@@ -35,6 +35,30 @@
     "permalink-copied": "Permalink skopiowany!",
     "reset": "Wyzeruj Turnip Prophet",
     "reset-warning": "Czy jesteś pewien, że chcesz wyzerować wszystkie pola?\n\nTej opcji nie można cofnąć!"
+  },
+  "profit": {
+    "title": "Zysk i inwestycja",
+    "description": "Wybierz jedną z wpisanych cen sprzedaży, aby zobaczyć, ile zarobisz, jeśli sprzedasz wszystkie rzepy po tej cenie.",
+    "selling-price": "Cena sprzedaży w tym scenariuszu",
+    "price-option": "{{day}}, {{time}} · {{price}}",
+    "no-prices": "Nie wpisano żadnych cen sprzedaży",
+    "quantity": "Liczba kupionych rzep (opcjonalnie)",
+    "invalid-quantity": "Wpisz dodatnią liczbę całkowitą rzep w obsługiwanym zakresie.",
+    "empty": "Wpisz liczbę rzep, aby obliczyć inwestycję i zysk.",
+    "missing-buy": "Wpisz powyżej cenę zakupu jako dodatnią liczbę całkowitą, aby obliczyć inwestycję.",
+    "missing-sell": "Wpisz powyżej cenę sprzedaży jako dodatnią liczbę całkowitą, aby zobaczyć hipotetyczną sprzedaż.",
+    "scenario": "Hipotetyczne wyniki sprzedaży wszystkich rzep po wybranej cenie.",
+    "too-large": "Te wartości są zbyt duże, aby dokładnie je obliczyć. Użyj mniejszych wartości.",
+    "unknown": "Niedostępne",
+    "bells": "{{amount}} Bells",
+    "investment": "Inwestycja początkowa",
+    "break-even": "Cena progu rentowności za rzepę",
+    "revenue": "Przychód ze sprzedaży",
+    "net": "Zysk / strata netto",
+    "gain": "Zysk netto",
+    "loss": "Strata netto",
+    "even": "Zysk netto (próg rentowności)",
+    "roi": "Zwrot z inwestycji"
   },
   "weekdays": {
     "monday": "Poniedziałek",
@@ -67,17 +91,17 @@
       "input": "Cena wejściowa",
       "minimum": "Gwarantowana cena minimalna",
       "maximum": "Potencjalna najwyższa cena",
-      "expected": "Expected Price"
+      "expected": "Oczekiwana cena"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Na podstawie dotychczasowych cen najbardziej prawdopodobna tendencja to: <b>{{0}}</b> (szansa {{1}}).",
+    "sell-now-title": "Czy sprzedać teraz?",
+    "sell-now": "Warto sprzedać teraz.",
+    "sell-later": "Lepiej sprzedać później.",
+    "sell-advice": "Oczekiwana najwyższa cena przy późniejszej sprzedaży to <b>{{0}}</b> Bells (<b>{{1}}</b>).",
+    "should-buy-title": "Czy kupić?",
+    "should-buy": "Warto kupić.",
+    "should-not-buy": "Nie warto kupować.",
+    "buy-advice": "Oczekiwana najwyższa cena sprzedaży w tym tygodniu to <b>{{0}}</b> Bells."
   },
   "textbox": {
     "description": "Po tym jak wprowadzisz kilka cen rzep, Turnip Prophet dokona obliczeń i wyświetli różne prawdopodobne szablony cen, których może doświadczyć Twoja wyspa",
@@ -87,19 +111,23 @@
     "sponsor": "Chcesz wesprzeć twórców tego projektu? Wejdź na stronę <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> i wciśnij '❤ Sponsor'",
     "contributors-text": "Aha! I nie zapominajmy o tych, którzy dotychczas nas wspierali!",
     "contributors": "Współautorzy",
+    "credits": "Fork projektu <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Oparty na <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">badaniach Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Zobacz wszystkich współautorów</a>",
+    "install": {
+      "title": "Zainstaluj aplikację",
+      "button": "Dodaj do ekranu głównego"
+    },
     "language": "Język",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "Motyw",
+      "auto": "Automatyczny",
+      "light": "Jasny",
+      "dark": "Ciemny",
+      "high-color-contrast": "Wysoki kontrast kolorów"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Ups! Wygląda na to, że w prognozie cen rzep jest błąd. Sprawdź wpisane wartości.",
+    "github": "Jeśli ceny rzep są poprawne, a na wyspie nie było podróży w czasie, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">zgłoś problem.</a>"
   }
 }

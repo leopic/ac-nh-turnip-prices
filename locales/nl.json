@@ -6,11 +6,11 @@
     "salutation": "Hallo, en welkom bij de <b>Turnip Prophet</b> app op je Nook Phone.",
     "description": "Deze app laat je toe de knol-prijzen op je eiland dagelijks bij te houden, maar je moet ze zelf ingeven!",
     "conclusion": "Daarna zal de Turnip Prophet app op <b>magische</b> wijze de knol-prijzen berekenen die je de rest van de week zal krijgen.",
-    "dismiss": "Got it!"
+    "dismiss": "Begrepen!"
   },
   "first-time": {
     "title": "Beginnende Koper",
-    "description": "Is dit de eerste keer dat je knollen koopt van Daisy Mae op je eiland?<i>(Dit beïnvloedt je patroon)</i>",
+    "description": "Is dit de eerste keer dat een inwoner knollen koopt van Daisy Mae op <b>je eigen</b> eiland?<i>(Dit beïnvloedt je patroon)</i>",
     "yes": "Ja",
     "no": "Nee"
   },
@@ -35,6 +35,30 @@
     "permalink-copied": "Deelbare link gekopieerd!",
     "reset": "Maak Turnip Prophet leeg",
     "reset-warning": "Ben je zeker dat je alle velden wil leegmaken?\n\nDit kan niet ongedaan gemaakt worden!"
+  },
+  "profit": {
+    "title": "Winst & investering",
+    "description": "Kies een ingevoerde verkoopprijs om te zien wat je zou verdienen als je al je knollen tegen die prijs verkoopt.",
+    "selling-price": "Verkoopprijs voor dit scenario",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "Geen verkoopprijzen ingevoerd",
+    "quantity": "Gekochte knollen (optioneel)",
+    "invalid-quantity": "Voer een positief, geheel aantal knollen in binnen het ondersteunde bereik.",
+    "empty": "Voer het aantal knollen in om je investering en winst te berekenen.",
+    "missing-buy": "Voer hierboven een aankoopprijs in als positief geheel getal om je investering te berekenen.",
+    "missing-sell": "Voer hierboven een verkoopprijs in als positief geheel getal om een hypothetische verkoop te zien.",
+    "scenario": "Hypothetische resultaten als je alle knollen tegen de gekozen prijs verkoopt.",
+    "too-large": "Deze waarden zijn te groot om nauwkeurig te berekenen. Gebruik kleinere waarden.",
+    "unknown": "Niet beschikbaar",
+    "bells": "{{amount}} Bells",
+    "investment": "Initiële investering",
+    "break-even": "Break-evenprijs per knol",
+    "revenue": "Verkoopopbrengst",
+    "net": "Nettowinst / -verlies",
+    "gain": "Nettowinst",
+    "loss": "Nettoverlies",
+    "even": "Nettowinst (break-even)",
+    "roi": "Rendement op investering"
   },
   "weekdays": {
     "monday": "Maandag",
@@ -67,39 +91,43 @@
       "input": "Ingevoerde prijs",
       "minimum": "Gegarandeerd Minimum",
       "maximum": "Potentieel Maximum",
-      "expected": "Expected Price"
+      "expected": "Verwachte prijs"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Op basis van je prijzen tot nu toe heb je hoogstwaarschijnlijk het patroon <b>{{0}}</b> ({{1}} kans).",
+    "sell-now-title": "Moet je nu verkopen?",
+    "sell-now": "Je verkoopt het best nu.",
+    "sell-later": "Je verkoopt het best later.",
+    "sell-advice": "De verwachte maximumprijs als je later verkoopt is <b>{{0}}</b> Bells op <b>{{1}}</b>.",
+    "should-buy-title": "Moet je kopen?",
+    "should-buy": "Je kunt het best kopen.",
+    "should-not-buy": "Je koopt het best niet.",
+    "buy-advice": "De verwachte maximale verkoopprijs voor deze week is <b>{{0}}</b> Bells."
   },
   "textbox": {
     "description": "Nadat je wat knol-prijzen hebt ingevoerd, zal de Turnip Prophet wat berekeningen doen en de verschillende mogelijke patronen voorstellen die je eiland kan vertonen.",
     "development": "Deze applicatie is nog in ontwikkeling, en zal met de tijd beter worden!",
-    "thanks": "Dit alles zou niet mogelijk zijn zonder het <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">werk van Ninji</a> om uit te zoeken hoe Timmy en Tommy de waarde van knollen bepalen.",
+    "thanks": "Dit alles zou niet mogelijk zijn zonder het <a href=\"https://twitter.com/_Ninji/status/1244818665851289602?s=20\">werk van Ninji</a> om uit te zoeken hoe Timmy en Tommy de waarde van knollen bepalen.",
     "support": "Ondersteuning, feedback en bijdrages zijn mogelijk via <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">GitHub</a>",
     "sponsor": "Wil je de ontwikkelaars van dit project sponsoren? Ga naar de <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> pagina en klik op '❤ Sponsor'",
     "contributors-text": "Oh! En laten we degenen die tot nu toe bijgedragen hebben niet vergeten te bedanken!",
     "contributors": "Bijdragers",
+    "credits": "Fork van <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Gebaseerd op <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">het onderzoek van Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Bekijk alle bijdragers</a>",
+    "install": {
+      "title": "App installeren",
+      "button": "Zet op beginscherm"
+    },
     "language": "Taal",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "Thema",
+      "auto": "Automatisch",
+      "light": "Licht",
+      "dark": "Donker",
+      "high-color-contrast": "Hoog kleurcontrast"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Oeps! Er lijkt een fout te zitten in je knol-voorspellingen. Controleer je invoer.",
+    "github": "Als je knol-prijzen juist zijn en je niet in de tijd bent gereisd, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">dien dan een melding in.</a>"
   }
 }

@@ -6,11 +6,11 @@
     "salutation": "สวัสดีจ้า ยินดีต้อนรับสู่โปรแกรม <b>Turnip Prophet</b> บน Nook Phone ของคุณ",
     "description": "โปรแกรมนี้จะช่วยให้คุณสามารถจดบันทึกราคาหัวผักกาดรายวันบนเกาะของคุณ แต่ต้องจดเองนะ!",
     "conclusion": "หลังจากนั้น Turnip Prophet จะทำการ<b>พยากรณ์</b>ราคาหัวผักกาดตลอดทั้งสัปดาห์ที่เป็นไปได้ให้คุณ",
-    "dismiss": "Got it!"
+    "dismiss": "เข้าใจแล้ว!"
   },
   "first-time": {
     "title": "ซื้อครั้งแรก",
-    "description": "นี่เป็นครั้งแรกที่คุณซื้อหัวผักกาดจากน้องหมูอู๊ดๆ Daisy Mae บนเกาะ<b>ของคุณรีเปล่า</b>?<i>(มีผลกับการคำนวณรูปแบบราคา)</i>",
+    "description": "นี่เป็นครั้งแรกที่ผู้อยู่อาศัยซื้อหัวผักกาดจากน้องหมูอู๊ดๆ Daisy Mae บนเกาะ<b>ของคุณเอง</b>หรือเปล่า?<i>(มีผลกับการคำนวณรูปแบบราคา)</i>",
     "yes": "ใช่",
     "no": "ไม่"
   },
@@ -29,12 +29,36 @@
     "description": "ราคาหัวผักกาดบนเกาะของคุณสัปดาห์นี้?",
     "open": {
       "am": "เช้า - 08.00 นาฬิกา ถึง 11.59 นาฬิกา",
-      "pm": "บ่าย - 12:00 นาฬิกา to 22:00 นาฬิกา"
+      "pm": "บ่าย - 12:00 นาฬิกา ถึง 22:00 นาฬิกา"
     },
     "copy-permalink": "คัดลอก Permalink",
     "permalink-copied": "Permalink คัดลอกแล้วจ้า!",
     "reset": "รีเซ็ต Turnip Prophet",
     "reset-warning": "แน่ใจนะว่าจะล้างข้อมูลทั้งหมด?\n\nแก้ไขอีกไม่ได้แล้วนา!"
+  },
+  "profit": {
+    "title": "กำไรและเงินลงทุน",
+    "description": "เลือกราคาขายที่กรอกไว้ เพื่อดูว่าคุณจะได้เงินเท่าไหร่ถ้าขายหัวผักกาดทั้งหมดในราคานั้น",
+    "selling-price": "ราคาขายสำหรับกรณีนี้",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "ยังไม่ได้กรอกราคาขาย",
+    "quantity": "จำนวนหัวผักกาดที่ซื้อ (ไม่บังคับ)",
+    "invalid-quantity": "กรอกจำนวนหัวผักกาดเป็นจำนวนเต็มบวกที่อยู่ในช่วงที่รองรับ",
+    "empty": "กรอกจำนวนหัวผักกาดเพื่อคำนวณเงินลงทุนและกำไร",
+    "missing-buy": "กรอกราคาซื้อด้านบนเป็นจำนวนเต็มบวก เพื่อคำนวณเงินลงทุน",
+    "missing-sell": "กรอกราคาขายด้านบนเป็นจำนวนเต็มบวก เพื่อดูผลการขายสมมติ",
+    "scenario": "ผลลัพธ์สมมติ หากขายหัวผักกาดทั้งหมดในราคาที่เลือก",
+    "too-large": "ค่าเหล่านี้มากเกินกว่าจะคำนวณได้อย่างแม่นยำ กรุณาใช้ค่าที่น้อยลง",
+    "unknown": "ไม่มีข้อมูล",
+    "bells": "{{amount}} เบล",
+    "investment": "เงินลงทุนเริ่มต้น",
+    "break-even": "ราคาคุ้มทุนต่อหัวผักกาดหนึ่งหัว",
+    "revenue": "รายได้จากการขาย",
+    "net": "กำไร / ขาดทุนสุทธิ",
+    "gain": "กำไรสุทธิ",
+    "loss": "ขาดทุนสุทธิ",
+    "even": "กำไรสุทธิ (เท่าทุน)",
+    "roi": "ผลตอบแทนจากการลงทุน (ROI)"
   },
   "weekdays": {
     "monday": "วันจันทร์",
@@ -67,17 +91,17 @@
       "input": "ราคา",
       "minimum": "การันตีต่ำสุด",
       "maximum": "เป็นไปได้สูงสุด",
-      "expected": "Expected Price"
+      "expected": "ราคาที่คาดการณ์"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "จากราคาที่กรอกมาจนถึงตอนนี้ คุณน่าจะอยู่ในรูปแบบ <b>{{0}}</b> มากที่สุด (โอกาส {{1}})",
+    "sell-now-title": "ควรขายตอนนี้ไหม?",
+    "sell-now": "ควรขายตอนนี้เลย",
+    "sell-later": "ควรรอขายทีหลัง",
+    "sell-advice": "ราคาสูงสุดที่คาดว่าจะขายได้ในภายหลังคือ <b>{{0}}</b> เบล ช่วง <b>{{1}}</b>",
+    "should-buy-title": "ควรซื้อไหม?",
+    "should-buy": "ควรซื้อ",
+    "should-not-buy": "ไม่ควรซื้อ",
+    "buy-advice": "ราคาขายสูงสุดที่คาดการณ์ของสัปดาห์นี้คือ <b>{{0}}</b> เบล"
   },
   "textbox": {
     "description": "หลังจากใส่ราคาหัวผักกาดไปได้บางส่วน โปรแกรม Turnip Prophet จะทำการแสดงตัวเลขราคาและความเป็นไปได้ของรูปแบบต่าง ๆ ที่เกาะของคุณจะเจอ",
@@ -87,19 +111,23 @@
     "sponsor": "ต้องการเป็นสปอนเซอร์แก่นักพัฒนา? ไปที่ <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> และเลือก '❤ Sponsor'",
     "contributors-text": "อ้อ! และต้องไม่ลืมที่จะขอบคุณผู้ที่ช่วยร่วมพัฒนามาจนถึงตอนนี้!",
     "contributors": "ผู้ร่วมพัฒนา",
+    "credits": "Fork มาจาก <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a> โดยอ้างอิงจาก<a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">ผลการค้นคว้าของ Ninji</a>",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">ดูผู้ร่วมพัฒนาทั้งหมด</a>",
+    "install": {
+      "title": "ติดตั้งโปรแกรม",
+      "button": "เพิ่มไปยังหน้าจอโฮม"
+    },
     "language": "ภาษา",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "ธีม",
+      "auto": "อัตโนมัติ",
+      "light": "สว่าง",
+      "dark": "มืด",
+      "high-color-contrast": "สีคอนทราสต์สูง"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "อุ๊ย! ดูเหมือนการพยากรณ์ราคาหัวผักกาดจะผิดพลาด กรุณาตรวจสอบข้อมูลที่กรอกอีกครั้ง",
+    "github": "ถ้าราคาหัวผักกาดถูกต้องและคุณไม่ได้ย้อนเวลา กรุณา<a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">ส่งรายงานปัญหา</a>"
   }
 }
