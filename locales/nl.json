@@ -50,7 +50,7 @@
     "scenario": "Hypothetische resultaten als je alle knollen tegen de gekozen prijs verkoopt.",
     "too-large": "Deze waarden zijn te groot om nauwkeurig te berekenen. Gebruik kleinere waarden.",
     "unknown": "Niet beschikbaar",
-    "bells": "{{amount}} Bells",
+    "bells": "{{amount}} klingels",
     "investment": "Initiële investering",
     "break-even": "Break-evenprijs per knol",
     "revenue": "Verkoopopbrengst",
@@ -97,11 +97,11 @@
     "sell-now-title": "Moet je nu verkopen?",
     "sell-now": "Je verkoopt het best nu.",
     "sell-later": "Je verkoopt het best later.",
-    "sell-advice": "De verwachte maximumprijs als je later verkoopt is <b>{{0}}</b> Bells op <b>{{1}}</b>.",
+    "sell-advice": "De verwachte maximumprijs als je later verkoopt is <b>{{0}}</b> klingels op <b>{{1}}</b>.",
     "should-buy-title": "Moet je kopen?",
     "should-buy": "Je kunt het best kopen.",
     "should-not-buy": "Je koopt het best niet.",
-    "buy-advice": "De verwachte maximale verkoopprijs voor deze week is <b>{{0}}</b> Bells."
+    "buy-advice": "De verwachte maximale verkoopprijs voor deze week is <b>{{0}}</b> klingels."
   },
   "textbox": {
     "description": "Nadat je wat knol-prijzen hebt ingevoerd, zal de Turnip Prophet wat berekeningen doen en de verschillende mogelijke patronen voorstellen die je eiland kan vertonen.",
