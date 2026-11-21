@@ -71,8 +71,9 @@
   --table-range2-text: inherit;
   --table-range3-text: inherit;
   --table-range4-text: inherit;
-  --profit-gain-text: #333;
-  --profit-loss-text: #333;
+  --profit-gain-text: hsl(140, 70%, 26%);
+  --profit-loss-text: hsl(0, 70%, 42%);
+  --profit-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23686868' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 [data-theme="light-high-color-contrast"] {
@@ -86,12 +87,15 @@
   --table-range2-text: inherit;
   --table-range3-text: inherit;
   --table-range4-text: inherit;
+  --profit-gain-text: hsl(140, 90%, 20%);
+  --profit-loss-text: hsl(0, 90%, 33%);
 }
 
 [data-theme="dark"],
 [data-theme="dark-high-color-contrast"] {
-  --profit-gain-text: #FFF;
-  --profit-loss-text: #FFF;
+  --profit-gain-text: hsl(140, 60%, 60%);
+  --profit-loss-text: hsl(0, 85%, 72%);
+  --profit-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23CCCCCC' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
   --bg-color: #1A1A1A;
   --bg-dot-color: #222;
 
@@ -144,7 +148,8 @@
 }
 
 [data-theme="dark-high-color-contrast"] {
-  --profit-gain-text: #000;
+  --profit-gain-text: hsl(140, 90%, 65%);
+  --profit-loss-text: hsl(0, 100%, 78%);
   --table-range0: hsl(140, 90%, 30%);
   --table-range1: hsl(90, 90%, 25%);
   --table-range2: hsl(60, 90%, 25%);
@@ -773,24 +778,55 @@ input[class=now]:placeholder-shown::placeholder {
 
 .profit-calculator {
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  justify-items: center;
+  align-items: start;
   width: 100%;
-  max-width: 640px;
+  max-width: 720px;
   min-width: 0;
-  margin: 16px 0;
-  padding: 16px;
-  border: 1px solid currentColor;
-  border-radius: 24px;
+  margin: 24px auto 16px;
+  padding: 16px 24px;
+  text-align: center;
   overflow-wrap: anywhere;
   line-height: 1.5;
 }
 
+/* Heading, help text and results span both columns; the two inputs sit side by side. */
+.profit-calculator > h2,
+#profit-help,
+#profit-results {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .profit-calculator {
+    grid-template-columns: 1fr;
+    padding: 16px 0;
+  }
+}
+
 .profit-calculator h2 {
-  margin: 0 0 8px;
+  margin: 8px auto;
   font-size: 1.25rem;
+  font-weight: 800;
   color: var(--form-h6-text-color);
 }
 
 .profit-calculator p {
+  margin: 8px auto;
+}
+
+#profit-help,
+#profit-message {
+  max-width: 460px;
+  font-size: 0.9rem;
+}
+
+.profit-calculator .input__group {
+  width: 100%;
   margin: 8px 0;
 }
 
@@ -802,18 +838,33 @@ input[class=now]:placeholder-shown::placeholder {
 #profit-sell-price {
   box-sizing: border-box;
   width: 100%;
-  max-width: 240px;
   min-height: 44px;
   transition: none;
 }
 
+#turnip-quantity {
+  max-width: 160px;
+}
+
 #profit-sell-price {
-  padding: 8px;
-  color: inherit;
-  border: 1px solid currentColor;
-  border-radius: 12px;
+  max-width: 320px;
+  margin: 8px 0;
+  padding: 8px 40px 8px 16px;
+  border: 0;
+  border-radius: 40px;
   font: inherit;
-  background: var(--input-bg-color);
+  font-weight: bold;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--input-bg-color) var(--profit-select-arrow) no-repeat right 16px center;
+}
+
+#profit-sell-price:disabled {
+  padding-right: 16px;
+  cursor: default;
+  background-image: none;
 }
 
 #profit-sell-price:focus-visible {
@@ -830,16 +881,23 @@ input[class=now]:placeholder-shown::placeholder {
 }
 
 #profit-values {
-  margin-bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  margin: 8px auto 0;
+  text-align: start;
 }
 
 #profit-values > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: baseline;
   gap: 4px 16px;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 8px 4px;
+}
+
+#profit-values > div + div {
+  border-top: 1px dashed color-mix(in srgb, currentColor 30%, transparent);
 }
 
 #profit-values dd {
@@ -848,13 +906,15 @@ input[class=now]:placeholder-shown::placeholder {
   font-variant-numeric: tabular-nums;
 }
 
-.profit-gain {
-  background: var(--table-range0);
+#profit-net-row dd {
+  font-size: 1.25rem;
+}
+
+.profit-gain dd {
   color: var(--profit-gain-text);
 }
 
-.profit-loss {
-  background: var(--table-range4);
+.profit-loss dd {
   color: var(--profit-loss-text);
 }
 
