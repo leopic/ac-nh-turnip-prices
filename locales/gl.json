@@ -6,11 +6,11 @@
     "salutation": "Ola, estás no aplicativo <b>Turnip Prophet</b> no teu Nookófono.",
     "description": "Este aplicativo permíteche facer un seguemento do prezo dos nabos na túa illa. Porén, tes que introducir os prezos manualmente.",
     "conclusion": "Depois, o aplicativo predirá <b>maxicamente</b> os prezos dos nabos na túa illa para o resto da semana.",
-    "dismiss": "Got it!"
+    "dismiss": "Entendido!"
   },
   "first-time": {
     "title": "Primeira compra",
-    "description": "É a primeira vez que compras nabos a Juliana na túa illa? <i>(Isto afecta aos prezos)</i>",
+    "description": "É a primeira vez que un residente compra nabos a Juliana na <b>túa propia</b> illa? <i>(Isto afecta aos prezos)</i>",
     "yes": "Si",
     "no": "Non"
   },
@@ -35,6 +35,30 @@
     "permalink-copied": "Ligazón permanente copiada!",
     "reset": "Restablecer Turnip Prophet",
     "reset-warning": "Seguro que desexas restablecer todos os campos?\n\nIsto non se pode desfacer!"
+  },
+  "profit": {
+    "title": "Beneficio e investimento",
+    "description": "Escolle un dos prezos de venda introducidos para ver canto gañarías se venderas todos os teus nabos a ese prezo.",
+    "selling-price": "Prezo de venda para esta simulación",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "Non introduciches ningún prezo de venda",
+    "quantity": "Nabos comprados (opcional)",
+    "invalid-quantity": "Introduce un número enteiro positivo de nabos dentro do intervalo admitido.",
+    "empty": "Introduce a cantidade de nabos para calcular o investimento e o beneficio.",
+    "missing-buy": "Introduce arriba un prezo de compra enteiro e positivo para calcular o teu investimento.",
+    "missing-sell": "Introduce arriba un prezo de venda enteiro e positivo para ver unha venda hipotética.",
+    "scenario": "Resultados hipotéticos se vendes todos os nabos ao prezo seleccionado.",
+    "too-large": "Estes valores son demasiado grandes para calculalos con precisión. Usa valores máis pequenos.",
+    "unknown": "Non dispoñible",
+    "bells": "{{amount}} bayas",
+    "investment": "Investimento inicial",
+    "break-even": "Prezo de equilibrio por nabo",
+    "revenue": "Ingresos pola venda",
+    "net": "Beneficio / perda neta",
+    "gain": "Beneficio neto",
+    "loss": "Perda neta",
+    "even": "Beneficio neto (punto de equilibrio)",
+    "roi": "Rendibilidade do investimento"
   },
   "weekdays": {
     "monday": "Luns",
@@ -67,39 +91,43 @@
       "input": "Prezo introducido",
       "minimum": "Mínimo garantido",
       "maximum": "Máximo potencial",
-      "expected": "Expected Price"
+      "expected": "Prezo esperado"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Segundo os prezos que introduciches ata agora, o máis probable é que teñas a tendencia <b>{{0}}</b> ({{1}} de probabilidade).",
+    "sell-now-title": "Deberías vender agora?",
+    "sell-now": "Deberías vender agora.",
+    "sell-later": "Deberías vender máis tarde.",
+    "sell-advice": "O prezo máximo esperado se vendes máis tarde é de <b>{{0}}</b> bayas, o <b>{{1}}</b>.",
+    "should-buy-title": "Deberías comprar?",
+    "should-buy": "Deberías comprar.",
+    "should-not-buy": "Non deberías comprar.",
+    "buy-advice": "O prezo máximo de venda esperado para esta semana é de <b>{{0}}</b> bayas."
   },
   "textbox": {
     "description": "Despois de introducir algúns prezos, o Turnip Prophet calculará que prezos poden ter no futuro.",
     "development": "Este aplicativo aínda está en desenvolvemento, mais mellorará co tempo!",
     "thanks": "Nada disto sería posible sen o traballo de <a href=\"https://twitter.com/_Ninji/status/1244818665851289602?s=20\">Ninji</a> achando como se calculan os prezos.",
     "support": "Soporte, comentarios e contribucións están dispoñibles en <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">GitHub</a>",
+    "sponsor": "Queres patrocinar a quen desenvolve este proxecto? Vai á páxina de <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> e preme en '❤ Sponsor'",
     "contributors-text": "Oh! E non esqueceremos dar as grazas aos que xa contribuíron.",
     "contributors": "Contribuidores",
+    "credits": "Bifurcación de <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Baseado na <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">investigación de Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Ver todos os contribuidores</a>",
+    "install": {
+      "title": "Instalar o aplicativo",
+      "button": "Engadir á pantalla de inicio"
+    },
     "language": "Lingua",
-    "sponsor": "Want to sponsor the developers behind this project? Go to the <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> page and click '❤ Sponsor'",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "Tema",
+      "auto": "Automático",
+      "light": "Claro",
+      "dark": "Escuro",
+      "high-color-contrast": "Alto contraste de cor"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Vaites! Parece que hai un erro nas predicións dos teus nabos. Revisa os datos introducidos.",
+    "github": "Se os prezos dos teus nabos son correctos e non viaxaches no tempo, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">envía un informe.</a>"
   }
 }

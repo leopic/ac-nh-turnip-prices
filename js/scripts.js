@@ -4,6 +4,15 @@ function languageTag(code) {
   return { ua: 'uk', ph: 'fil' }[code] || code;
 }
 
+// Intl.PluralRules quietly falls back to English rules for `ua` and `ph`, so
+// i18next would pick e.g. "5 дзвіночка". Look plural rules up by language tag.
+// Uses i18next's plural resolver, so check it on i18next major upgrades.
+function useLanguageTagPlurals(translator) {
+  const resolver = translator.services.pluralResolver;
+  const getRule = resolver.getRule.bind(resolver);
+  resolver.getRule = (code, options) => getRule(languageTag(code), options);
+}
+
 //Reusable Fields
 const getSellFields = function () {
   let fields = [];
@@ -140,6 +149,7 @@ const renderProfitCalculator = function () {
   const language = i18next.resolvedLanguage || i18next.language || 'en';
   const locale = languageTag(language);
   const formatBells = (value, signed = false) => i18next.t('profit.bells', {
+    count: value,
     amount: new Intl.NumberFormat(locale, { signDisplay: signed ? 'exceptZero' : 'auto' }).format(value),
     interpolation: { escapeValue: false },
   });

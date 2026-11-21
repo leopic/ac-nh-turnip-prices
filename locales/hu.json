@@ -6,7 +6,7 @@
     "salutation": "Üdvözöllek a Nookfonod <b>Turnip Prophet</b> alkalmazásában!",
     "description": "Ezzel az alkalmazással követheted a szigeted naponta változó retekárait, viszont az árakat Neked kell megadnod!",
     "conclusion": "Az árak megadása után a Turnip Prophet <b>varázslatosan</b> megjósolja a hét elkövetkezendő árait.",
-    "dismiss": "Got it!"
+    "dismiss": "Értem!"
   },
   "first-time": {
     "title": "Első vásárlás",
@@ -35,6 +35,30 @@
     "permalink-copied": "Hivatkozás kimásolva!",
     "reset": "Mezők kiürítése",
     "reset-warning": "Biztosan ki akarsz üríteni minden mezőt?\n\nEz a művelet nem vonható vissza!"
+  },
+  "profit": {
+    "title": "Nyereség és befektetés",
+    "description": "Válassz ki egy megadott eladási árat, és megnézheted, mennyit keresnél, ha az összes retkedet ezen az áron adnád el.",
+    "selling-price": "Eladási ár ehhez a számításhoz",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "Még nem adtál meg eladási árat",
+    "quantity": "Megvett retkek száma (nem kötelező)",
+    "invalid-quantity": "A retkek számához adj meg egy pozitív egész számot a támogatott tartományon belül.",
+    "empty": "Add meg a retkek számát a befektetés és a nyereség kiszámításához.",
+    "missing-buy": "Adj meg fent egy pozitív egész vételi árat a befektetésed kiszámításához.",
+    "missing-sell": "Adj meg fent egy pozitív egész eladási árat, hogy lásd egy feltételezett eladás eredményét.",
+    "scenario": "Feltételezett eredmény, ha az összes retket a kiválasztott áron adod el.",
+    "too-large": "Ezek az értékek túl nagyok a pontos számításhoz. Adj meg kisebb értékeket.",
+    "unknown": "Nem elérhető",
+    "bells": "{{amount}} Bell",
+    "investment": "Kezdeti befektetés",
+    "break-even": "Nullszaldós ár retkenként",
+    "revenue": "Eladási bevétel",
+    "net": "Nettó nyereség / veszteség",
+    "gain": "Nettó nyereség",
+    "loss": "Nettó veszteség",
+    "even": "Nettó nyereség (nullszaldó)",
+    "roi": "Befektetésarányos megtérülés"
   },
   "weekdays": {
     "monday": "Hétfő",
@@ -67,17 +91,17 @@
       "input": "Megadott ár",
       "minimum": "Garantált minimum",
       "maximum": "Lehetséges maximum",
-      "expected": "Expected Price"
+      "expected": "Várható ár"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Az eddigi áraid alapján a legvalószínűbb minta: <b>{{0}}</b> ({{1}} esély).",
+    "sell-now-title": "Érdemes most eladni?",
+    "sell-now": "Most érdemes eladnod.",
+    "sell-later": "Később érdemes eladnod.",
+    "sell-advice": "Későbbi eladásnál a várható legmagasabb ár <b>{{0}}</b> Bell (<b>{{1}}</b>).",
+    "should-buy-title": "Érdemes vásárolni?",
+    "should-buy": "Érdemes vásárolnod.",
+    "should-not-buy": "Nem érdemes vásárolnod.",
+    "buy-advice": "A hét várható legmagasabb eladási ára <b>{{0}}</b> Bell."
   },
   "textbox": {
     "description": "Miután megadtál néhány árat, a Turnip Prophet kiszámolja és megjeleníti az összes lehetséges mintát ami a héten megjelenhet.",
@@ -87,16 +111,20 @@
     "sponsor": "Szeretnéd szponzorálni a projekt fejlesztőit? Menj a <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> oldalra és nyomd meg a „❤ Sponsor” gombot!",
     "contributors-text": "Ó, és ne felejtsünk el köszönetet mondani az eddigi hozzájárulóknak!",
     "contributors": "Hozzájárulók",
+    "credits": "A <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a> forkja. <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji kutatásán</a> alapul.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Az összes hozzájáruló megtekintése</a>",
+    "install": {
+      "title": "Alkalmazás telepítése",
+      "button": "Hozzáadás a kezdőképernyőhöz"
+    },
     "language": "Nyelv",
     "theme": {
       "title": "Téma",
       "auto": "Automatikus",
       "light": "Világos",
       "dark": "Sötét",
-      "high-color-contrast": "High Color Contrast"
-    },
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+      "high-color-contrast": "Nagy kontraszt"
+    }
   },
   "errors": {
     "impossible-values": "Hoppá! Valami nem stimmel a jóslatokkal. Ellenőrizd a bevitt adatokat.",

@@ -1,17 +1,16 @@
 {
   "general": {
-    "name": "Turnip Prophet",
     "daisy-mae": "Brunella"
   },
   "welcome": {
     "salutation": "Ciao e benvenuto nell'app <b>Turnip Prophet</b> del tuo Nook Phone.",
     "description": "Questa applicazione ti permetterà di tenere traccia del prezzo giornaliero delle rape. Ma dovrai inserire i prezzi da te!",
     "conclusion": "Se lo fai Turnip Prophet predirrà <b>magicamente</b> i prezzi delle rape che avrai per il resto della settimana.",
-    "dismiss": "Got it!"
+    "dismiss": "Ho capito!"
   },
   "first-time": {
     "title": "Primo Acquisto",
-    "description": "È la prima volta che acquisti sulla tua isola le rape da Brunella?<i>(influisce sul comportamento dei prezzi)</i>",
+    "description": "È la prima volta che un abitante acquista le rape da Brunella sulla <b>tua</b> isola?<i>(influisce sul comportamento dei prezzi)</i>",
     "yes": "Sì",
     "no": "No"
   },
@@ -37,6 +36,30 @@
     "reset": "Resetta Turnip Prophet",
     "reset-warning": "Sei sicuro di voler resettare tutti i campi?\n\nNon può essere annullato!"
   },
+  "profit": {
+    "title": "Profitto e investimento",
+    "description": "Scegli uno dei prezzi di vendita inseriti per vedere quanto guadagneresti vendendo tutte le tue rape a quel prezzo.",
+    "selling-price": "Prezzo di vendita per questa simulazione",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "Nessun prezzo di vendita inserito",
+    "quantity": "Rape acquistate (facoltativo)",
+    "invalid-quantity": "Inserisci un numero intero positivo di rape entro l'intervallo consentito.",
+    "empty": "Inserisci la quantità di rape per calcolare investimento e profitto.",
+    "missing-buy": "Inserisci qui sopra un prezzo di acquisto intero e positivo per calcolare il tuo investimento.",
+    "missing-sell": "Inserisci qui sopra un prezzo di vendita intero e positivo per vedere una vendita ipotetica.",
+    "scenario": "Risultati ipotetici vendendo tutte le rape al prezzo selezionato.",
+    "too-large": "Questi valori sono troppo grandi per un calcolo preciso. Usa valori più piccoli.",
+    "unknown": "Non disponibile",
+    "bells": "{{amount}} stelline",
+    "investment": "Investimento iniziale",
+    "break-even": "Prezzo di pareggio per rapa",
+    "revenue": "Ricavo della vendita",
+    "net": "Profitto / perdita netta",
+    "gain": "Profitto netto",
+    "loss": "Perdita netta",
+    "even": "Profitto netto (pareggio)",
+    "roi": "Ritorno sull'investimento"
+  },
   "weekdays": {
     "monday": "Lunedì",
     "tuesday": "Martedì",
@@ -55,8 +78,8 @@
     }
   },
   "times": {
-    "morning": "AM",
-    "afternoon": "PM"
+    "morning": "Mattina",
+    "afternoon": "Pomeriggio"
   },
   "output": {
     "title": "Risultati",
@@ -68,17 +91,17 @@
       "input": "Prezzo Iniziale",
       "minimum": "Minimo Garantito",
       "maximum": "Massimo Potenziale",
-      "expected": "Expected Price"
+      "expected": "Prezzo Previsto"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "In base ai prezzi inseriti finora, il comportamento più probabile è <b>{{0}}</b> ({{1}} di probabilità).",
+    "sell-now-title": "Conviene vendere ora?",
+    "sell-now": "Ti conviene vendere ora.",
+    "sell-later": "Ti conviene vendere più tardi.",
+    "sell-advice": "Il prezzo massimo previsto vendendo più tardi è di <b>{{0}}</b> stelline (<b>{{1}}</b>).",
+    "should-buy-title": "Conviene comprare?",
+    "should-buy": "Ti conviene comprare.",
+    "should-not-buy": "Non ti conviene comprare.",
+    "buy-advice": "Il prezzo di vendita massimo previsto per questa settimana è di <b>{{0}}</b> stelline."
   },
   "textbox": {
     "description": "Dopo aver inserito alcuni prezzi, Turnip Prophet calcolerà e mostrerà i possibili comportamenti del prezzo delle rape nella tua isola.",
@@ -88,19 +111,23 @@
     "sponsor": "Vuoi sponsorizzare gli sviluppatori di questo progetto? Vai nella pagina <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a> e clicca '❤ Sponsor'",
     "contributors-text": "Oh! Non dimentichiamoci di ringraziare chi ha contribuito fin'ora!",
     "contributors": "Collaboratori",
+    "credits": "Fork di <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Basato sulla <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">ricerca di Ninji</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Vedi tutti i collaboratori</a>",
+    "install": {
+      "title": "Installa l'app",
+      "button": "Aggiungi alla schermata Home"
+    },
     "language": "Lingua",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "Tema",
+      "auto": "Automatico",
+      "light": "Chiaro",
+      "dark": "Scuro",
+      "high-color-contrast": "Contrasto colori elevato"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Ops! Sembra che ci sia un errore nelle previsioni delle tue rape. Controlla i dati inseriti.",
+    "github": "Se i prezzi delle tue rape sono corretti e non hai viaggiato nel tempo, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">invia una segnalazione.</a>"
   }
 }

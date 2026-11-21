@@ -6,11 +6,11 @@
     "salutation": "Hallo und Willkommen bei der <b>Turnip Prophet</b> App auf deinem Nook Phone.",
     "description": "Mit dieser App kannst du die Rübenpreise deiner Insel täglich verfolgen, aber du musst die Preise selbst eingeben!",
     "conclusion": "Danach wird die Turnip Prophet App <b>magisch</b> deine Rübenpreise vorhersagen, welche du den Rest der Woche haben wirst.",
-    "dismiss": "Got it!"
+    "dismiss": "Alles klar!"
   },
   "first-time": {
     "title": "Erstmaliger Einkäufer",
-    "description": "Kaufst du zum ersten Mal Rüben von Jorna auf deiner Insel? <i>(Dies beeinflusst dein Verkaufsmuster)</i>",
+    "description": "Ist es das erste Mal, dass ein Bewohner auf <b>deiner eigenen</b> Insel Rüben von Jorna kauft? <i>(Dies beeinflusst dein Verkaufsmuster)</i>",
     "yes": "Ja",
     "no": "Nein"
   },
@@ -36,6 +36,30 @@
     "reset": "Eingegebene Daten zurücksetzen",
     "reset-warning": "Bist du dir sicher, dass du deine eingegebenen Daten zurücksetzen möchtest?\n\nDies kann nicht rückgängig gemacht werden!"
   },
+  "profit": {
+    "title": "Gewinn & Investition",
+    "description": "Wähle einen eingegebenen Verkaufspreis, um zu sehen, wie viel du verdienen würdest, wenn du alle deine Rüben zu diesem Preis verkaufen würdest.",
+    "selling-price": "Verkaufspreis für dieses Szenario",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "Keine Verkaufspreise eingegeben",
+    "quantity": "Gekaufte Rüben (optional)",
+    "invalid-quantity": "Gib eine positive ganze Zahl an Rüben im unterstützten Bereich ein.",
+    "empty": "Gib die Anzahl deiner Rüben ein, um Investition und Gewinn zu berechnen.",
+    "missing-buy": "Gib oben einen Kaufpreis als positive ganze Zahl ein, um deine Investition zu berechnen.",
+    "missing-sell": "Gib oben einen Verkaufspreis als positive ganze Zahl ein, um einen hypothetischen Verkauf zu sehen.",
+    "scenario": "Hypothetische Ergebnisse, wenn du alle Rüben zum gewählten Preis verkaufst.",
+    "too-large": "Diese Werte sind zu groß für eine genaue Berechnung. Verwende kleinere Werte.",
+    "unknown": "Nicht verfügbar",
+    "bells": "{{amount}} Sternis",
+    "investment": "Anfangsinvestition",
+    "break-even": "Gewinnschwelle pro Rübe",
+    "revenue": "Verkaufserlös",
+    "net": "Nettogewinn / -verlust",
+    "gain": "Nettogewinn",
+    "loss": "Nettoverlust",
+    "even": "Nettogewinn (ausgeglichen)",
+    "roi": "Kapitalrendite"
+  },
   "weekdays": {
     "monday": "Montag",
     "tuesday": "Dienstag",
@@ -59,7 +83,7 @@
   },
   "output": {
     "title": "Berechnung",
-    "chance": "% Chance",
+    "chance": "Wahrscheinlichkeit (%)",
     "to": "bis",
     "minimum": "Garantiertes Minimum",
     "maximum": "Potentielles Maximum",
@@ -67,17 +91,17 @@
       "input": "Eingegebener Preis",
       "minimum": "Garantiertes Minimum",
       "maximum": "Potentielles Maximum",
-      "expected": "Expected Price"
+      "expected": "Erwarteter Preis"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "Nach deinen bisherigen Preisen hast du höchstwahrscheinlich das Verkaufsmuster <b>{{0}}</b> (Wahrscheinlichkeit: {{1}}).",
+    "sell-now-title": "Solltest du jetzt verkaufen?",
+    "sell-now": "Du solltest jetzt verkaufen.",
+    "sell-later": "Du solltest später verkaufen.",
+    "sell-advice": "Der erwartete Höchstpreis bei einem späteren Verkauf liegt bei <b>{{0}}</b> Sternis am <b>{{1}}</b>.",
+    "should-buy-title": "Solltest du kaufen?",
+    "should-buy": "Du solltest kaufen.",
+    "should-not-buy": "Du solltest nicht kaufen.",
+    "buy-advice": "Der erwartete höchste Verkaufspreis dieser Woche liegt bei <b>{{0}}</b> Sternis."
   },
   "textbox": {
     "description": "Nachdem du einige Rübenpreise eingegeben hast, benutzt der Turnip Prophet etwas Magie und zeigt dir die verschiedenen möglichen Verkaufsmuster an, die auf deiner Insel auftreten können.",
@@ -87,19 +111,23 @@
     "sponsor": "Möchtest du die Entwickler hinter diesem Projekt unterstützen? Gehe zu <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub.com</a> und klicke auf den '❤ Sponsor' Button für mehr Informationen.",
     "contributors-text": "Oh! Und vergessen wir nicht, denen zu danken, die bis jetzt dazu beigetragen haben!",
     "contributors": "Mitwirkende",
+    "credits": "Fork von <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Basiert auf <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninjis Forschung</a>.",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">Alle Mitwirkenden anzeigen</a>",
+    "install": {
+      "title": "App installieren",
+      "button": "Zum Startbildschirm hinzufügen"
+    },
     "language": "Sprache",
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>",
     "theme": {
-      "title": "Theme",
-      "auto": "Automatic",
-      "light": "Light",
-      "dark": "Dark",
-      "high-color-contrast": "High Color Contrast"
+      "title": "Design",
+      "auto": "Automatisch",
+      "light": "Hell",
+      "dark": "Dunkel",
+      "high-color-contrast": "Hoher Kontrast"
     }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "Hoppla! Bei deiner Rübenvorhersage scheint ein Fehler aufgetreten zu sein. Bitte überprüfe deine Eingaben.",
+    "github": "Wenn deine Rübenpreise stimmen und du keine Zeitreise gemacht hast, <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">melde bitte den Fehler.</a>"
   }
 }

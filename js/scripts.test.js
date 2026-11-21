@@ -501,10 +501,15 @@ describe('Profit calculator integration', () => {
       fallbackLng: 'en',
       resources: { ua: { translation: ukrainian }, en: { translation: english } },
     });
+    env.window.useLanguageTagPlurals(translator);
     env.window.i18next = translator;
     field('sell_10').value = '169';
+    field('sell_11').value = '92';
     env.window.updateProfitCalculator();
-    expect(field('profit-sell-price').options[0].text).toBe("П'ятниця Перед обідом · 169 Bells");
+    const options = [...field('profit-sell-price').options].map(o => o.text);
+    expect(options[0]).toBe("П'ятниця, Перед обідом · 169 дзвіночків");
+    // `ua` is a country code; plural rules must come from `uk`, or this reads "92 дзвіночка".
+    expect(options[1]).toMatch(/ · 92 дзвіночки$/);
   });
 
   it('renders predictions before attempting to render a failing calculator', () => {
@@ -539,6 +544,7 @@ describe('Calculator controls and translations', () => {
       translator.init = () => Promise.resolve();
       translator.languages = [];
       translator.on = vi.fn();
+      translator.services = { pluralResolver: { getRule: () => undefined } };
       const update = vi.spyOn(window, 'update');
       await vm.runInContext(translationsSource, dom.getInternalVMContext(), { filename: 'translations.js' });
       vi.advanceTimersByTime(500);
@@ -574,6 +580,7 @@ describe('Calculator controls and translations', () => {
       translator.language = 'ua';
       translator.changeLanguage = vi.fn();
       translator.on = vi.fn();
+      translator.services = { pluralResolver: { getRule: () => undefined } };
       // The shared template has no language menu; index.html does.
       document.body.insertAdjacentHTML('beforeend', '<select id="language"></select>');
       await vm.runInContext(translationsSource, dom.getInternalVMContext(), { filename: 'translations.js' });

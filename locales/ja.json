@@ -6,11 +6,11 @@
     "salutation": "こんにちは！タヌキ開発特製スマホの最新アプリ <b>Turnip Prophet</b> へようこそ。",
     "description": "このアプリは、無人島のカブ価を毎日予測することができます。そのためには、まず自分でデータを入力することが必要です！",
     "conclusion": "そうすれば、Turnip Prophetは<b>魔法</b>のように、あなたのこの一週間のカブ価を予測します。",
-    "dismiss": "Got it!"
+    "dismiss": "わかりました！"
   },
   "first-time": {
     "title": "はじめての購入",
-    "description": "あなたが自分の島でカブを購入したのは今回が初めてですか？<i>（答えによってパターンが変化します）</i>",
+    "description": "<b>自分の</b>島で、住民がウリからカブを購入するのは今回が初めてですか？<i>（答えによってパターンが変化します）</i>",
     "yes": "はい",
     "no": "いいえ"
   },
@@ -35,6 +35,30 @@
     "permalink-copied": "パーマリンクがコピーされました！",
     "reset": "Turnip Prophetをリセット",
     "reset-warning": "本当に全てをリセットしますか？\n\nリセットしたら後戻りはできませんよ！"
+  },
+  "profit": {
+    "title": "利益と投資",
+    "description": "入力済みの売値を選ぶと、その価格でカブをすべて売った場合にいくら稼げるかを確認できます。",
+    "selling-price": "シミュレーションに使う売値",
+    "price-option": "{{day}} {{time}} · {{price}}",
+    "no-prices": "売値が入力されていません",
+    "quantity": "購入したカブの数（任意）",
+    "invalid-quantity": "カブの数は、対応範囲内の正の整数で入力してください。",
+    "empty": "カブの数を入力すると、投資額と利益を計算します。",
+    "missing-buy": "投資額を計算するには、上の欄に買値を正の整数で入力してください。",
+    "missing-sell": "売却シミュレーションを見るには、上の欄に売値を正の整数で入力してください。",
+    "scenario": "選んだ価格でカブをすべて売った場合のシミュレーション結果です。",
+    "too-large": "値が大きすぎて正確に計算できません。もっと小さい値を入力してください。",
+    "unknown": "計算できません",
+    "bells": "{{amount}}ベル",
+    "investment": "初期投資額",
+    "break-even": "損益分岐価格（1カブあたり）",
+    "revenue": "売上金額",
+    "net": "純損益",
+    "gain": "純利益",
+    "loss": "純損失",
+    "even": "純利益（損益ゼロ）",
+    "roi": "投資収益率（ROI）"
   },
   "weekdays": {
     "monday": "月曜日",
@@ -67,17 +91,17 @@
       "input": "カブ価",
       "minimum": "保証される最小の収入",
       "maximum": "予測される限界の収入",
-      "expected": "Expected Price"
+      "expected": "予想カブ価"
     },
-    "likely-pattern": "Based on your prices so far, you're most likely on a <b>{{0}}</b> pattern ({{1}} chance).",
-    "sell-now-title": "Should you sell now?",
-    "sell-now": "You should sell now.",
-    "sell-later": "You should sell later.",
-    "sell-advice": "The expected maximum price for selling later is <b>{{0}}</b> bells on <b>{{1}}</b>.",
-    "should-buy-title": "Should you buy?",
-    "should-buy": "You should buy.",
-    "should-not-buy": "You should not buy.",
-    "buy-advice": "The expected maximum sell price for the week is <b>{{0}}</b> bells."
+    "likely-pattern": "これまでのカブ価から、最も可能性が高いパターンは<b>{{0}}</b>です（確率 {{1}}）。",
+    "sell-now-title": "今売るべき？",
+    "sell-now": "今売りましょう。",
+    "sell-later": "後で売りましょう。",
+    "sell-advice": "後で売る場合の予想最高価格は、<b>{{1}}</b>の<b>{{0}}</b>ベルです。",
+    "should-buy-title": "買うべき？",
+    "should-buy": "買いましょう。",
+    "should-not-buy": "買わないほうがよさそうです。",
+    "buy-advice": "今週の予想最高売値は<b>{{0}}</b>ベルです。"
   },
   "textbox": {
     "description": "複数のカブ価を入力すると、Turnip Prophetはそれをもとに、可能性のある変動パターンを計算して表示します。",
@@ -87,19 +111,23 @@
     "sponsor": "このプロジェクトに関わったソフトウェア開発者をスポンサーしたい場合、<a href=\"https://github.com/mikebryant/ac-nh-turnip-prices#sponsor-button-repo\">GitHub</a>のページで「❤ Sponsor」をクリックしてください！",
     "contributors-text": "そして、このアプリの作成を手伝っていただいた方々に感謝します！",
     "contributors": "貢献者",
+    "credits": "<a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>のフォークです。<a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji氏の研究</a>をもとにしています。",
+    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">すべての貢献者を見る</a>",
+    "install": {
+      "title": "アプリをインストール",
+      "button": "ホーム画面に追加"
+    },
     "language": "言語",
     "theme": {
       "title": "テーマ",
       "auto": "自動",
       "light": "ライト",
       "dark": "ダーク",
-      "high-color-contrast": "High Color Contrast"
-    },
-    "credits": "Fork of <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices\">mikebryant/ac-nh-turnip-prices</a>. Built on <a href=\"https://twitter.com/_Ninji/status/1244818665851289602\">Ninji's research</a>.",
-    "view-contributors": "<a href=\"https://github.com/leopic/ac-nh-turnip-prices/graphs/contributors\">View all contributors</a>"
+      "high-color-contrast": "ハイコントラスト"
+    }
   },
   "errors": {
-    "impossible-values": "Oops! There seems to be an error with your turnip predictions. Please check your inputs.",
-    "github": "If your turnip prices are correct and you have not time traveled, please <a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">submit a report.</a>"
+    "impossible-values": "おっと！カブ価の予測でエラーが発生したようです。入力内容を確認してください。",
+    "github": "カブ価が正しく、タイムトラベルもしていない場合は、<a href=\"https://github.com/mikebryant/ac-nh-turnip-prices/issues\">報告してください。</a>"
   }
 }
