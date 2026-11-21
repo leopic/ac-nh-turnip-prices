@@ -109,6 +109,11 @@ function createJQueryMock(document) {
         elements.forEach(el => { el.value = v; });
         return obj;
       },
+      attr(name, v) {
+        if (v === undefined) return elements[0] ? elements[0].getAttribute(name) : undefined;
+        elements.forEach(el => { el.setAttribute(name, v); });
+        return obj;
+      },
       html(v) {
         if (v === undefined) return elements[0] ? elements[0].innerHTML : '';
         elements.forEach(el => { el.innerHTML = v; });
@@ -552,6 +557,40 @@ describe('Calculator controls and translations', () => {
     } finally {
       env.window.close();
       vi.useRealTimers();
+    }
+  });
+
+  it('sets <html lang> to the BCP 47 code at start and when the language changes', async () => {
+    const env = setupEnvironment();
+    try {
+      const { window, document, dom } = env;
+      const { i18next: translator } = window;
+      window.i18nextHttpBackend = {};
+      window.i18nextBrowserLanguageDetector = {};
+      window.jqueryI18next = { init: vi.fn() };
+      translator.use = () => translator;
+      translator.init = () => Promise.resolve();
+      translator.languages = ['ua'];
+      translator.language = 'ua';
+      translator.changeLanguage = vi.fn();
+      translator.on = vi.fn();
+      // The shared template has no language menu; index.html does.
+      document.body.insertAdjacentHTML('beforeend', '<select id="language"></select>');
+      await vm.runInContext(translationsSource, dom.getInternalVMContext(), { filename: 'translations.js' });
+      expect(document.documentElement.getAttribute('lang')).toBe('uk');
+
+      const select = document.getElementById('language');
+      const choose = code => {
+        select.value = code;
+        select.dispatchEvent(new window.Event('change', { bubbles: true }));
+      };
+      choose('ph');
+      expect(translator.changeLanguage).toHaveBeenLastCalledWith('ph');
+      expect(document.documentElement.getAttribute('lang')).toBe('fil');
+      choose('pt-BR');
+      expect(document.documentElement.getAttribute('lang')).toBe('pt-BR');
+    } finally {
+      env.window.close();
     }
   });
 });
