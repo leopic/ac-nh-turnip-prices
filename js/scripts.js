@@ -1,3 +1,9 @@
+// `ua` and `ph` are country codes. The app keeps them (saved settings, shared
+// links, locale file names), but <html lang> and Intl need BCP 47 language codes.
+function languageTag(code) {
+  return { ua: 'uk', ph: 'fil' }[code] || code;
+}
+
 //Reusable Fields
 const getSellFields = function () {
   let fields = [];
@@ -132,7 +138,7 @@ const renderProfitCalculator = function () {
     if (element.textContent !== value) element.textContent = value;
   };
   const language = i18next.resolvedLanguage || i18next.language || 'en';
-  const locale = { ua: 'uk', ph: 'fil' }[language] || language;
+  const locale = languageTag(language);
   const formatBells = (value, signed = false) => i18next.t('profit.bells', {
     amount: new Intl.NumberFormat(locale, { signDisplay: signed ? 'exceptZero' : 'auto' }).format(value),
     interpolation: { escapeValue: false },
